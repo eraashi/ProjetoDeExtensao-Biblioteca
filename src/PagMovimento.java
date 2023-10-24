@@ -65,7 +65,6 @@ public class PagMovimento extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nova Movimentação");
         setMinimumSize(new java.awt.Dimension(600, 515));
-        setPreferredSize(null);
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -164,7 +163,7 @@ public class PagMovimento extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(170, 420, 72, 23);
+        jButton2.setBounds(150, 420, 72, 23);
 
         jButton3.setText("Voltar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +172,7 @@ public class PagMovimento extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(380, 420, 72, 23);
+        jButton3.setBounds(360, 420, 72, 23);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Transação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
 
@@ -208,7 +207,7 @@ public class PagMovimento extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(160, 340, 290, 50);
+        jPanel3.setBounds(140, 340, 290, 50);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações do Livro"));
 
