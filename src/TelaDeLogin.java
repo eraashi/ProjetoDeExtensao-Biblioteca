@@ -159,7 +159,10 @@ public class TelaDeLogin extends javax.swing.JFrame {
                     notFound = 1;
                 }
                 if(notFound == 1 && Senhavar.equals(senhaDb)){
-                        System.out.println("OKAY");
+                        showMessageDialog(null, "Logado Com Sucesso!! ");
+                        this.dispose();
+                        PaginaInicial formulario = new PaginaInicial();
+                        formulario.setVisible(true);
                         
                 }else{
                     JOptionPane.showMessageDialog(new JFrame(), "Usuario ou Senha Incorretos! ", "Error", JOptionPane.ERROR_MESSAGE);
@@ -167,7 +170,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 st.execute(query);
                 usuario.setText("");
                 senhalogin.setText("");
-                showMessageDialog(null, "Conta Criada Com Sucesso!! ");
+                
                 
                         
             }
@@ -175,9 +178,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Error" + e.getMessage());
         }
-        this.dispose();
-        PaginaInicial formulario = new PaginaInicial();
-        formulario.setVisible(true);
+        
         
     }//GEN-LAST:event_botao_entraActionPerformed
 
