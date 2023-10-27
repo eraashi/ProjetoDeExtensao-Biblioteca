@@ -170,9 +170,6 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 st.execute(query);
                 usuario.setText("");
                 senhalogin.setText("");
-                
-                
-                        
             }
             
         }catch(Exception e){

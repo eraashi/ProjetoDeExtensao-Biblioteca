@@ -298,7 +298,7 @@ public class PagMovimento extends javax.swing.JFrame {
         getContentPane().add(jLabel20);
         jLabel20.setBounds(120, 30, 80, 50);
         getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(20, 240, 540, 30);
+        jSeparator1.setBounds(20, 230, 540, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
