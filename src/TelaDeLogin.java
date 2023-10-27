@@ -152,7 +152,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 Senhavar = senhalogin.getText();
                 System.out.println(Senhavar);
                 
-                query = "SELECT * FROM user WHERE email='"+Loginvar+"'";
+                query = "SELECT * FROM user WHERE login='"+Loginvar+"'";
                 ResultSet rs = st.executeQuery(query);
                 while(rs.next()){
                     senhaDb = rs.getString("senha");

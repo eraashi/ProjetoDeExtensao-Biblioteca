@@ -154,7 +154,7 @@ public class PaginaInicial extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/lateral mero.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 300, 1230);
+        jLabel2.setBounds(0, 0, 300, 1160);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/icone atualização (1).png"))); // NOI18N
         getContentPane().add(jLabel4);
