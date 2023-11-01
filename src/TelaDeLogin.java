@@ -133,7 +133,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
 
     private void botao_entraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_entraActionPerformed
         
-        String Loginvar, Senhavar, query, senhaDb = null;
+        /*String Loginvar, Senhavar, query, senhaDb = null;
         String SUrl, SUser, Spass;
         SUrl = "jdbc:mysql://localhost:3306/bibliotecamero";
         SUser = "root";
@@ -174,7 +174,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
             
         }catch(Exception e){
             System.out.println("Error" + e.getMessage());
-        }
+        }*/
         
         
     }//GEN-LAST:event_botao_entraActionPerformed

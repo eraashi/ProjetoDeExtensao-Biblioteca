@@ -91,8 +91,8 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="8" max="32767" attributes="0"/>
-                          <Component id="conf_senha" min="-2" pref="228" max="-2" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
+                          <Component id="txtconf_senha" min="-2" pref="228" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -101,8 +101,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="senha" pref="288" max="32767" attributes="0"/>
-                              <Component id="login" max="32767" attributes="0"/>
+                              <Component id="txtsenha" pref="288" max="32767" attributes="0"/>
+                              <Component id="txtlogin" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -116,17 +116,17 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="login" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtlogin" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="senha" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtsenha" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="conf_senha" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtconf_senha" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -158,25 +158,25 @@
             <Property name="text" type="java.lang.String" value="Confirmar Senha:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="login">
+        <Component class="javax.swing.JTextField" name="txtlogin">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtloginActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="conf_senha">
+        <Component class="javax.swing.JPasswordField" name="txtconf_senha">
           <Properties>
             <Property name="text" type="java.lang.String" value="jPassword"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="conf_senhaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtconf_senhaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="senha">
+        <Component class="javax.swing.JPasswordField" name="txtsenha">
           <Properties>
             <Property name="text" type="java.lang.String" value="jPassword"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="senhaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtsenhaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -200,41 +200,41 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="nome_completo" pref="237" max="32767" attributes="0"/>
+                          <Component id="txtnome_completo" pref="237" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="celular" max="32767" attributes="0"/>
+                          <Component id="txtcelular" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="email" max="32767" attributes="0"/>
+                              <Component id="txtemail" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="endereço" max="32767" attributes="0"/>
+                              <Component id="txtendereço" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cidade" min="-2" pref="139" max="-2" attributes="0"/>
+                              <Component id="txtcidade" min="-2" pref="139" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="uf" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtuf" min="-2" pref="30" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="num" pref="60" max="32767" attributes="0"/>
+                              <Component id="txtnum" pref="60" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cpf" max="32767" attributes="0"/>
+                              <Component id="txtcpf" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -247,36 +247,36 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="nome_completo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtnome_completo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtcpf" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="celular" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtcelular" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="uf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtcidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtuf" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="num" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtnum" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="endereço" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtendereço" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="email" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtemail" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -331,20 +331,20 @@
             <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nome_completo">
+        <Component class="javax.swing.JTextField" name="txtnome_completo">
         </Component>
-        <Component class="javax.swing.JTextField" name="cpf">
+        <Component class="javax.swing.JTextField" name="txtcpf">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cpfActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtcpfActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="celular">
+        <Component class="javax.swing.JTextField" name="txtcelular">
         </Component>
-        <Component class="javax.swing.JTextField" name="cidade">
+        <Component class="javax.swing.JTextField" name="txtcidade">
         </Component>
-        <Component class="javax.swing.JTextField" name="uf">
+        <Component class="javax.swing.JTextField" name="txtuf">
         </Component>
-        <Component class="javax.swing.JTextField" name="endere&#xe7;o">
+        <Component class="javax.swing.JTextField" name="txtendere&#xe7;o">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -354,7 +354,7 @@
             <Property name="text" type="java.lang.String" value="E-mail:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="email">
+        <Component class="javax.swing.JTextField" name="txtemail">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
@@ -364,7 +364,7 @@
             <Property name="text" type="java.lang.String" value="N&#xba;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="num">
+        <Component class="javax.swing.JTextField" name="txtnum">
         </Component>
       </SubComponents>
     </Container>

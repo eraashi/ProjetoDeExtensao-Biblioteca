@@ -1,3 +1,6 @@
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,11 +13,13 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 
 public class Registro extends javax.swing.JFrame {
-    
+    User user = new User();
+    UserDAO usuariodao = new UserDAO();
    
     public Registro() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,9 +36,9 @@ public class Registro extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        login = new javax.swing.JTextField();
-        conf_senha = new javax.swing.JPasswordField();
-        senha = new javax.swing.JPasswordField();
+        txtlogin = new javax.swing.JTextField();
+        txtconf_senha = new javax.swing.JPasswordField();
+        txtsenha = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -41,16 +46,16 @@ public class Registro extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        nome_completo = new javax.swing.JTextField();
-        cpf = new javax.swing.JTextField();
-        celular = new javax.swing.JTextField();
-        cidade = new javax.swing.JTextField();
-        uf = new javax.swing.JTextField();
-        endereço = new javax.swing.JTextField();
+        txtnome_completo = new javax.swing.JTextField();
+        txtcpf = new javax.swing.JTextField();
+        txtcelular = new javax.swing.JTextField();
+        txtcidade = new javax.swing.JTextField();
+        txtuf = new javax.swing.JTextField();
+        txtendereço = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        email = new javax.swing.JTextField();
+        txtemail = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        num = new javax.swing.JTextField();
+        txtnum = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -97,23 +102,23 @@ public class Registro extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel3.setText("Confirmar Senha:");
 
-        login.addActionListener(new java.awt.event.ActionListener() {
+        txtlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginActionPerformed(evt);
+                txtloginActionPerformed(evt);
             }
         });
 
-        conf_senha.setText("jPassword");
-        conf_senha.addActionListener(new java.awt.event.ActionListener() {
+        txtconf_senha.setText("jPassword");
+        txtconf_senha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                conf_senhaActionPerformed(evt);
+                txtconf_senhaActionPerformed(evt);
             }
         });
 
-        senha.setText("jPassword");
-        senha.addActionListener(new java.awt.event.ActionListener() {
+        txtsenha.setText("jPassword");
+        txtsenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                senhaActionPerformed(evt);
+                txtsenhaActionPerformed(evt);
             }
         });
 
@@ -126,16 +131,16 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(conf_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(txtconf_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(senha, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                            .addComponent(login))))
+                            .addComponent(txtsenha, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                            .addComponent(txtlogin))))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,15 +149,15 @@ public class Registro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(conf_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtconf_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -179,9 +184,9 @@ public class Registro extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jLabel10.setText("Endereço:");
 
-        cpf.addActionListener(new java.awt.event.ActionListener() {
+        txtcpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpfActionPerformed(evt);
+                txtcpfActionPerformed(evt);
             }
         });
 
@@ -201,36 +206,36 @@ public class Registro extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nome_completo, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+                        .addComponent(txtnome_completo, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(celular))
+                        .addComponent(txtcelular))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel11)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(email))
+                            .addComponent(txtemail))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel10)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(endereço))
+                            .addComponent(txtendereço))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel8)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcidade, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel9)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtuf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel12)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, 60, Short.MAX_VALUE))
+                            .addComponent(txtnum, javax.swing.GroupLayout.PREFERRED_SIZE, 60, Short.MAX_VALUE))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel5)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cpf))))
+                            .addComponent(txtcpf))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -238,31 +243,31 @@ public class Registro extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(nome_completo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnome_completo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
-                    .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtuf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(endereço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtendereço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         getContentPane().add(jPanel2);
@@ -285,76 +290,13 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botao_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_confirmarActionPerformed
-        this.dispose();
-        PaginaInicial formulario = new PaginaInicial();
-        formulario.setVisible(true);
-        //System.out.println("Botao clicado");
-        String loginvar, senhavar, conf_senhavar, nomefullvar, cpfvar, celularvar, cidadevar, ufvar, numvar, enderecovar, emailvar, query;
-        String SUrl, SUser, Spass;
-        SUrl = "jdbc:mysql://localhost:3306/bibliotecamero";
-        SUser = "root";
-        Spass = "";
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(SUrl, SUser, Spass);
-            Statement st = con.createStatement();
-            if("".equals(login.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite seu Login", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(senha.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite sua senha", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(conf_senha.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Confirme Sua Senha", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(nome_completo.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite seu Nome completo", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(cpf.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite seu CPF/CNPJ", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(celular.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite seu Celular", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(cidade.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite sua cidade", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(uf.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite sua UF ", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(num.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite seu Número", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(endereço.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite seu Endereço", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(email.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite seu E-mail", "Error", JOptionPane.ERROR_MESSAGE);
-            }else{
-                loginvar = login.getText();
-                senhavar = senha.getText();
-                conf_senhavar = conf_senha.getText();
-                nomefullvar = nome_completo.getText();
-                cpfvar = cpf.getText();
-                celularvar = celular.getText();
-                cidadevar = cidade.getText();
-                ufvar = uf.getText();
-                numvar = num.getText();
-                enderecovar = endereço.getText();
-                emailvar = email.getText();
-                System.out.println(senhavar);
-                
-                query = "INSERT INTO user(login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, num, endereço, email)"+
-                        "VALUES('"+loginvar+"', '"+senhavar+"', '"+conf_senhavar+"', '"+nomefullvar+"', '"+cpfvar+"', '"+celularvar+"', '"+cidadevar+"', '"+ufvar+"', '"+numvar+"', '"+enderecovar+"', '"+emailvar+"' )";
-                st.execute(query);
-                
-                login.setText("");
-                senha.setText("");
-                conf_senha.setText("");
-                nome_completo.setText("");
-                cpf.setText("");
-                celular.setText("");
-                cidade.setText("");
-                uf.setText("");
-                num.setText("");
-                endereço.setText("");
-                email.setText("");
-                showMessageDialog(null, "Conta Criada Com Sucesso!! ");
-            }
-            
-        }catch(Exception e){
-            System.out.println("Error" + e.getMessage());
-        }
+         
+          
+        
+          
+        
+        
+        
     }//GEN-LAST:event_botao_confirmarActionPerformed
 
     private void botao_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_voltarActionPerformed
@@ -363,21 +305,21 @@ public class Registro extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_botao_voltarActionPerformed
 
-    private void cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfActionPerformed
+    private void txtcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cpfActionPerformed
+    }//GEN-LAST:event_txtcpfActionPerformed
 
-    private void senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaActionPerformed
+    private void txtsenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsenhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_senhaActionPerformed
+    }//GEN-LAST:event_txtsenhaActionPerformed
 
-    private void conf_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conf_senhaActionPerformed
+    private void txtconf_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtconf_senhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_conf_senhaActionPerformed
+    }//GEN-LAST:event_txtconf_senhaActionPerformed
 
-    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+    private void txtloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtloginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_loginActionPerformed
+    }//GEN-LAST:event_txtloginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -417,12 +359,6 @@ public class Registro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botao_confirmar;
     private javax.swing.JButton botao_voltar;
-    private javax.swing.JTextField celular;
-    private javax.swing.JTextField cidade;
-    private javax.swing.JPasswordField conf_senha;
-    private javax.swing.JTextField cpf;
-    private javax.swing.JTextField email;
-    private javax.swing.JTextField endereço;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -439,10 +375,16 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField login;
-    private javax.swing.JTextField nome_completo;
-    private javax.swing.JTextField num;
-    private javax.swing.JPasswordField senha;
-    private javax.swing.JTextField uf;
+    private javax.swing.JTextField txtcelular;
+    private javax.swing.JTextField txtcidade;
+    private javax.swing.JPasswordField txtconf_senha;
+    private javax.swing.JTextField txtcpf;
+    private javax.swing.JTextField txtemail;
+    private javax.swing.JTextField txtendereço;
+    private javax.swing.JTextField txtlogin;
+    private javax.swing.JTextField txtnome_completo;
+    private javax.swing.JTextField txtnum;
+    private javax.swing.JPasswordField txtsenha;
+    private javax.swing.JTextField txtuf;
     // End of variables declaration//GEN-END:variables
 }
