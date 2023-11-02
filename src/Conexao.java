@@ -1,37 +1,25 @@
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 public class Conexao {
-    private static final String URL = "jdbc:mysql://localhost:3306/bibliotecamero";
-    private static final String USER = "root";
-    private static final String PASS = "";
-    public static Connection getConnection()throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conexao = DriverManager.getConnection(URL, USER, PASS);
-        return conexao;
-    }
-    public static void classConnection(Connection conn) throws Exception{
+    public static void main(String[] args){
         try {
-            Connection conexao = Conexao.getConnection();
-            System.out.println("Conexão obtida com sucesso");
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao fechar a conexao com o banco de dados: "+ e);
-        }
+            Connection con;
+            Statement st;
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bibliotecamero", "root", "");
+            st = con.createStatement();
+            //st.executeUpdate("INSERT INTO user('"+txtlogin+"', '"+txtsenha+"', '"+txtconf_senha+"', '"+txtnome_completo+"', '"+txtcpf+"', '"+txtcelular+"', '"+txtcidade+"', '"+txtuf+"', '"+txtnum+"', '"+txtendereco+"', '"+txtemail+"' );
+            //JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso");
+    }catch(ClassNotFoundException ex){
+        JOptionPane.showMessageDialog(null, "Erro na conexao ");
+    }catch (SQLException ex){
+        JOptionPane.showMessageDialog(null, "Erro na conexao com banco de dados");
     }
-   /*public static void closeConnection(Connection conn) throws SQLException {
-        closeConnection(conn);
-        Object stmt;
-        if (conn != null) {
-            conn.close();
-        }
-    }
-    public static void closeConnection(Connection com, PreparedStatement stmt, ResultSet rs) throws SQLException {
-        closeConnection(com);
-        if (rs != null) {
-            rs.close();
-        }
-    }*/
+    
 }
-
+}

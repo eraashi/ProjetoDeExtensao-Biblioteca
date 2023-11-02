@@ -1,6 +1,6 @@
 
 public class User {
-    
+    private String id;
     private String login;
     private String senha;
     private String confirmar_senha;
@@ -15,7 +15,7 @@ public class User {
     
     
     
-    public User(int id, String login, String senha, String confirmar_senha, String nome_completo, String celular, String cidade, String uf, String num, String endereço, String email) {
+    public User( String login, String senha, String confirmar_senha, String nome_completo, String celular, String cidade, String uf, String num, String endereço, String email) {
         
         this.login = login;
         this.senha = senha;
@@ -30,6 +30,14 @@ public class User {
     }
     public User(){
     
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 

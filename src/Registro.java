@@ -8,13 +8,13 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
-
+import java.util.Random;
 
 
 
 public class Registro extends javax.swing.JFrame {
-    User user = new User();
-    UserDAO usuariodao = new UserDAO();
+    //User user = new User();
+    //UserDAO usuariodao = new UserDAO();
    
     public Registro() {
         initComponents();
@@ -290,14 +290,62 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botao_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_confirmarActionPerformed
-         
-          
+        User user;
+        UserDAO userdao;
+        boolean status;
+        int resp;
+        Random random = new Random();
+        int randomnumber = random.nextInt(0, 100);
+       
+        user =  new User();
         
+        user.setLogin(txtlogin.getText());
+        user.setSenha(txtsenha.getText());
+        user.setConfirmar_senha(txtconf_senha.getText());
+        user.setNome_completo(txtnome_completo.getText());
+        user.setCpf(txtcpf.getText());
+        user.setCelular(txtcelular.getText());
+        user.setCidade(txtcidade.getText());
+        user.setUf(txtuf.getText());
+        user.setNum(txtnum.getText());
+        user.setEndereço(txtendereço.getText());
+        user.setEmail( txtemail.getText());
+        
+         userdao = new UserDAO();
+        status = userdao.conectar();
           
+        if (status == false){
+            JOptionPane.showMessageDialog(null,"Erro na conexao com o banco de dados");
+        }else {
+            resp = userdao.salvar(user);
+            if (resp == 1){
+                JOptionPane.showMessageDialog(null,"Dados Salvos com sucesso");
+                limparcampos();
+            }else if(resp==1062){
+                JOptionPane.showMessageDialog(null,"Essa Matricula ja foi feita");
+        }else{
+                JOptionPane.showMessageDialog(null,"ERRO Ao Salvar Os Dados");
+            }
+            userdao.desconectar();
+        }
         
         
         
     }//GEN-LAST:event_botao_confirmarActionPerformed
+public void limparcampos(){
+    txtlogin.setText("");
+                txtsenha.setText("");
+                txtconf_senha.setText("");
+                txtnome_completo.setText("");
+                txtcpf.setText("");
+                txtcelular.setText("");
+                txtcidade.setText("");
+                txtuf.setText("");
+                txtnum.setText("");
+                txtendereço.setText("");
+                txtemail.setText("");
+                txtlogin.requestFocus();
+}
 
     private void botao_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_voltarActionPerformed
         this.dispose();
