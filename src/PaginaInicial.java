@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,6 +19,8 @@ public class PaginaInicial extends javax.swing.JFrame {
      */
     public PaginaInicial() {
         initComponents();
+        //aqui a lista é atualizada assim que a página surge
+        listarLivros();
         setLocationRelativeTo(null);
     }
 
@@ -28,39 +34,29 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        btnPesquisar = new javax.swing.JButton();
+        txtPesquisa = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaLivro = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList<>();
+        btnAtualizarTabela = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Página Inicial");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(1920, 1080));
+        setMinimumSize(new java.awt.Dimension(1178, 734));
         setModalExclusionType(null);
-        setSize(new java.awt.Dimension(1920, 1080));
+        setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -74,42 +70,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(60, 450, 180, 50);
 
-        jList4.setBorder(null);
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane4.setViewportView(jList4);
-
-        jTabbedPane1.addTab("Emprestados", jScrollPane4);
-
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(jList3);
-
-        jTabbedPane1.addTab("Acervo", jScrollPane3);
-
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
-
-        jTabbedPane1.addTab("Devolvidos", jScrollPane2);
-
-        getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(380, 350, 360, 230);
-
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 153, 51));
         jLabel3.setText("Atualização de Catálogo");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(880, 310, 280, 30);
+        jLabel3.setBounds(840, 260, 280, 30);
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Sair");
@@ -121,36 +86,26 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(60, 520, 180, 50);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane5.setViewportView(jList1);
-
-        getContentPane().add(jScrollPane5);
-        jScrollPane5.setBounds(830, 360, 340, 210);
-
-        jButton4.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
-        jButton4.setText("Pesquisar");
-        jButton4.setToolTipText("");
-        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setToolTipText("");
+        btnPesquisar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(360, 170, 100, 30);
+        getContentPane().add(btnPesquisar);
+        btnPesquisar.setBounds(360, 170, 100, 30);
 
-        jTextField1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtPesquisa.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtPesquisaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(480, 170, 500, 30);
+        getContentPane().add(txtPesquisa);
+        txtPesquisa.setBounds(480, 170, 500, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/lateral mero.png"))); // NOI18N
         getContentPane().add(jLabel2);
@@ -158,7 +113,7 @@ public class PaginaInicial extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/icone atualização (1).png"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(800, 300, 80, 50);
+        jLabel4.setBounds(760, 250, 80, 50);
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 153, 51));
@@ -166,47 +121,54 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(360, 90, 630, 48);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/pngtree-magnifier-and-background-glass-lens-png-image_4944280 1.png"))); // NOI18N
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(380, 290, 48, 60);
-
-        jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 153, 51));
-        jLabel11.setText("Movimentações");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(430, 300, 180, 40);
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/elemento retangulo (2).png"))); // NOI18N
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(340, 130, 890, 540);
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/elemento retangulo (2).png"))); // NOI18N
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(-100, 130, 890, 540);
-
-        jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 153, 51));
-        jLabel13.setText("Movimentações");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(440, 320, 180, 40);
-
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 153, 51));
         jLabel14.setText("Movimentações");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(440, 320, 180, 40);
+        jLabel14.setBounds(450, 260, 180, 40);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/pngtree-magnifier-and-background-glass-lens-png-image_4944280 1.png"))); // NOI18N
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(390, 310, 48, 60);
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/pngtree-magnifier-and-background-glass-lens-png-image_4944280 1.png"))); // NOI18N
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(390, 310, 48, 60);
+        jLabel8.setBounds(390, 250, 48, 60);
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/livro icone laranja 1.png"))); // NOI18N
         getContentPane().add(jLabel15);
         jLabel15.setBounds(990, 60, 90, 90);
+
+        tabelaLivro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Título", "Autor", "ISBN", "Editora", "Data", "Local"
+            }
+        ));
+        jScrollPane1.setViewportView(tabelaLivro);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(800, 320, 300, 200);
+
+        jList3.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(jList3);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(380, 320, 320, 199);
+
+        btnAtualizarTabela.setText("Atualizar");
+        btnAtualizarTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarTabelaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtualizarTabela);
+        btnAtualizarTabela.setBounds(910, 540, 90, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -223,13 +185,23 @@ public class PaginaInicial extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtPesquisaActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        
+        //HOJE EU VEJO ESSE BOTÃO
+        
+        PagMovimento denuncias = new PagMovimento();
+        denuncias.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnAtualizarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaActionPerformed
+        //botão para atualizar a tabela da interface
+        listarLivros();
+    }//GEN-LAST:event_btnAtualizarTabelaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,31 +240,50 @@ public class PaginaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizarTabela;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JList<String> jList3;
-    private javax.swing.JList<String> jList4;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tabelaLivro;
+    private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
+
+    //criei esse método para listar os livros do mysql numa tabela da interface
+    //ela é atualizado quando a página abre e quando é apertado o novo botao em baixo dela
+    private void listarLivros() {
+
+        try {
+            LivroDAO objLivroDAO = new LivroDAO();
+
+            DefaultTableModel model = (DefaultTableModel) tabelaLivro.getModel();
+            model.setNumRows(0);
+
+            ArrayList<LivroDTO> lista = objLivroDAO.pesquisarLivroLista();
+
+            for (int num = 0; num < lista.size(); num++) {
+                model.addRow(new Object[]{
+                    lista.get(num).getTitulo(),
+                    lista.get(num).getAutor(),
+                    lista.get(num).getIsbn(),
+                    lista.get(num).getEditora(),
+                    lista.get(num).getData(),
+                    lista.get(num).getLocal(),
+                });
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "listarLivros TABELA: " + erro);
+        }
+
+    }
+
 }

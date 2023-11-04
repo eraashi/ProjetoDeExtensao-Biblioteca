@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
 public class Conexao {
     public static void main(String[] args){
         try {
@@ -22,4 +23,20 @@ public class Conexao {
     }
     
 }
+    //criei esse método de conexao pois o único outro que eu conseguia chamar estava em UserDAO
+    //e a de cima está como "main" o que torna impossível de chamar em outra classe
+    //pra não confundir separei uma conexao universal na classe Conexao
+    //conectaBD pode ser usado pra qualquer conexao com o banco
+    public Connection conectaBD(){
+        Connection conn = null;
+        
+        try {
+            String url = "jdbc:mysql://localhost:3306/bibliotecamero?user=root&pass=";
+            conn = DriverManager.getConnection(url);
+            
+        }catch(SQLException erro){
+            JOptionPane.showMessageDialog(null, "conectaBD na classe Conexao: " + erro.getMessage());
+        }
+        return conn;
+    }
 }

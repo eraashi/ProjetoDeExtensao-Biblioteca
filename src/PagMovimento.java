@@ -1,5 +1,11 @@
 
+import Ferramentas.LimitaCaracteres;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.LabelView;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,6 +24,13 @@ public class PagMovimento extends javax.swing.JFrame {
     public PagMovimento() {
         initComponents();
         setLocationRelativeTo(null);
+        atualizarLivros();
+        
+        txtNome.setDocument(new LimitaCaracteres(60, LimitaCaracteres.TipoEntrada.NOME));
+        txtCelular.setDocument(new LimitaCaracteres(11, LimitaCaracteres.TipoEntrada.NUMEROINTEIRO));
+        txtDatausuario.setDocument(new LimitaCaracteres(10, LimitaCaracteres.TipoEntrada.DATA));
+        txtHorausuario.setDocument(new LimitaCaracteres(5, LimitaCaracteres.TipoEntrada.HORA));
+        txtCPF.setDocument(new LimitaCaracteres(60, LimitaCaracteres.TipoEntrada.NUMEROINTEIRO));
     }
 
     /**
@@ -31,16 +44,16 @@ public class PagMovimento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtCelular = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        txtDatausuario = new javax.swing.JTextField();
+        txtCPF = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtHorausuario = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        boxReservado = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -50,13 +63,13 @@ public class PagMovimento extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        txtTituloLivro = new javax.swing.JLabel();
+        txtAutorLivro = new javax.swing.JLabel();
+        txtISBN = new javax.swing.JLabel();
+        txtDataLivro = new javax.swing.JLabel();
+        txtEditoraLivro = new javax.swing.JLabel();
+        txtLocaLivro = new javax.swing.JLabel();
+        txtNomeLivro = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
@@ -74,12 +87,12 @@ public class PagMovimento extends javax.swing.JFrame {
 
         jLabel8.setText("Data:");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        txtDatausuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                txtDatausuarioActionPerformed(evt);
             }
         });
-        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtDatausuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 limNum(evt);
             }
@@ -87,12 +100,12 @@ public class PagMovimento extends javax.swing.JFrame {
 
         jLabel10.setText("CPF:");
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        txtHorausuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                txtHorausuarioActionPerformed(evt);
             }
         });
-        jTextField9.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtHorausuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 limNumH(evt);
             }
@@ -100,12 +113,7 @@ public class PagMovimento extends javax.swing.JFrame {
 
         jLabel11.setText("Hora:");
 
-        jRadioButton1.setText("Reservado");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
+        boxReservado.setText("Reservado");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,47 +127,47 @@ public class PagMovimento extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField8)))
+                                .addComponent(txtCPF)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDatausuario, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField9))
+                                .addComponent(txtHorausuario))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jRadioButton1))
+                                .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(boxReservado))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(boxReservado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDatausuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtHorausuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -198,17 +206,18 @@ public class PagMovimento extends javax.swing.JFrame {
 
         jLabel16.setText("Data:");
 
-        jLabel1.setText("Titulo do Livro");
+        txtTituloLivro.setText("Titulo do Livro");
+        txtTituloLivro.setToolTipText("");
 
-        jLabel2.setText("Autor do Livro");
+        txtAutorLivro.setText("Autor do Livro");
 
-        jLabel5.setText("ISBN do Livro");
+        txtISBN.setText("ISBN do Livro");
 
-        jLabel9.setText("Data da publicação");
+        txtDataLivro.setText("Data da publicação");
 
-        jLabel18.setText("Editora do Livro");
+        txtEditoraLivro.setText("Editora do Livro");
 
-        jLabel19.setText("Local de Publicação");
+        txtLocaLivro.setText("Local de Publicação");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -222,31 +231,31 @@ public class PagMovimento extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5))
+                                .addComponent(txtISBN))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)))
+                                .addComponent(txtAutorLivro)))
                         .addGap(33, 33, 33)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel18)
+                                .addComponent(txtEditoraLivro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel19)
+                                .addComponent(txtLocaLivro)
                                 .addContainerGap(20, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9)
+                                .addComponent(txtDataLivro)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTituloLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -255,32 +264,32 @@ public class PagMovimento extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel1))
+                    .addComponent(txtTituloLivro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel2)
+                    .addComponent(txtAutorLivro)
                     .addComponent(jLabel14)
                     .addComponent(jLabel15)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19))
+                    .addComponent(txtEditoraLivro)
+                    .addComponent(txtLocaLivro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel5)
+                    .addComponent(txtISBN)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel9))
+                    .addComponent(txtDataLivro))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(60, 100, 470, 100);
 
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 153, 51));
-        jLabel7.setText("Nome do Livro");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(200, 30, 410, 48);
+        txtNomeLivro.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
+        txtNomeLivro.setForeground(new java.awt.Color(255, 153, 51));
+        txtNomeLivro.setText("Nome do Livro");
+        getContentPane().add(txtNomeLivro);
+        txtNomeLivro.setBounds(200, 30, 410, 48);
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/icone movimento.png"))); // NOI18N
         getContentPane().add(jLabel20);
@@ -292,6 +301,28 @@ public class PagMovimento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String nome_cliente;
+        int data_cliente, hora_cliente, cpf_cliente, celular_cliente;
+        boolean reservado;
+        //pegando o editável escrito
+        nome_cliente = txtNome.getText();
+        data_cliente = Integer.parseInt(txtDatausuario.getText());
+        hora_cliente = Integer.parseInt(txtHorausuario.getText());
+        cpf_cliente = Integer.parseInt(txtCPF.getText());
+        celular_cliente = Integer.parseInt(txtCelular.getText());
+        reservado = boxReservado.isSelected();
+        //setando o editável escrito na DTO para o mysql
+        LivroDTO objlivro = new LivroDTO();
+        objlivro.setNome_cliente(nome_cliente);
+        objlivro.setData_cliente(data_cliente);
+        objlivro.setHora_cliente(hora_cliente);
+        objlivro.setCelular_clinte(celular_cliente);
+        objlivro.setCpf_cliente(cpf_cliente);
+        objlivro.setReservado(reservado);
+        //ordenando o DTO ser salvo no mysql
+        LivroDAO objLivroDAO = new LivroDAO();
+        objLivroDAO.alterarUsuarioLivro(objlivro);
+        
         this.dispose();
         PaginaInicial formulario = new PaginaInicial();
         formulario.setVisible(true);
@@ -310,9 +341,9 @@ public class PagMovimento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_limNum
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void txtDatausuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDatausuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_txtDatausuarioActionPerformed
 
     private void limNumH(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_limNumH
         char c = evt.getKeyChar();
@@ -321,13 +352,9 @@ public class PagMovimento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_limNumH
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void txtHorausuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHorausuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_txtHorausuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,9 +393,9 @@ public class PagMovimento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox boxReservado;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -376,25 +403,76 @@ public class PagMovimento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel txtAutorLivro;
+    private javax.swing.JTextField txtCPF;
+    private javax.swing.JTextField txtCelular;
+    private javax.swing.JLabel txtDataLivro;
+    private javax.swing.JTextField txtDatausuario;
+    private javax.swing.JLabel txtEditoraLivro;
+    private javax.swing.JTextField txtHorausuario;
+    private javax.swing.JLabel txtISBN;
+    private javax.swing.JLabel txtLocaLivro;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JLabel txtNomeLivro;
+    private javax.swing.JLabel txtTituloLivro;
     // End of variables declaration//GEN-END:variables
+
+    //método privado do frame pra atualizar os campos com as infos dos livros
+    private void atualizarLivros(){
+        try{
+            LivroDTO objLivroDTO = new LivroDTO();
+            String tituloLivro, autor, editora, local, nomeCliente;
+            int id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;
+            boolean reservadoCliente;
+            //pegando o não aditável
+            tituloLivro = objLivroDTO.getTitulo();
+            autor = objLivroDTO.getAutor();
+            editora = objLivroDTO.getEditora();
+            isbn = objLivroDTO.getIsbn();
+            data = objLivroDTO.getData();
+            local = objLivroDTO.getLocal();
+            //pegando o editável
+            nomeCliente = objLivroDTO.getNome_cliente();
+            cpfCliente = objLivroDTO.getCpf_cliente();
+            dataCliente = objLivroDTO.getData_cliente();
+            horaCliente = objLivroDTO.getHora_cliente();
+            celularCliente = objLivroDTO.getCelular_cliente();
+            reservadoCliente = objLivroDTO.isReservado();
+            //setando o não editável
+            txtTituloLivro.setText(tituloLivro);
+            txtNomeLivro.setText(tituloLivro);
+            txtAutorLivro.setText(autor);
+            txtISBN.setText(Integer.toString(isbn));
+            txtEditoraLivro.setText(editora);
+            txtLocaLivro.setText(local);
+            txtDataLivro.setText(Integer.toString(data));
+            //setando o editável
+            txtNome.setText(nomeCliente);
+            txtCPF.setText(Integer.toString(cpfCliente));
+            txtDatausuario.setText(Integer.toString(dataCliente));
+            txtHorausuario.setText(Integer.toString(horaCliente));
+            txtCelular.setText(Integer.toString(celularCliente));
+            boxReservado.setSelected(reservadoCliente);
+            
+        }catch (Exception erro){
+            JOptionPane.showMessageDialog(null, "atualizarLivros em PagMovimento: " + erro);
+        }
+    }
+    
+    //deu errado/nao precisa
+    /*private void marcaReservado(){
+      * LivroDTO objLivroDTO = new LivroDTO();
+      * boolean ativo;
+      * if(boxReservado.isSelected()){
+      *     objLivroDTO.isReservado(rs.getInt("id"));
+      * }
+    }*/
 }

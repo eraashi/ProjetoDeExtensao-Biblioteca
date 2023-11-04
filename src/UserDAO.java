@@ -8,9 +8,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 
-
-
-
 public class UserDAO {
     Connection conn;
     PreparedStatement pst;
