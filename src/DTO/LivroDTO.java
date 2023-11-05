@@ -1,3 +1,5 @@
+package DTO;
+
 //classe criada para armazenar os dados dos livros antes deles serem
 //jogados no mysql
 public class LivroDTO {
@@ -90,7 +92,7 @@ public class LivroDTO {
         return celular_cliente;
     }
 
-    public void setCelular_clinte(int celular_cliente) {
+    public void setCelular_cliente(int celular_cliente) {
         this.celular_cliente = celular_cliente;
     }
 

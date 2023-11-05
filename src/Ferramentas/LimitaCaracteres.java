@@ -28,11 +28,11 @@ public class LimitaCaracteres extends PlainDocument{
         String regex = "";
         switch(tpEntrada){
             case NUMEROINTEIRO: regex = "[^0-9]"; break;
-            case NUMERODECIMAL: regex = "[^0-9,.]"; break;
-            case NOME:          regex = "[^\\p{IsLatin} ]"; break;
-            case EMAIL:         regex = "[^\\p{IsLatin}@.\\-_][^0-9]"; break;
-            case DATA:          regex = "[^0-9/]"; break;
-            case HORA:          regex = "[^0-9:]"; break;
+            case NUMERODECIMAL: regex = "[^0-9,.][.,]"; break;
+            case NOME:          regex = "[^\\p{IsLatin}]"; break;
+            case EMAIL:         regex = "[^\\p{IsLatin}@.\\-_][^0-9][-_]"; break;
+            case DATA:          regex = "[^0-9/][/]"; break;
+            case HORA:          regex = "[^0-9:][:]"; break;
         }
         // fazendo a substituição
         string = string.replaceAll(regex, "");

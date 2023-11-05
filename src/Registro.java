@@ -1,3 +1,5 @@
+import DAO.UserDAO;
+import DTO.UserDTO;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.sql.SQLException;
@@ -13,7 +15,7 @@ import java.util.Random;
 
 
 public class Registro extends javax.swing.JFrame {
-    //User user = new User();
+    //User user = new UserDTO();
     //UserDAO usuariodao = new UserDAO();
    
     public Registro() {
@@ -290,14 +292,14 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botao_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_confirmarActionPerformed
-        User user;
+        UserDTO user;
         UserDAO userdao;
         boolean status;
         int resp;
         Random random = new Random();
         int randomnumber = random.nextInt(0, 100);
        
-        user =  new User();
+        user =  new UserDTO();
         
         user.setLogin(txtlogin.getText());
         user.setSenha(txtsenha.getText());

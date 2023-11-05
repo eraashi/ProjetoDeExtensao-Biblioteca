@@ -1,3 +1,6 @@
+package DAO;
+
+import DTO.UserDTO;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +26,7 @@ public class UserDAO {
             return false;
         }
     }
-    public int salvar(User user){
+    public int salvar(UserDTO user){
         int status;
         try {
             pst = conn.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");

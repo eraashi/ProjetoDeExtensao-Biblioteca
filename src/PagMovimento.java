@@ -1,4 +1,6 @@
 
+import DTO.LivroDTO;
+import DAO.LivroDAO;
 import Ferramentas.LimitaCaracteres;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class PagMovimento extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         atualizarLivros();
+        idLivro.setVisible(false);
         
         txtNome.setDocument(new LimitaCaracteres(60, LimitaCaracteres.TipoEntrada.NOME));
         txtCelular.setDocument(new LimitaCaracteres(11, LimitaCaracteres.TipoEntrada.NUMEROINTEIRO));
@@ -54,8 +57,8 @@ public class PagMovimento extends javax.swing.JFrame {
         txtHorausuario = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         boxReservado = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -69,6 +72,7 @@ public class PagMovimento extends javax.swing.JFrame {
         txtDataLivro = new javax.swing.JLabel();
         txtEditoraLivro = new javax.swing.JLabel();
         txtLocaLivro = new javax.swing.JLabel();
+        idLivro = new javax.swing.JLabel();
         txtNomeLivro = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -174,23 +178,23 @@ public class PagMovimento extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(60, 260, 470, 110);
 
-        jButton2.setText("Salvar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(150, 400, 72, 23);
+        getContentPane().add(btnSalvar);
+        btnSalvar.setBounds(150, 400, 72, 23);
 
-        jButton3.setText("Voltar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(360, 400, 72, 23);
+        getContentPane().add(btnVoltar);
+        btnVoltar.setBounds(360, 400, 72, 23);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações do Livro"));
 
@@ -219,6 +223,8 @@ public class PagMovimento extends javax.swing.JFrame {
 
         txtLocaLivro.setText("Local de Publicação");
 
+        idLivro.setText("idLivro");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -242,16 +248,20 @@ public class PagMovimento extends javax.swing.JFrame {
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtEditoraLivro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtLocaLivro)
-                                .addContainerGap(20, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtDataLivro)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(47, 47, 47)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLocaLivro)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(idLivro)))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -278,7 +288,8 @@ public class PagMovimento extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(txtISBN)
                     .addComponent(jLabel16)
-                    .addComponent(txtDataLivro))
+                    .addComponent(txtDataLivro)
+                    .addComponent(idLivro))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -289,50 +300,29 @@ public class PagMovimento extends javax.swing.JFrame {
         txtNomeLivro.setForeground(new java.awt.Color(255, 153, 51));
         txtNomeLivro.setText("Nome do Livro");
         getContentPane().add(txtNomeLivro);
-        txtNomeLivro.setBounds(200, 30, 410, 48);
+        txtNomeLivro.setBounds(110, 30, 410, 48);
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/icone movimento.png"))); // NOI18N
         getContentPane().add(jLabel20);
-        jLabel20.setBounds(120, 30, 80, 50);
+        jLabel20.setBounds(30, 30, 80, 50);
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(20, 230, 540, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String nome_cliente;
-        int data_cliente, hora_cliente, cpf_cliente, celular_cliente;
-        boolean reservado;
-        //pegando o editável escrito
-        nome_cliente = txtNome.getText();
-        data_cliente = Integer.parseInt(txtDatausuario.getText());
-        hora_cliente = Integer.parseInt(txtHorausuario.getText());
-        cpf_cliente = Integer.parseInt(txtCPF.getText());
-        celular_cliente = Integer.parseInt(txtCelular.getText());
-        reservado = boxReservado.isSelected();
-        //setando o editável escrito na DTO para o mysql
-        LivroDTO objlivro = new LivroDTO();
-        objlivro.setNome_cliente(nome_cliente);
-        objlivro.setData_cliente(data_cliente);
-        objlivro.setHora_cliente(hora_cliente);
-        objlivro.setCelular_clinte(celular_cliente);
-        objlivro.setCpf_cliente(cpf_cliente);
-        objlivro.setReservado(reservado);
-        //ordenando o DTO ser salvo no mysql
-        LivroDAO objLivroDAO = new LivroDAO();
-        objLivroDAO.alterarUsuarioLivro(objlivro);
-        
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        alterarEditaveisLivro();
         this.dispose();
         PaginaInicial formulario = new PaginaInicial();
         formulario.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
         PaginaInicial formulario = new PaginaInicial();
         formulario.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void limNum(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_limNum
         char c = evt.getKeyChar();
@@ -394,8 +384,9 @@ public class PagMovimento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox boxReservado;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel idLivro;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -439,6 +430,7 @@ public class PagMovimento extends javax.swing.JFrame {
             isbn = objLivroDTO.getIsbn();
             data = objLivroDTO.getData();
             local = objLivroDTO.getLocal();
+            id = objLivroDTO.getId();
             //pegando o editável
             nomeCliente = objLivroDTO.getNome_cliente();
             cpfCliente = objLivroDTO.getCpf_cliente();
@@ -454,6 +446,7 @@ public class PagMovimento extends javax.swing.JFrame {
             txtEditoraLivro.setText(editora);
             txtLocaLivro.setText(local);
             txtDataLivro.setText(Integer.toString(data));
+            idLivro.setText(Integer.toString(id));
             //setando o editável
             txtNome.setText(nomeCliente);
             txtCPF.setText(Integer.toString(cpfCliente));
@@ -467,12 +460,32 @@ public class PagMovimento extends javax.swing.JFrame {
         }
     }
     
-    //deu errado/nao precisa
-    /*private void marcaReservado(){
-      * LivroDTO objLivroDTO = new LivroDTO();
-      * boolean ativo;
-      * if(boxReservado.isSelected()){
-      *     objLivroDTO.isReservado(rs.getInt("id"));
-      * }
-    }*/
+    //método para pegar o que foi escrito no editavel
+    //jogar no LivroDTO e depois usar o método "alterarUsuarioLivro"
+    //para que ele atualize no banco de dados mysql
+    private void alterarEditaveisLivro(){
+        String nome_cliente;
+        int data_cliente, hora_cliente, cpf_cliente, celular_cliente;
+        boolean reservado;
+        //pegando o editável escrito
+        nome_cliente = txtNome.getText();
+        data_cliente = Integer.parseInt(txtDatausuario.getText());
+        hora_cliente = Integer.parseInt(txtHorausuario.getText());
+        cpf_cliente = Integer.parseInt(txtCPF.getText());
+        celular_cliente = Integer.parseInt(txtCelular.getText());
+        reservado = boxReservado.isSelected();
+        //setando o editável escrito na DTO para o mysql
+        LivroDTO objlivro = new LivroDTO();
+        objlivro.setNome_cliente(nome_cliente);
+        objlivro.setData_cliente(data_cliente);
+        objlivro.setHora_cliente(hora_cliente);
+        objlivro.setCelular_cliente(celular_cliente);
+        objlivro.setCpf_cliente(cpf_cliente);
+        objlivro.setReservado(reservado);
+        //ordenando o DTO ser salvo no mysql
+        LivroDAO objLivroDAO = new LivroDAO();
+        objLivroDAO.alterarUsuarioLivro(objlivro);
+
+    }
+    
 }

@@ -1,5 +1,7 @@
+package DTO;
 
-public class User {
+
+public class UserDTO {
     private String id;
     private String login;
     private String senha;
@@ -15,7 +17,7 @@ public class User {
     
     
     
-    public User( String login, String senha, String confirmar_senha, String nome_completo, String celular, String cidade, String uf, String num, String endereço, String email) {
+    public UserDTO( String login, String senha, String confirmar_senha, String nome_completo, String celular, String cidade, String uf, String num, String endereço, String email) {
         
         this.login = login;
         this.senha = senha;
@@ -28,7 +30,7 @@ public class User {
         this.endereço = endereço;
         this.email = email;
     }
-    public User(){
+    public UserDTO(){
     
     }
 

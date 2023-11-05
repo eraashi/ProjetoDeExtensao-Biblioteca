@@ -1,10 +1,15 @@
+package DAO;
+
 //classe criada para criar métodos com relação aos dados dos livros
+import Conexao.Conexao;
+import DTO.LivroDTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import DTO.LivroDTO;
 
 public class LivroDAO {
 
@@ -12,9 +17,44 @@ public class LivroDAO {
     PreparedStatement pstm;
     ResultSet rs;
     ArrayList<LivroDTO> lista = new ArrayList<>();
+    
+    public ResultSet listarBoxLivros(){
+        String sql = "SELECT id, titulo FROM livromovimentacao ORDER BY titulo";
+        conn = new Conexao().conectaBD();
+        
+        try{
+            pstm = conn.prepareStatement(sql);
+            return pstm.executeQuery();
+            
+        }catch(SQLException erro){
+            JOptionPane.showMessageDialog(null, "listarBoxLivros: " + erro);
+            return null;
+        }
+    }
+    
+    //esse método aqui tenta comparar um id local com um id do mysql
+    public ResultSet compararIdLivro(LivroDTO objIdLivro){
+        //int idLivro = objIdLivro.getId();
+        conn = new Conexao().conectaBD();
+        
+        try {
+            String sql = "SELECT * from livromovimentacao WHERE id = ?";
+            
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, objIdLivro.getId());
+            
+            rs = pstm.executeQuery();
+            
+            return rs;
+        }catch(SQLException erro){
+            JOptionPane.showMessageDialog(null, "compararIdLivro: " + erro);
+            return null;
+        }
+    }
+    
     //aqui esse método puxa os dados do msql e trás para a classe LivrosDTO
-    public void atualizarDadosLivros(LivroDTO objLivroDTO) {
-        String sql = "SELECT titulo, autor, isbn, editora, data, local from livromovimentacao";
+    public void resgatarDadosLivros(LivroDTO objLivroDTO) {
+        String sql = "SELECT * from livromovimentacao";
         conn = new Conexao().conectaBD();
         
         try {
@@ -22,7 +62,7 @@ public class LivroDAO {
             rs = pstm.executeQuery();
             
             while (rs.next()) {
-
+                
                 objLivroDTO.setId(rs.getInt("id"));
                 objLivroDTO.setTitulo(rs.getString("titulo"));
                 objLivroDTO.setAutor(rs.getString("autor"));
@@ -30,6 +70,12 @@ public class LivroDAO {
                 objLivroDTO.setEditora(rs.getString("editora"));
                 objLivroDTO.setData(rs.getInt("data"));
                 objLivroDTO.setLocal(rs.getString("local"));
+                objLivroDTO.setNome_cliente(rs.getString("nome_cliente"));
+                objLivroDTO.setCpf_cliente(rs.getInt("cpf_cliente"));
+                objLivroDTO.setData_cliente(rs.getInt("data_cliente"));
+                objLivroDTO.setHora_cliente(rs.getInt("hora_cliente"));
+                objLivroDTO.setCelular_cliente(rs.getInt("isbn"));
+                objLivroDTO.setReservado(rs.getBoolean("reservado"));
 
             }
 
@@ -38,9 +84,10 @@ public class LivroDAO {
         }
     }
     //aqui esse método faz a alteração do DTO para o mysql
-    //pega os dados dos livros em LivrosDTO e joga na tabela msql
+    //pega os dados editáveis dos livros em LivrosDTO e joga na tabela msql
+    //utilizando o id como referência
     public void alterarUsuarioLivro(LivroDTO objLivroDTO) {
-        String sql = "insert into livromovimentacao (nome_cliente, cpf_cliente, data_cliente, hora_cliente, celular-cliente, reservado) values (?, ?, ?, ?, ?, ?)";
+        String sql = "update livromovimentacao set nome_cliente = ?, cpf_cliente = ?, data_cliente = ?, hora_cliente = ?, hora_cliente = ?, celular-cliente = ? where id = ?";
         conn = new Conexao().conectaBD();
 
         try {
@@ -51,6 +98,7 @@ public class LivroDAO {
             pstm.setInt(4, objLivroDTO.getHora_cliente());
             pstm.setInt(5, objLivroDTO.getCelular_cliente());
             pstm.setBoolean(6, objLivroDTO.isReservado());
+            pstm.setInt(7, objLivroDTO.getId());
 
             pstm.execute();
             pstm.close();
@@ -60,7 +108,7 @@ public class LivroDAO {
         }
 
     }
-    //aqui é um métodoq ue lista todos os dados da tabela do msql
+    //aqui é um método que lista todos os dados da tabela do msql
     //e joga numa lista array que logo depois é usada na tabela da interface gráfica
     public ArrayList<LivroDTO> pesquisarLivroLista() {
         String sql = "SELECT * from livromovimentacao";
