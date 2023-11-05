@@ -80,7 +80,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         listaLivros = new javax.swing.JList<>();
         btnAtualizarTabela = new javax.swing.JButton();
-        boxLivros = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
 
@@ -229,10 +228,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(btnAtualizarTabela);
         btnAtualizarTabela.setBounds(910, 540, 90, 23);
 
-        boxLivros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Título" }));
-        getContentPane().add(boxLivros);
-        boxLivros.setBounds(360, 570, 500, 30);
-
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 153, 51));
         jLabel9.setText("Bem Vindo à Biblioteca Mero Carneiro");
@@ -378,7 +373,6 @@ public class PaginaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> boxLivros;
     private javax.swing.JButton btnAtualizarTabela;
     private javax.swing.JButton btnNovaMovimento;
     private javax.swing.JButton btnPesquisar;
@@ -442,7 +436,8 @@ public class PaginaInicial extends javax.swing.JFrame {
         }
     }
     
-    Vector<Integer> id = new Vector<Integer>();
+    //não vou utilizar agora
+    /*Vector<Integer> id = new Vector<Integer>();
 
     public void restaurarBoxLivros() {
         boxLivros.setEditable(true);
@@ -460,7 +455,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "restaurarBoxLivros: " + erro);
         }
-    }
+    }*/
     
     private void atualizarNomeUsuario(){
         try{

@@ -18,7 +18,9 @@ public class LivroDAO {
     ResultSet rs;
     ArrayList<LivroDTO> lista = new ArrayList<>();
     
-    public ResultSet listarBoxLivros(){
+    //método que lista id e titulo do banco de dados
+    //não está sendo usado
+    /*public ResultSet listarBoxLivros(){
         String sql = "SELECT id, titulo FROM livromovimentacao ORDER BY titulo";
         conn = new Conexao().conectaBD();
         
@@ -30,7 +32,7 @@ public class LivroDAO {
             JOptionPane.showMessageDialog(null, "listarBoxLivros: " + erro);
             return null;
         }
-    }
+    }*/
     
     //esse método aqui tenta comparar um id local com um id do mysql
     public ResultSet compararIdLivro(LivroDTO objLivroDTO){
