@@ -299,7 +299,7 @@ public class Registro extends javax.swing.JFrame {
         Random random = new Random();
         int randomnumber = random.nextInt(0, 100);
        
-        user =  new UserDTO();
+        user = new UserDTO();
         
         user.setLogin(txtlogin.getText());
         user.setSenha(txtsenha.getText());
@@ -313,7 +313,7 @@ public class Registro extends javax.swing.JFrame {
         user.setEndereço(txtendereço.getText());
         user.setEmail( txtemail.getText());
         
-         userdao = new UserDAO();
+        userdao = new UserDAO();
         status = userdao.conectar();
           
         if (status == false){

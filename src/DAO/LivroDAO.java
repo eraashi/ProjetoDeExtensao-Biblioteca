@@ -33,16 +33,14 @@ public class LivroDAO {
     }
     
     //esse método aqui tenta comparar um id local com um id do mysql
-    public ResultSet compararIdLivro(LivroDTO objIdLivro){
-        //int idLivro = objIdLivro.getId();
+    public ResultSet compararIdLivro(LivroDTO objLivroDTO){
         conn = new Conexao().conectaBD();
         
         try {
             String sql = "SELECT * from livromovimentacao WHERE id = ?";
             
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, objIdLivro.getId());
-            
+            pstm.setInt(1, objLivroDTO.getId());
             rs = pstm.executeQuery();
             
             return rs;
@@ -53,12 +51,13 @@ public class LivroDAO {
     }
     
     //aqui esse método puxa os dados do msql e trás para a classe LivrosDTO
-    public void resgatarDadosLivros(LivroDTO objLivroDTO) {
-        String sql = "SELECT * from livromovimentacao";
+    public void resgatarDadosLivro(LivroDTO objLivroDTO) {
+        String sql = "SELECT * from livromovimentacao WHERE id = ?";
         conn = new Conexao().conectaBD();
         
         try {
             pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, objLivroDTO.getId());
             rs = pstm.executeQuery();
             
             while (rs.next()) {

@@ -64,7 +64,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         btnNovaMovimento = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        txtNomeUsuario = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         txtPesquisa = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -132,11 +132,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(btnSair);
         btnSair.setBounds(60, 520, 180, 50);
 
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(239, 125, 9));
-        jLabel7.setText("nomedousuario");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 360, 270, 48);
+        txtNomeUsuario.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
+        txtNomeUsuario.setForeground(new java.awt.Color(239, 125, 9));
+        txtNomeUsuario.setText("nomedousuario");
+        getContentPane().add(txtNomeUsuario);
+        txtNomeUsuario.setBounds(20, 360, 270, 48);
 
         btnPesquisar.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         btnPesquisar.setText("Pesquisar");
@@ -264,24 +264,33 @@ public class PaginaInicial extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         //em tese, era pra funcionar
-        //pegar o valor de txtId, jogar na id de LivroDTO
-        //vou precisar de um método que compare com o banco de dados
-        //e retorne para LivroDTO todos os dados do livro que tenha o mesmo id
-        //para a próxima página Pagmovimento carregar os itens de LivroDTO
-        //agora uma forma de comparar esse id com o banco de dados e retorne os dados para LivroDTO
+        //esse botão pega o valor de txtId, joga na variável idLocal
+        //depois, cria um objeto de LivroDTO que armazena na Id do DTO o valor
+        //de idLocal
+        //chamo um método de LivroDAO que faz a comparação com o banco de dados
+        //do Id de LivroDTO com o do banco e retorna o valor para o objeto
+        //que foi instanciado antes: objLivroDTO
+        //cria-se um if onde se o resultado dessa operação do método for encotrado,
+        //no caso se o Id for encontrado com um id do banco de dados,
+        //todas as informações desse id do banco de dados são trazidas para o
+        //objLivroDTO, no caso cada informação do livro
+        //abre-se a página de movimento, onde automaticamente, preenche-se
+        //cada campo label e campo textfield, com as informações da DTO
         
         try{
             int idLocal;
-            LivroDTO objLivroId = new LivroDTO();
+            
             idLocal = Integer.parseInt(txtId.getText());
-            objLivroId.setId(idLocal);
+            
+            LivroDTO objLivroDTO = new LivroDTO();
+            objLivroDTO.setId(idLocal);
         
             LivroDAO objLivroDAO = new LivroDAO();
-            ResultSet rsLivroDAO = objLivroDAO.compararIdLivro(objLivroId);
+            ResultSet rsLivroDAO = objLivroDAO.compararIdLivro(objLivroDTO);
             
             if(rsLivroDAO.next()){
                 //checar se está funcionando
-                objLivroDAO.resgatarDadosLivros(objLivroId);
+                objLivroDAO.resgatarDadosLivro(objLivroDTO);
                 
                 PagMovimento denuncias = new PagMovimento();
                 denuncias.setVisible(true);
@@ -376,7 +385,6 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -385,6 +393,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JList<String> listaPesquisaLivros;
     private javax.swing.JTable tabelaLivro;
     private javax.swing.JTextField txtId;
+    private javax.swing.JLabel txtNomeUsuario;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
     

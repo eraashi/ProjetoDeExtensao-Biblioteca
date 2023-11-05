@@ -14,8 +14,6 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class UserDAO {
     Connection conn;
     PreparedStatement pst;
-    public UserDAO() {
-    }
     
     public boolean conectar(){
         try {
