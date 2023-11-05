@@ -79,7 +79,7 @@ public class LivroDAO {
             }
 
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "atualizarDadosLivros em LivroDAO: " + erro);
+            JOptionPane.showMessageDialog(null, "resgatarDadosLivros em LivroDAO: " + erro);
         }
     }
     //aqui esse método faz a alteração do DTO para o mysql
@@ -107,7 +107,7 @@ public class LivroDAO {
         }
 
     }
-    //aqui é um método que lista todos os dados da tabela do msql
+    //aqui é um método que lista TODOS os dados da tabela do msql
     //e joga numa lista array que logo depois é usada na tabela da interface gráfica
     public ArrayList<LivroDTO> pesquisarLivroLista() {
         String sql = "SELECT * from livromovimentacao";

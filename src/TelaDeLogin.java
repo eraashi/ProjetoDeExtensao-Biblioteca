@@ -1,3 +1,5 @@
+import DTO.UserDTO;
+import DAO.UserDAO;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -164,6 +166,12 @@ public class TelaDeLogin extends javax.swing.JFrame {
                     notFound = 1;
                 }
                 if(notFound == 1 && Senhavar.equals(senhaDb)){
+                        //>incremento (icaro)<//
+                        UserDTO objUserDTO = new UserDTO();
+                        objUserDTO.setLogin(Loginvar);
+                        resgatarDadosUsuario();
+                        //>incremento (icaro)<//
+                        
                         showMessageDialog(null, "Logado Com Sucesso!! ");
                         
                 }else{

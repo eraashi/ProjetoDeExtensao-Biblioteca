@@ -6,6 +6,8 @@
 import Conexao.Conexao;
 import DTO.LivroDTO;
 import DAO.LivroDAO;
+import DTO.UserDTO;
+import DAO.UserDAO;
 import java.awt.EventQueue;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -41,6 +43,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         listarLivros();
         //aqui a combox padrao é atualiza assim que a página surge
         //restaurarBoxLivros();
+        atualizarNomeUsuario();
         //métodos para a combobox IMPROVISADA (do lado do botao pesquisar)
         listaPesquisaLivros.setVisible(false);
         conn.conectaBD();
@@ -456,6 +459,20 @@ public class PaginaInicial extends javax.swing.JFrame {
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "restaurarBoxLivros: " + erro);
+        }
+    }
+    
+    private void atualizarNomeUsuario(){
+        try{
+            UserDTO objUserDTO = new UserDTO();
+            String nome;
+            
+            nome = objUserDTO.getNome_completo();
+            
+            txtNomeUsuario.setText(nome);
+            
+        }catch(Exception erro){
+            JOptionPane.showMessageDialog(null, "atualizarNomeUsuario em PaginaInicial: " + erro);
         }
     }
 

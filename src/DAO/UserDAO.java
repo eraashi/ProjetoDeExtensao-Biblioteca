@@ -16,6 +16,7 @@ public class UserDAO {
 
     Connection conn;
     PreparedStatement pst;
+    ResultSet rs;
 
     public boolean conectar() {
         try {
@@ -58,7 +59,40 @@ public class UserDAO {
 
         }
     }
+    
+    public void resgatarDadosUsuario(UserDTO objUserDTO) {
+        String sql = "SELECT * FROM user WHERE login = ?";
+        conn = new Conexao().conectaBD();
+        
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, objUserDTO.getLogin());
+            rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                
+                objUserDTO.setId(rs.getString("id"));
+                objUserDTO.setLogin(rs.getString("login"));
+                objUserDTO.setSenha(rs.getString("senha"));
+                objUserDTO.setConfirmar_senha(rs.getString("confirmar_senha"));
+                objUserDTO.setNome_completo(rs.getString("nome_completo"));
+                objUserDTO.setCpf(rs.getString("cpf"));
+                objUserDTO.setCelular(rs.getString("celular"));
+                objUserDTO.setCidade(rs.getString("cidade"));
+                objUserDTO.setUf(rs.getString("uf"));
+                objUserDTO.setNum(rs.getString("num"));
+                objUserDTO.setEndereço(rs.getString("endereco"));
+                objUserDTO.setEmail(rs.getString("email"));
+                
+            }
 
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "resgatarDadosUsuario em UserDAO: " + erro);
+        }
+    }
+    
+    //criei esse método simplificado de autenticacao
+    //para organizar melhor a tela de login caso seja necessário
     public ResultSet autenticacaoUsuario(UserDTO objUserDTO){
         conn = new Conexao().conectaBD();
         
