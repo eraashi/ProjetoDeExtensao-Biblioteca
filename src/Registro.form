@@ -164,17 +164,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtconf_senha">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jPassword"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtconf_senhaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtsenha">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jPassword"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtsenhaActionPerformed"/>
           </Events>

@@ -110,14 +110,12 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
-        txtconf_senha.setText("jPassword");
         txtconf_senha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtconf_senhaActionPerformed(evt);
             }
         });
 
-        txtsenha.setText("jPassword");
         txtsenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtsenhaActionPerformed(evt);

@@ -1,30 +1,33 @@
 package DAO;
 
+import Conexao.Conexao;
 import DTO.UserDTO;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-
 public class UserDAO {
+
     Connection conn;
     PreparedStatement pst;
-    
-    public boolean conectar(){
+
+    public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bibliotecamero", "root", "");
             return true;
-        }catch(ClassNotFoundException | SQLException ex){
+        } catch (ClassNotFoundException | SQLException ex) {
             return false;
         }
     }
-    public int salvar(UserDTO user){
+
+    public int salvar(UserDTO user) {
         int status;
         try {
             pst = conn.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -44,22 +47,35 @@ public class UserDAO {
             return status;
         } catch (SQLException ex) {
             System.out.println(ex.getErrorCode());
-           return ex.getErrorCode();
-    
+            return ex.getErrorCode();
+        }
     }
-        
-    }
-    public void desconectar(){
-        try{
+
+    public void desconectar() {
+        try {
             conn.close();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
+
+        }
+    }
+
+    public ResultSet autenticacaoUsuario(UserDTO objUserDTO){
+        conn = new Conexao().conectaBD();
+        
+        try{
+            String sql = "SELECT * FROM user WHERE login = ? AND senha = ?";
             
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, objUserDTO.getLogin());
+            pstm.setString(2, objUserDTO.getSenha());
+            
+            ResultSet rs = pstm.executeQuery();
+            return rs;
+            
+        }catch(SQLException erro){
+            JOptionPane.showMessageDialog(null, "autenticacaoUsuario em UserDAO: " + erro);
+            return null;
         }
     }
     
-    
-    
 }
-        
-            
-
