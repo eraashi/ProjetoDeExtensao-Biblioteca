@@ -139,4 +139,27 @@ public class LivroDAO {
         }
         return lista;
     }
+    
+    public void criarNovoLivro(LivroDTO objLivroDTO) {
+        String sql = "INSERT INTO livromovimentacao VALUES(?,?,?,?,?,?)";
+        conn = new Conexao().conectaBD();
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, objLivroDTO.getTitulo());
+            pstm.setString(2, objLivroDTO.getAutor());
+            pstm.setInt(3, objLivroDTO.getIsbn());
+            pstm.setString(4, objLivroDTO.getEditora());
+            pstm.setInt(5, objLivroDTO.getData());
+            pstm.setString(6, objLivroDTO.getLocal());
+
+            pstm.execute();
+            pstm.close();
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "alterarUsuarioLivro em LivroDAO: " + erro);
+        }
+
+    }
+    
 }

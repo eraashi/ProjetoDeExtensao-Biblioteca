@@ -85,6 +85,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         btnExcluirLivro = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Página Inicial");
@@ -102,7 +103,7 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(listaPesquisaLivros);
-        listaPesquisaLivros.setBounds(480, 200, 500, 90);
+        listaPesquisaLivros.setBounds(480, 260, 500, 90);
 
         txtNomeUsuario1.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
         txtNomeUsuario1.setForeground(new java.awt.Color(239, 125, 9));
@@ -113,7 +114,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         btnNovoLivro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNovoLivro.setForeground(new java.awt.Color(255, 204, 0));
         btnNovoLivro.setText("Novo Livro");
-        btnNovoLivro.setEnabled(false);
         btnNovoLivro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoLivroActionPerformed(evt);
@@ -160,7 +160,7 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnPesquisar);
-        btnPesquisar.setBounds(360, 170, 100, 30);
+        btnPesquisar.setBounds(360, 230, 100, 30);
 
         txtPesquisa.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         txtPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,22 +179,22 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtPesquisa);
-        txtPesquisa.setBounds(480, 170, 500, 30);
+        txtPesquisa.setBounds(480, 230, 500, 30);
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 153, 51));
         jLabel14.setText("Movimentações");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(860, 260, 180, 40);
+        jLabel14.setBounds(860, 320, 180, 40);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/pngtree-magnifier-and-background-glass-lens-png-image_4944280 1.png"))); // NOI18N
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(800, 250, 48, 60);
+        jLabel8.setBounds(800, 310, 48, 60);
 
         jScrollPane3.setViewportView(listaLivros);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(790, 320, 310, 199);
+        jScrollPane3.setBounds(790, 380, 310, 199);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/lateral mero.png"))); // NOI18N
         getContentPane().add(jLabel2);
@@ -208,11 +208,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 153, 51));
         jLabel3.setText("Atualização de Catálogo");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(440, 260, 280, 30);
+        jLabel3.setBounds(440, 320, 280, 30);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/icone atualização (1).png"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(360, 250, 80, 50);
+        jLabel4.setBounds(360, 310, 80, 50);
 
         tabelaLivro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -228,7 +228,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelaLivro);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(400, 320, 300, 200);
+        jScrollPane1.setBounds(400, 380, 300, 200);
 
         btnAtualizarTabela.setText("Atualizar");
         btnAtualizarTabela.addActionListener(new java.awt.event.ActionListener() {
@@ -237,21 +237,27 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAtualizarTabela);
-        btnAtualizarTabela.setBounds(440, 540, 90, 23);
+        btnAtualizarTabela.setBounds(440, 600, 90, 23);
 
         btnExcluirLivro.setText("Excluir Livro");
         getContentPane().add(btnExcluirLivro);
-        btnExcluirLivro.setBounds(560, 540, 94, 23);
+        btnExcluirLivro.setBounds(560, 600, 94, 23);
 
-        jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 153, 51));
-        jLabel9.setText("Bem Vindo à Biblioteca Mero Carneiro");
+        jLabel9.setText("Nova Reserva/Devolução");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(360, 90, 630, 48);
+        jLabel9.setBounds(360, 188, 630, 30);
 
         txtId.setEditable(false);
         getContentPane().add(txtId);
-        txtId.setBounds(990, 170, 30, 30);
+        txtId.setBounds(990, 230, 30, 30);
+
+        jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 153, 51));
+        jLabel10.setText("Bem Vindo à Biblioteca Mero Carneiro");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(360, 90, 630, 48);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -352,7 +358,9 @@ public class PaginaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaMouseClicked
 
     private void btnNovoLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLivroActionPerformed
-        // TODO add your handling code here:
+        NovoLivro objNovoLivro = new NovoLivro();
+        objNovoLivro.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnNovoLivroActionPerformed
 
     /**
@@ -398,6 +406,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnNovoLivro;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
