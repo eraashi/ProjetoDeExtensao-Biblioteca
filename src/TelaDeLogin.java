@@ -15,7 +15,10 @@ import javax.swing.SwingUtilities;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -134,58 +137,30 @@ public class TelaDeLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioActionPerformed
 
     private void botao_entraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_entraActionPerformed
-        //vc precisa me dizer o que tá acontecendo com esse botão pois não está funcionando
-        //joguei essas próximas 3 linhas aqui para fazer alguns testes
-        this.dispose();
-        PaginaInicial formulario = new PaginaInicial();
-        formulario.setVisible(true);
-        
-        /*String Loginvar, Senhavar, query, senhaDb = null;
-        String SUrl, SUser, Spass;
-        SUrl = "jdbc:mysql://localhost:3306/bibliotecamero";
-        SUser = "root";
-        Spass = "";
-        int notFound = 0;
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(SUrl, SUser, Spass);
-            Statement st = con.createStatement();
-            if("".equals(usuario.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite seu Login", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(senhalogin.getText())){
-                JOptionPane.showMessageDialog(new JFrame(), "Digite sua senha", "Error", JOptionPane.ERROR_MESSAGE);
-            }else{
-                Loginvar = usuario.getText();
-                Senhavar = senhalogin.getText();
-                System.out.println(Senhavar);
+        try {
+            String usuario_login, senha_usuario;
+            usuario_login = usuario.getText();
+            senha_usuario = senhalogin.getText();
+            UserDTO objUserDTO = new UserDTO();
+            objUserDTO.setLogin(usuario_login);
+            objUserDTO.setSenha(senha_usuario);
+            UserDAO OBJuserdao = new UserDAO();
+            ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(objUserDTO);
+            if (rsuserdao.next()){
                 
-                query = "SELECT * FROM user WHERE login='"+Loginvar+"'";
-                ResultSet rs = st.executeQuery(query);
-                while(rs.next()){
-                    senhaDb = rs.getString("senha");
-                    notFound = 1;
-                }
-                if(notFound == 1 && Senhavar.equals(senhaDb)){
-                        //>incremento (icaro)<//
-                        UserDTO objUserDTO = new UserDTO();
-                        objUserDTO.setLogin(Loginvar);
-                        resgatarDadosUsuario();
-                        //>incremento (icaro)<//
-                        
-                        showMessageDialog(null, "Logado Com Sucesso!! ");
-                        
-                }else{
-                    JOptionPane.showMessageDialog(new JFrame(), "Usuario ou Senha Incorretos! ", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                st.execute(query);
-                usuario.setText("");
-                senhalogin.setText("");
+               this.dispose();
+                PaginaInicial formulario = new PaginaInicial();
+                formulario.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos");
             }
-            
-        }catch(Exception e){
-            System.out.println("Error" + e.getMessage());
-        }*/
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaDeLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        
+     
+                
         
     }//GEN-LAST:event_botao_entraActionPerformed
 
