@@ -43,7 +43,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         listarLivros();
         //aqui a combox padrao é atualiza assim que a página surge
         //restaurarBoxLivros();
-        atualizarNomeUsuario();
+        //atualizarNomeUsuario();
         //métodos para a combobox IMPROVISADA (do lado do botao pesquisar)
         listaPesquisaLivros.setVisible(false);
         conn.conectaBD();
@@ -485,25 +485,6 @@ public class PaginaInicial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "restaurarBoxLivros: " + erro);
         }
     }*/
-    public void atualizarNomeUsuario() {
-        String nome;
-        UserDTO objUserDTO = new UserDTO();
-
-        try {
-            conn.executaSQL("SELECT nome FROM user WHERE login = ?");
-            pstm.setString(1, objUserDTO.getLogin());
-            rs = pstm.executeQuery();
-
-            while (conn.rs.next()) {
-                objUserDTO.setNome_completo(rs.getString("nome"));
-                nome = objUserDTO.getNome_completo();
-                txtNomeUsuario.setText(nome);
-            }
-
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "atualizarNomeUsuario em PaginaInicial: " + erro);
-        }
-    }
 
     //criei esse método para listar os livros do mysql numa tabela da interface
     //ela é atualizada quando a página abre e quando é pressionado o novo botao em baixo dela
