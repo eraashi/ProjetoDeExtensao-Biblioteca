@@ -141,17 +141,24 @@ public class LivroDAO {
     }
     
     public void criarNovoLivro(LivroDTO objLivroDTO) {
-        String sql = "INSERT INTO livromovimentacao (id, titulo, autor, isbn, editora, data, local, nome_cliente, cpf-cliente, data_cliente, hora_cliente, celular-cliente, reservado) VALUES(DEFAULT,?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)";
+        String sql = "INSERT INTO livromovimentacao (id, titulo, autor, isbn, editora, data, local, nome_cliente, cpf-cliente, data_cliente, hora_cliente, celular-cliente, reservado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conn = new Conexao().conectaBD();
 
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objLivroDTO.getTitulo());
-            pstm.setString(2, objLivroDTO.getAutor());
-            pstm.setInt(3, objLivroDTO.getIsbn());
-            pstm.setString(4, objLivroDTO.getEditora());
-            pstm.setInt(5, objLivroDTO.getData());
-            pstm.setString(6, objLivroDTO.getLocal());
+            pstm.setInt(1, objLivroDTO.getId());
+            pstm.setString(2, objLivroDTO.getTitulo());
+            pstm.setString(3, objLivroDTO.getAutor());
+            pstm.setInt(4, objLivroDTO.getIsbn());
+            pstm.setString(5, objLivroDTO.getEditora());
+            pstm.setInt(6, objLivroDTO.getData());
+            pstm.setString(7, objLivroDTO.getLocal());
+            pstm.setString(8, objLivroDTO.getNome_cliente());
+            pstm.setInt(9, objLivroDTO.getCpf_cliente());
+            pstm.setInt(10, objLivroDTO.getData_cliente());
+            pstm.setInt(7, objLivroDTO.getHora_cliente());
+            pstm.setInt(7, objLivroDTO.getCelular_cliente());
+            pstm.setBoolean(7, objLivroDTO.isReservado());
 
             pstm.execute();
             pstm.close();
