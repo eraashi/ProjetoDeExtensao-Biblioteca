@@ -36,6 +36,8 @@ public class PaginaInicial extends javax.swing.JFrame {
     public ResultSet rs;
     DefaultListModel modelo;
     int Enter = 0;
+    
+    String [] Codig;
 
     public PaginaInicial() {
         initComponents();
@@ -295,13 +297,14 @@ public class PaginaInicial extends javax.swing.JFrame {
         //objLivroDTO, no caso cada informação do livro
         //abre-se a página de movimento, onde automaticamente, preenche-se
         //cada campo label e campo textfield, com as informações da DTO
-
+        
         try {
             int idLocal;
 
             idLocal = Integer.parseInt(txtId.getText());
 
             LivroDTO objLivroDTO = new LivroDTO();
+
             objLivroDTO.setId(idLocal);
 
             LivroDAO objLivroDAO = new LivroDAO();
@@ -430,8 +433,10 @@ public class PaginaInicial extends javax.swing.JFrame {
             conn.executaSQL("SELECT * FROM livromovimentacao WHERE titulo LIKE '" + txtPesquisa.getText() + "%' ORDER BY titulo");
             modelo.removeAllElements();
             int v = 0;
+            Codig = new String[10];
             while (conn.rs.next() & v < 4) {
                 modelo.addElement(conn.rs.getString("titulo"));
+                Codig[v] = conn.rs.getString("id");
                 v++;
             }
             if (v >= 1) {
@@ -449,7 +454,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     public void MostraPesquisa() {
         int Linha = listaPesquisaLivros.getSelectedIndex();
         if (Linha >= 0) {
-            conn.executaSQL("SELECT * FROM livromovimentacao WHERE titulo LIKE '" + "" + txtPesquisa.getText() + "%' ORDER BY titulo LIMIT" + Linha + " , 1");
+            conn.executaSQL("SELECT * FROM livromovimentacao WHERE id = "+Codig[Linha]+" ");
             ResultadoPesquisa();
         }
     }

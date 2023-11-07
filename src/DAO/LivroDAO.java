@@ -39,8 +39,7 @@ public class LivroDAO {
         conn = new Conexao().conectaBD();
         
         try {
-            String sql = "SELECT * from livromovimentacao WHERE id = ?";
-            
+            String sql = "SELECT id from livromovimentacao WHERE id = ?";
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, objLivroDTO.getId());
             rs = pstm.executeQuery();

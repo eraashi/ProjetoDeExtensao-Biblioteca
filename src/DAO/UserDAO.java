@@ -60,7 +60,7 @@ public class UserDAO {
         }
     }
     
-    public void resgatarDadosUsuario(UserDTO objUserDTO) {
+    public ResultSet resgatarDadosUsuario(UserDTO objUserDTO) {
         String sql = "SELECT * FROM user WHERE login = ?";
         conn = new Conexao().conectaBD();
         
@@ -88,7 +88,9 @@ public class UserDAO {
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "resgatarDadosUsuario em UserDAO: " + erro);
+            return null;
         }
+        return rs;
     }
     
     //criei esse método simplificado de autenticacao

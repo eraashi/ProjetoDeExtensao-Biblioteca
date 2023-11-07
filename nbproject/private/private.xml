@@ -5,10 +5,9 @@
         <group>
             <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/DTO/UserDTO.java</file>
             <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/DAO/UserDAO.java</file>
-            <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/DAO/LivroDAO.java</file>
             <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/PaginaInicial.java</file>
-            <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/DTO/LivroDTO.java</file>
-            <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/NovoLivro.java</file>
+            <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/DAO/LivroDAO.java</file>
+            <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/TelaDeLogin.java</file>
         </group>
     </open-files>
 </project-private>
