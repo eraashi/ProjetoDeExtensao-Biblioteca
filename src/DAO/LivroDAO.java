@@ -141,7 +141,7 @@ public class LivroDAO {
     }
     
     public void criarNovoLivro(LivroDTO objLivroDTO) {
-        String sql = "INSERT INTO livromovimentacao VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO livromovimentacao SET titulo = ?, autor = ?, isbn = ?, editora = ?, data = ?, local = ?";
         conn = new Conexao().conectaBD();
 
         try {
@@ -157,7 +157,7 @@ public class LivroDAO {
             pstm.close();
 
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "alterarUsuarioLivro em LivroDAO: " + erro);
+            JOptionPane.showMessageDialog(null, "criarNovoLivro em LivroDAO: " + erro);
         }
 
     }

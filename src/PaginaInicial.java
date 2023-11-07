@@ -36,7 +36,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     public ResultSet rs;
     DefaultListModel modelo;
     int Enter = 0;
-    
+
     public PaginaInicial() {
         initComponents();
         //aqui a lista é atualizada assim que a página surge
@@ -50,7 +50,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         modelo = new DefaultListModel();
         listaPesquisaLivros.setModel(modelo);
         txtId.setVisible(false);
-        
+
         setLocationRelativeTo(null);
     }
 
@@ -295,33 +295,33 @@ public class PaginaInicial extends javax.swing.JFrame {
         //objLivroDTO, no caso cada informação do livro
         //abre-se a página de movimento, onde automaticamente, preenche-se
         //cada campo label e campo textfield, com as informações da DTO
-        
-        try{
+
+        try {
             int idLocal;
-            
+
             idLocal = Integer.parseInt(txtId.getText());
-            
+
             LivroDTO objLivroDTO = new LivroDTO();
             objLivroDTO.setId(idLocal);
-        
+
             LivroDAO objLivroDAO = new LivroDAO();
             ResultSet rsLivroDAO = objLivroDAO.compararIdLivro(objLivroDTO);
-            
-            if(rsLivroDAO.next()){
+
+            if (rsLivroDAO.next()) {
                 //checar se está funcionando
                 objLivroDAO.resgatarDadosLivro(objLivroDTO);
-                
+
                 PagMovimento denuncias = new PagMovimento();
                 denuncias.setVisible(true);
                 this.dispose();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Livro não encontrado no banco de dados. ");
             }
-            
-        } catch (SQLException erro){
+
+        } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "btnPesquisarActionPerformed: " + erro);
         }
-        
+
         //HOJE EU VEJO ESSE BOTÃO
         PagMovimento denuncias = new PagMovimento();
         denuncias.setVisible(true);
@@ -337,9 +337,9 @@ public class PaginaInicial extends javax.swing.JFrame {
         //aqui se o usuario pressionar enter e a variável for 0
         //a lista IMPROVISADA é atualizada
         //se nao, se for 1, a variável recebe 0
-        if (Enter == 0){
-        listaPesquisaParaTextfield();
-        }else
+        if (Enter == 0) {
+            listaPesquisaParaTextfield();
+        } else
             Enter = 0;
     }//GEN-LAST:event_txtPesquisaKeyReleased
 
@@ -424,18 +424,16 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel txtNomeUsuario1;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
-    
-    
-    
-    public void listaPesquisaParaTextfield(){
-        try{
+
+    public void listaPesquisaParaTextfield() {
+        try {
             conn.executaSQL("SELECT * FROM livromovimentacao WHERE titulo LIKE '" + txtPesquisa.getText() + "%' ORDER BY titulo");
             modelo.removeAllElements();
             int v = 0;
-            while(conn.rs.next() & v < 4){
+            while (conn.rs.next() & v < 4) {
                 modelo.addElement(conn.rs.getString("titulo"));
                 v++;
-            } 
+            }
             if (v >= 1) {
                 listaPesquisaLivros.setVisible(true);
             } else {
@@ -443,11 +441,11 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
 
             ResultadoPesquisa();
-        }catch(SQLException erro){
+        } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "listPesquisaParaTextfield em PaginaInicial: " + erro);
         }
     }
-    
+
     public void MostraPesquisa() {
         int Linha = listaPesquisaLivros.getSelectedIndex();
         if (Linha >= 0) {
@@ -455,18 +453,18 @@ public class PaginaInicial extends javax.swing.JFrame {
             ResultadoPesquisa();
         }
     }
-        
+
     public void ResultadoPesquisa() {
         try {
             conn.rs.first();
             txtPesquisa.setText(conn.rs.getString("titulo"));
             txtId.setText(conn.rs.getString("id"));
-            
+
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "ResultadoPesquisa em PaginaInicial: " + erro);
         }
     }
-    
+
     //não vou utilizar agora
     /*Vector<Integer> id = new Vector<Integer>();
 
@@ -487,17 +485,22 @@ public class PaginaInicial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "restaurarBoxLivros: " + erro);
         }
     }*/
-    
-    private void atualizarNomeUsuario(){
-        try{
-            UserDTO objUserDTO = new UserDTO();
-            String nome;
-            
-            nome = objUserDTO.getNome_completo();
-            
-            txtNomeUsuario.setText(nome);
-            
-        }catch(Exception erro){
+    public void atualizarNomeUsuario() {
+        String nome;
+        UserDTO objUserDTO = new UserDTO();
+
+        try {
+            conn.executaSQL("SELECT nome FROM user WHERE login = ?");
+            pstm.setString(1, objUserDTO.getLogin());
+            rs = pstm.executeQuery();
+
+            while (conn.rs.next()) {
+                objUserDTO.setNome_completo(rs.getString("nome"));
+                nome = objUserDTO.getNome_completo();
+                txtNomeUsuario.setText(nome);
+            }
+
+        } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "atualizarNomeUsuario em PaginaInicial: " + erro);
         }
     }
