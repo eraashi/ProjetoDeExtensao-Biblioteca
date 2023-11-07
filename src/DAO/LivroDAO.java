@@ -141,7 +141,7 @@ public class LivroDAO {
     }
     
     public void criarNovoLivro(LivroDTO objLivroDTO) {
-        String sql = "INSERT INTO livromovimentacao (id, titulo, autor, isbn, editora, data, local, nome_cliente, cpf-cliente, data_cliente, hora_cliente, celular-cliente, reservado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO livromovimentacao VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conn = new Conexao().conectaBD();
 
         try {
@@ -156,9 +156,9 @@ public class LivroDAO {
             pstm.setString(8, objLivroDTO.getNome_cliente());
             pstm.setInt(9, objLivroDTO.getCpf_cliente());
             pstm.setInt(10, objLivroDTO.getData_cliente());
-            pstm.setInt(7, objLivroDTO.getHora_cliente());
-            pstm.setInt(7, objLivroDTO.getCelular_cliente());
-            pstm.setBoolean(7, objLivroDTO.isReservado());
+            pstm.setInt(11, objLivroDTO.getHora_cliente());
+            pstm.setInt(12, objLivroDTO.getCelular_cliente());
+            pstm.setBoolean(13, objLivroDTO.isReservado());
 
             pstm.execute();
             pstm.close();
