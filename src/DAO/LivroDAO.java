@@ -141,7 +141,7 @@ public class LivroDAO {
     }
     
     public void criarNovoLivro(LivroDTO objLivroDTO) {
-        String sql = "INSERT INTO livromovimentacao (titulo, autor, isbn, editora, data, hora) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO livromovimentacao (titulo, autor, isbn, editora, data, local) VALUES(?,?,?,?,?,?)";
         conn = new Conexao().conectaBD();
 
         try {
