@@ -140,11 +140,11 @@ public class LivroDAO {
         return lista;
     }
     
-    public void criarNovoLivro(LivroDTO objLivroDTO) {
-        String sql = "INSERT INTO livromovimentacao SET titulo = ?, autor = ?, isbn = ?, editora = ?, data = ?, local = ?";
-        conn = new Conexao().conectaBD();
+    public ResultSet criarNovoLivro(LivroDTO objLivroDTO) {
+            conn = new Conexao().conectaBD();
 
         try {
+            String sql = "INSERT INTO livromovimentacao SET titulo, autor, isbn, editora, data, hora VALUES(?,?,?,?,?,?)";
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, objLivroDTO.getTitulo());
             pstm.setString(2, objLivroDTO.getAutor());
@@ -153,11 +153,12 @@ public class LivroDAO {
             pstm.setInt(5, objLivroDTO.getData());
             pstm.setString(6, objLivroDTO.getLocal());
 
-            pstm.execute();
-            pstm.close();
+            ResultSet rs = pstm.executeQuery();
+            return rs;
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "criarNovoLivro em LivroDAO: " + erro);
+            return null;
         }
 
     }
