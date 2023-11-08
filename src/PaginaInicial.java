@@ -302,9 +302,9 @@ public class PaginaInicial extends javax.swing.JFrame {
         //cada campo label e campo textfield, com as informações da DTO
         
         try {
-            int idLocal;
+            String idLocal;
 
-            idLocal = Integer.parseInt(txtId.getText());
+            idLocal = txtId.getText();
 
             LivroDTO objLivroDTO = new LivroDTO();
 
@@ -443,7 +443,7 @@ public class PaginaInicial extends javax.swing.JFrame {
             Codig = new String[10];
             while (conn.rs.next() & v < 4) {
                 modelo.addElement(conn.rs.getString("titulo"));
-                Codig[v] = conn.rs.getString("id");
+                Codig[v] = conn.rs.getString("cod");
                 v++;
             }
             if (v >= 1) {

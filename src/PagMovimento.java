@@ -281,12 +281,13 @@ public class PagMovimento extends javax.swing.JFrame {
                     .addComponent(txtEditoraLivro)
                     .addComponent(txtLocaLivro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtISBN)
-                    .addComponent(jLabel16)
-                    .addComponent(txtDataLivro)
-                    .addComponent(idLivro, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(idLivro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel12)
+                        .addComponent(txtISBN)
+                        .addComponent(jLabel16)
+                        .addComponent(txtDataLivro)))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -417,8 +418,7 @@ public class PagMovimento extends javax.swing.JFrame {
     private void atualizarLivros() {
         try {
             LivroDTO objLivroDTO = new LivroDTO();
-            String tituloLivro, autor, editora, local, nomeCliente;
-            int id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;
+            String tituloLivro, autor, editora, local, nomeCliente, id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;;
             boolean reservadoCliente;
             //pegando o não aditável
             tituloLivro = objLivroDTO.getTitulo();
@@ -439,17 +439,17 @@ public class PagMovimento extends javax.swing.JFrame {
             txtTituloLivro.setText(tituloLivro);
             txtNomeLivro.setText(tituloLivro);
             txtAutorLivro.setText(autor);
-            txtISBN.setText(Integer.toString(isbn));
+            txtISBN.setText(isbn);
             txtEditoraLivro.setText(editora);
             txtLocaLivro.setText(local);
-            txtDataLivro.setText(Integer.toString(data));
-            idLivro.setText(Integer.toString(id));
+            txtDataLivro.setText(data);
+            idLivro.setText(id);
             //setando o editável
             txtNome.setText(nomeCliente);
-            txtCPF.setText(Integer.toString(cpfCliente));
-            txtDatausuario.setText(Integer.toString(dataCliente));
-            txtHorausuario.setText(Integer.toString(horaCliente));
-            txtCelular.setText(Integer.toString(celularCliente));
+            txtCPF.setText(cpfCliente);
+            txtDatausuario.setText(dataCliente);
+            txtHorausuario.setText(horaCliente);
+            txtCelular.setText(celularCliente);
             boxReservado.setSelected(reservadoCliente);
 
         } catch (Exception erro) {
@@ -462,15 +462,14 @@ public class PagMovimento extends javax.swing.JFrame {
     //para que ele atualize no banco de dados mysql
     private void alterarEditaveisLivro() {
         try {
-            String nome_cliente;
-            int data_cliente, hora_cliente, cpf_cliente, celular_cliente;
+            String nome_cliente, data_cliente, hora_cliente, cpf_cliente, celular_cliente;;
             boolean reservado;
             //pegando o editável escrito
             nome_cliente = txtNome.getText();
-            data_cliente = Integer.parseInt(txtDatausuario.getText());
-            hora_cliente = Integer.parseInt(txtHorausuario.getText());
-            cpf_cliente = Integer.parseInt(txtCPF.getText());
-            celular_cliente = Integer.parseInt(txtCelular.getText());
+            data_cliente = txtDatausuario.getText();
+            hora_cliente = txtHorausuario.getText();
+            cpf_cliente = txtCPF.getText();
+            celular_cliente = txtCelular.getText();
             reservado = boxReservado.isSelected();
             //setando o editável escrito na DTO para o mysql
             LivroDTO objlivro = new LivroDTO();

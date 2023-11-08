@@ -41,7 +41,7 @@ public class LivroDAO {
         try {
             String sql = "SELECT id from livromovimentacao WHERE id = ?";
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, objLivroDTO.getId());
+            pstm.setString(1, objLivroDTO.getId());
             rs = pstm.executeQuery();
             
             return rs;
@@ -58,23 +58,23 @@ public class LivroDAO {
         
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, objLivroDTO.getId());
+            pstm.setString(1, objLivroDTO.getId());
             rs = pstm.executeQuery();
             
             while (rs.next()) {
                 
-                objLivroDTO.setId(rs.getInt("id"));
+                objLivroDTO.setId(rs.getString("id"));
                 objLivroDTO.setTitulo(rs.getString("titulo"));
                 objLivroDTO.setAutor(rs.getString("autor"));
-                objLivroDTO.setIsbn(rs.getInt("isbn"));
+                objLivroDTO.setIsbn(rs.getString("isbn"));
                 objLivroDTO.setEditora(rs.getString("editora"));
-                objLivroDTO.setData(rs.getInt("data"));
+                objLivroDTO.setData(rs.getString("data"));
                 objLivroDTO.setLocal(rs.getString("local"));
                 objLivroDTO.setNome_cliente(rs.getString("nome_cliente"));
-                objLivroDTO.setCpf_cliente(rs.getInt("cpf_cliente"));
-                objLivroDTO.setData_cliente(rs.getInt("data_cliente"));
-                objLivroDTO.setHora_cliente(rs.getInt("hora_cliente"));
-                objLivroDTO.setCelular_cliente(rs.getInt("isbn"));
+                objLivroDTO.setCpf_cliente(rs.getString("cpf_cliente"));
+                objLivroDTO.setData_cliente(rs.getString("data_cliente"));
+                objLivroDTO.setHora_cliente(rs.getString("hora_cliente"));
+                objLivroDTO.setCelular_cliente(rs.getString("isbn"));
                 objLivroDTO.setReservado(rs.getBoolean("reservado"));
 
             }
@@ -93,12 +93,12 @@ public class LivroDAO {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, objLivroDTO.getNome_cliente());
-            pstm.setInt(2, objLivroDTO.getCpf_cliente());
-            pstm.setInt(3, objLivroDTO.getData_cliente());
-            pstm.setInt(4, objLivroDTO.getHora_cliente());
-            pstm.setInt(5, objLivroDTO.getCelular_cliente());
+            pstm.setString(2, objLivroDTO.getCpf_cliente());
+            pstm.setString(3, objLivroDTO.getData_cliente());
+            pstm.setString(4, objLivroDTO.getHora_cliente());
+            pstm.setString(5, objLivroDTO.getCelular_cliente());
             pstm.setBoolean(6, objLivroDTO.isReservado());
-            pstm.setInt(7, objLivroDTO.getId());
+            pstm.setString(7, objLivroDTO.getId());
 
             pstm.execute();
             pstm.close();
@@ -121,12 +121,12 @@ public class LivroDAO {
             while (rs.next()) {
                 LivroDTO objLivroDTO = new LivroDTO();
 
-                objLivroDTO.setId(rs.getInt("id"));
+                objLivroDTO.setId(rs.getString("id"));
                 objLivroDTO.setTitulo(rs.getString("titulo"));
                 objLivroDTO.setAutor(rs.getString("autor"));
-                objLivroDTO.setIsbn(rs.getInt("isbn"));
+                objLivroDTO.setIsbn(rs.getString("isbn"));
                 objLivroDTO.setEditora(rs.getString("editora"));
-                objLivroDTO.setData(rs.getInt("data"));
+                objLivroDTO.setData(rs.getString("data"));
                 objLivroDTO.setLocal(rs.getString("local"));
 
                 lista.add(objLivroDTO);
@@ -145,18 +145,18 @@ public class LivroDAO {
 
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, objLivroDTO.getId());
+            pstm.setString(1, objLivroDTO.getId());
             pstm.setString(2, objLivroDTO.getTitulo());
             pstm.setString(3, objLivroDTO.getAutor());
-            pstm.setInt(4, objLivroDTO.getIsbn());
+            pstm.setString(4, objLivroDTO.getIsbn());
             pstm.setString(5, objLivroDTO.getEditora());
-            pstm.setInt(6, objLivroDTO.getData());
+            pstm.setString(6, objLivroDTO.getData());
             pstm.setString(7, objLivroDTO.getLocal());
             pstm.setString(8, objLivroDTO.getNome_cliente());
-            pstm.setInt(9, objLivroDTO.getCpf_cliente());
-            pstm.setInt(10, objLivroDTO.getData_cliente());
-            pstm.setInt(11, objLivroDTO.getHora_cliente());
-            pstm.setInt(12, objLivroDTO.getCelular_cliente());
+            pstm.setString(9, objLivroDTO.getCpf_cliente());
+            pstm.setString(10, objLivroDTO.getData_cliente());
+            pstm.setString(11, objLivroDTO.getHora_cliente());
+            pstm.setString(12, objLivroDTO.getCelular_cliente());
             pstm.setBoolean(13, objLivroDTO.isReservado());
 
             pstm.execute();
