@@ -264,14 +264,14 @@ public class NovoLivro extends javax.swing.JFrame {
     //jogar no LivroDTO e depois usar o método "criarNovoLivro"
     //para que se crie um novo livro no banco de dados mysql
     private void adicionarLivroDTO(){
-        String titulo, autor, editora, local;
-        int isbn, data;
+        String titulo, autor, editora, local, isbn, data;
+      
         //pegando o editável escrito
         titulo = txtTituloLivro.getText();
         autor = txtAutorLivro.getText();
-        isbn = Integer.parseInt(txtISBN.getText());
+        isbn = txtISBN.getText();
         editora = txtEditoraLivro.getText();
-        data = Integer.parseInt(txtDataLivro.getText());
+        data = txtDataLivro.getText();
         local = txtLocaLivro.getText();
         //setando o editável escrito na DTO para o mysql
         LivroDTO objlivro = new LivroDTO();

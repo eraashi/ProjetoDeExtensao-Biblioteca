@@ -13,6 +13,23 @@ public class Conexao {
     public Statement st;
     public ResultSet rs;
     public PreparedStatement pstm;
+    final private String url = "jdbc:mysql://localhost:3306/bibliotecamero";
+    final private String driver = "com.mysql.jdbc.Driver";
+    final private String usuario = "root";
+    final private String senha = "";
+    private Connection conexao;
+    public Statement statement;
+    public ResultSet resultset;
+    public void conecta() {
+        try {
+            Class.forName(driver);
+            conexao = DriverManager.getConnection(url, usuario, senha);
+        } catch (ClassNotFoundException Fonte) {
+            JOptionPane.showMessageDialog(null, "Driver nao localizado");
+        } catch (SQLException Fonte) {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar com o servidor MYSQL", "ATENÇAO", (2));
+        }
+    }
     public static void main(String[] args){
         try {
             Connection con;
@@ -38,6 +55,7 @@ public class Conexao {
         try {
             String url = "jdbc:mysql://localhost:3306/bibliotecamero?user=root&pass=";
             conn = DriverManager.getConnection(url);
+            st = conn.createStatement();
             
         }catch(SQLException erro){
             JOptionPane.showMessageDialog(null, "conectaBD na classe Conexao: " + erro.getMessage());

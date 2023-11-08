@@ -48,7 +48,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         atualizarNomeUsuario();
         //métodos para a combobox IMPROVISADA (do lado do botao pesquisar)
         listaPesquisaLivros.setVisible(false);
-        conn.conectaBD();
+        conn.conecta();
         modelo = new DefaultListModel();
         listaPesquisaLivros.setModel(modelo);
         txtId.setVisible(false);
@@ -443,7 +443,7 @@ public class PaginaInicial extends javax.swing.JFrame {
             Codig = new String[10];
             while (conn.rs.next() & v < 4) {
                 modelo.addElement(conn.rs.getString("titulo"));
-                Codig[v] = conn.rs.getString("cod");
+                Codig[v] = conn.rs.getString("id");
                 v++;
             }
             if (v >= 1) {
