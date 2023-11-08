@@ -13,7 +13,6 @@ import javax.swing.text.LabelView;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author icaro
@@ -28,7 +27,7 @@ public class PagMovimento extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         atualizarLivros();
         idLivro.setVisible(false);
-        
+
         txtNome.setDocument(new LimitaCaracteres(60, LimitaCaracteres.TipoEntrada.NOME));
         txtCelular.setDocument(new LimitaCaracteres(11, LimitaCaracteres.TipoEntrada.NUMEROINTEIRO));
         txtDatausuario.setDocument(new LimitaCaracteres(10, LimitaCaracteres.TipoEntrada.DATA));
@@ -223,8 +222,6 @@ public class PagMovimento extends javax.swing.JFrame {
 
         txtLocaLivro.setText("Local de Publicação");
 
-        idLivro.setText("idLivro");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -260,7 +257,7 @@ public class PagMovimento extends javax.swing.JFrame {
                             .addComponent(txtLocaLivro)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(idLivro)))
+                                .addComponent(idLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -289,8 +286,8 @@ public class PagMovimento extends javax.swing.JFrame {
                     .addComponent(txtISBN)
                     .addComponent(jLabel16)
                     .addComponent(txtDataLivro)
-                    .addComponent(idLivro))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(idLivro, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2);
@@ -326,8 +323,8 @@ public class PagMovimento extends javax.swing.JFrame {
 
     private void limNum(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_limNum
         char c = evt.getKeyChar();
-    if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
-        evt.consume();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            evt.consume();
         }
     }//GEN-LAST:event_limNum
 
@@ -337,8 +334,8 @@ public class PagMovimento extends javax.swing.JFrame {
 
     private void limNumH(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_limNumH
         char c = evt.getKeyChar();
-    if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
-        evt.consume();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            evt.consume();
         }
     }//GEN-LAST:event_limNumH
 
@@ -417,8 +414,8 @@ public class PagMovimento extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //método privado do frame pra atualizar os campos com as infos dos livros
-    private void atualizarLivros(){
-        try{
+    private void atualizarLivros() {
+        try {
             LivroDTO objLivroDTO = new LivroDTO();
             String tituloLivro, autor, editora, local, nomeCliente;
             int id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;
@@ -454,38 +451,41 @@ public class PagMovimento extends javax.swing.JFrame {
             txtHorausuario.setText(Integer.toString(horaCliente));
             txtCelular.setText(Integer.toString(celularCliente));
             boxReservado.setSelected(reservadoCliente);
-            
-        }catch (Exception erro){
+
+        } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "atualizarLivros em PagMovimento: " + erro);
         }
     }
-    
+
     //método para pegar o que foi escrito no editavel
     //jogar no LivroDTO e depois usar o método "alterarUsuarioLivro"
     //para que ele atualize no banco de dados mysql
-    private void alterarEditaveisLivro(){
-        String nome_cliente;
-        int data_cliente, hora_cliente, cpf_cliente, celular_cliente;
-        boolean reservado;
-        //pegando o editável escrito
-        nome_cliente = txtNome.getText();
-        data_cliente = Integer.parseInt(txtDatausuario.getText());
-        hora_cliente = Integer.parseInt(txtHorausuario.getText());
-        cpf_cliente = Integer.parseInt(txtCPF.getText());
-        celular_cliente = Integer.parseInt(txtCelular.getText());
-        reservado = boxReservado.isSelected();
-        //setando o editável escrito na DTO para o mysql
-        LivroDTO objlivro = new LivroDTO();
-        objlivro.setNome_cliente(nome_cliente);
-        objlivro.setData_cliente(data_cliente);
-        objlivro.setHora_cliente(hora_cliente);
-        objlivro.setCelular_cliente(celular_cliente);
-        objlivro.setCpf_cliente(cpf_cliente);
-        objlivro.setReservado(reservado);
-        //ordenando o DTO ser salvo no mysql
-        LivroDAO objLivroDAO = new LivroDAO();
-        objLivroDAO.alterarUsuarioLivro(objlivro);
-
+    private void alterarEditaveisLivro() {
+        try {
+            String nome_cliente;
+            int data_cliente, hora_cliente, cpf_cliente, celular_cliente;
+            boolean reservado;
+            //pegando o editável escrito
+            nome_cliente = txtNome.getText();
+            data_cliente = Integer.parseInt(txtDatausuario.getText());
+            hora_cliente = Integer.parseInt(txtHorausuario.getText());
+            cpf_cliente = Integer.parseInt(txtCPF.getText());
+            celular_cliente = Integer.parseInt(txtCelular.getText());
+            reservado = boxReservado.isSelected();
+            //setando o editável escrito na DTO para o mysql
+            LivroDTO objlivro = new LivroDTO();
+            objlivro.setNome_cliente(nome_cliente);
+            objlivro.setData_cliente(data_cliente);
+            objlivro.setHora_cliente(hora_cliente);
+            objlivro.setCelular_cliente(celular_cliente);
+            objlivro.setCpf_cliente(cpf_cliente);
+            objlivro.setReservado(reservado);
+            //ordenando o DTO ser salvo no mysql
+            LivroDAO objLivroDAO = new LivroDAO();
+            objLivroDAO.alterarUsuarioLivro(objlivro);
+        } catch (NumberFormatException erro) {
+            JOptionPane.showMessageDialog(null, "alterarEditaveisLivro em Pagmovimento; " + erro);
+        }
     }
-    
+
 }

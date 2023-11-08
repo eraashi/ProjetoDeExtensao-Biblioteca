@@ -45,7 +45,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         listarLivros();
         //aqui a combox padrao é atualiza assim que a página surge
         //restaurarBoxLivros();
-        //atualizarNomeUsuario();
+        atualizarNomeUsuario();
         //métodos para a combobox IMPROVISADA (do lado do botao pesquisar)
         listaPesquisaLivros.setVisible(false);
         conn.conectaBD();
@@ -66,9 +66,9 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         listaPesquisaLivros = new javax.swing.JList<>();
-        txtNomeUsuario1 = new javax.swing.JLabel();
+        txtOla = new javax.swing.JLabel();
         btnNovoLivro = new javax.swing.JButton();
-        btnNovaMovimento = new javax.swing.JButton();
+        btnEditarDados = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         txtNomeUsuario = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
@@ -107,11 +107,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(listaPesquisaLivros);
         listaPesquisaLivros.setBounds(480, 260, 500, 90);
 
-        txtNomeUsuario1.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
-        txtNomeUsuario1.setForeground(new java.awt.Color(239, 125, 9));
-        txtNomeUsuario1.setText("Olá,");
-        getContentPane().add(txtNomeUsuario1);
-        txtNomeUsuario1.setBounds(120, 330, 80, 50);
+        txtOla.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
+        txtOla.setForeground(new java.awt.Color(239, 125, 9));
+        txtOla.setText("Olá,");
+        getContentPane().add(txtOla);
+        txtOla.setBounds(120, 330, 80, 50);
 
         btnNovoLivro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNovoLivro.setForeground(new java.awt.Color(255, 204, 0));
@@ -124,17 +124,16 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(btnNovoLivro);
         btnNovoLivro.setBounds(60, 450, 180, 50);
 
-        btnNovaMovimento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnNovaMovimento.setForeground(new java.awt.Color(255, 204, 0));
-        btnNovaMovimento.setText("Editar Seus Dados");
-        btnNovaMovimento.setEnabled(false);
-        btnNovaMovimento.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarDados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEditarDados.setForeground(new java.awt.Color(255, 204, 0));
+        btnEditarDados.setText("Editar Seus Dados");
+        btnEditarDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovaMovimentoActionPerformed(evt);
+                btnEditarDadosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNovaMovimento);
-        btnNovaMovimento.setBounds(60, 510, 180, 50);
+        getContentPane().add(btnEditarDados);
+        btnEditarDados.setBounds(60, 510, 180, 50);
 
         btnSair.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSair.setText("Sair");
@@ -148,7 +147,6 @@ public class PaginaInicial extends javax.swing.JFrame {
 
         txtNomeUsuario.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         txtNomeUsuario.setForeground(new java.awt.Color(239, 125, 9));
-        txtNomeUsuario.setText("nomedousuario");
         getContentPane().add(txtNomeUsuario);
         txtNomeUsuario.setBounds(20, 380, 260, 50);
 
@@ -242,6 +240,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         btnAtualizarTabela.setBounds(440, 600, 90, 23);
 
         btnExcluirLivro.setText("Excluir Livro");
+        btnExcluirLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirLivroActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnExcluirLivro);
         btnExcluirLivro.setBounds(560, 600, 94, 23);
 
@@ -264,11 +267,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNovaMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaMovimentoActionPerformed
+    private void btnEditarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarDadosActionPerformed
         this.dispose();
-        PagMovimento denuncias = new PagMovimento();
-        denuncias.setVisible(true);
-    }//GEN-LAST:event_btnNovaMovimentoActionPerformed
+        AlterarUsuarioLogado altUsuario = new AlterarUsuarioLogado();
+        altUsuario.setVisible(true);
+    }//GEN-LAST:event_btnEditarDadosActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
@@ -350,8 +353,8 @@ public class PaginaInicial extends javax.swing.JFrame {
         //criei uma acao que quando o usuario clicar na lista aberta
         //o campo de escrever também recebe o conteúdo que ele clicou da lista
         //depois ela se fecha
-        MostraPesquisa();
-        listaPesquisaLivros.setVisible(false);
+        //MostraPesquisa();
+        //listaPesquisaLivros.setVisible(false);
     }//GEN-LAST:event_listaPesquisaLivrosMouseClicked
 
     private void txtPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPesquisaMouseClicked
@@ -365,6 +368,10 @@ public class PaginaInicial extends javax.swing.JFrame {
         objNovoLivro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnNovoLivroActionPerformed
+
+    private void btnExcluirLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLivroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcluirLivroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,8 +411,8 @@ public class PaginaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizarTabela;
+    private javax.swing.JButton btnEditarDados;
     private javax.swing.JButton btnExcluirLivro;
-    private javax.swing.JButton btnNovaMovimento;
     private javax.swing.JButton btnNovoLivro;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
@@ -424,7 +431,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JTable tabelaLivro;
     private javax.swing.JTextField txtId;
     private javax.swing.JLabel txtNomeUsuario;
-    private javax.swing.JLabel txtNomeUsuario1;
+    private javax.swing.JLabel txtOla;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 
@@ -515,7 +522,20 @@ public class PaginaInicial extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "listarLivros TABELA: " + erro);
         }
-
+    
     }
-
+    
+    private void atualizarNomeUsuario(){
+        
+        try{
+            UserDTO objUserDTO = new UserDTO();
+            
+            txtNomeUsuario.setText(objUserDTO.getNome_completo());
+            
+        }catch(Exception erro){
+            JOptionPane.showMessageDialog(null, "atualizarNomeUsuario em pagInicial: " + erro);
+        }
+        
+    }   
+    
 }

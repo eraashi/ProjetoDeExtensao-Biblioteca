@@ -61,12 +61,13 @@ public class UserDAO {
     }
     
     public ResultSet resgatarDadosUsuario(UserDTO objUserDTO) {
-        String sql = "SELECT * FROM user WHERE login = ?";
+        String sql = "SELECT * FROM user WHERE login = ? AND senha = ?";
         conn = new Conexao().conectaBD();
         
         try {
             pst = conn.prepareStatement(sql);
             pst.setString(1, objUserDTO.getLogin());
+            pst.setString(2, objUserDTO.getSenha());
             rs = pst.executeQuery();
             
             while (rs.next()) {
@@ -111,6 +112,33 @@ public class UserDAO {
         }catch(SQLException erro){
             JOptionPane.showMessageDialog(null, "autenticacaoUsuario em UserDAO: " + erro);
             return null;
+        }
+    }
+    
+    public void alterarUsuarioLogado(UserDTO objUserDTO) {
+        String sql = "update user set login = ?, senha = ?, confirmar_senha = ?, nome_completo = ?, cpf = ?, celular = ?, cidade = ?, uf = ?, num = ?, endereco = ?, email = ? where login = ?";
+        conn = new Conexao().conectaBD();
+
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, objUserDTO.getLogin());
+            pst.setString(2, objUserDTO.getSenha());
+            pst.setString(3, objUserDTO.getConfirmar_senha());
+            pst.setString(4, objUserDTO.getNome_completo());
+            pst.setString(5, objUserDTO.getCpf());
+            pst.setString(6, objUserDTO.getCelular());
+            pst.setString(7, objUserDTO.getCidade());
+            pst.setString(8, objUserDTO.getUf());
+            pst.setString(9, objUserDTO.getNum());
+            pst.setString(10, objUserDTO.getEndereço());
+            pst.setString(11, objUserDTO.getEmail());
+            pst.setString(12, objUserDTO.getLogin());
+            //talvez precise verificar pelo id do usuario, ao inves do login, ou talvez não
+            pst.execute();
+            pst.close();
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "alterarUsuarioLivro em LivroDAO: " + erro);
         }
     }
     

@@ -244,7 +244,7 @@
                               <Component id="txtLocaLivro" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="idLivro" min="-2" max="-2" attributes="0"/>
+                                  <Component id="idLivro" min="-2" pref="90" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -282,9 +282,9 @@
                       <Component id="txtISBN" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtDataLivro" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="idLivro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="idLivro" alignment="1" pref="17" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="11" max="32767" attributes="0"/>
+                  <EmptySpace pref="10" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -352,9 +352,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="idLivro">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="idLivro"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

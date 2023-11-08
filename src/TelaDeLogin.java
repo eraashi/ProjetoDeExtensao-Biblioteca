@@ -147,7 +147,8 @@ public class TelaDeLogin extends javax.swing.JFrame {
             UserDAO OBJuserdao = new UserDAO();
             ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(objUserDTO);
             if (rsuserdao.next()){
-                //resgatarDadosUsuario();
+                OBJuserdao.resgatarDadosUsuario(objUserDTO);
+                //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
                 this.dispose();
                 PaginaInicial formulario = new PaginaInicial();
                 formulario.setVisible(true);
@@ -158,9 +159,6 @@ public class TelaDeLogin extends javax.swing.JFrame {
             Logger.getLogger(TelaDeLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
-     
-                
         
     }//GEN-LAST:event_botao_entraActionPerformed
 
@@ -219,3 +217,4 @@ public class TelaDeLogin extends javax.swing.JFrame {
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 }
+
