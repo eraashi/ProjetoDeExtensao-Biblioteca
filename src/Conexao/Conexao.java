@@ -17,9 +17,11 @@ public class Conexao {
     final private String driver = "com.mysql.jdbc.Driver";
     final private String usuario = "root";
     final private String senha = "";
-    Connection conexao;
+    public Connection conexao;
     public Statement statement;
     public ResultSet resultset;
+    
+    
     public void conecta() {
         try {
             Class.forName(driver);

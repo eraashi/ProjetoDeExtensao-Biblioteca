@@ -3,8 +3,10 @@ import DTO.LivroDTO;
 import DAO.LivroDAO;
 import Ferramentas.LimitaCaracteres;
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.LabelView;
@@ -22,10 +24,17 @@ public class PagMovimento extends javax.swing.JFrame {
     /**
      * Creates new form PagDenuncia
      */
+    public ResultSet rs;
+    LivroDAO objLivroDAO = new LivroDAO();
+    LivroDTO objlivro = new LivroDTO();
+
     public PagMovimento() {
         initComponents();
         setLocationRelativeTo(null);
-        atualizarLivros();
+        
+        preencherLivros();
+        //resgatarDadosLivro();
+        //atualizarLivros();
         idLivro.setVisible(false);
 
         txtNome.setDocument(new LimitaCaracteres(60, LimitaCaracteres.TipoEntrada.NOME));
@@ -222,6 +231,8 @@ public class PagMovimento extends javax.swing.JFrame {
 
         txtLocaLivro.setText("Local de Publicação");
 
+        idLivro.setText("idLivro");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -415,7 +426,7 @@ public class PagMovimento extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //método privado do frame pra atualizar os campos com as infos dos livros
-    private void atualizarLivros() {
+    /*private void atualizarLivros() {
         try {
             LivroDTO objLivroDTO = new LivroDTO();
             String tituloLivro, autor, editora, local, nomeCliente, id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;;
@@ -455,7 +466,7 @@ public class PagMovimento extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "atualizarLivros em PagMovimento: " + erro);
         }
-    }
+    }*/
 
     //método para pegar o que foi escrito no editavel
     //jogar no LivroDTO e depois usar o método "alterarUsuarioLivro"
@@ -472,7 +483,6 @@ public class PagMovimento extends javax.swing.JFrame {
             celular_cliente = txtCelular.getText();
             reservado = boxReservado.isSelected();
             //setando o editável escrito na DTO para o mysql
-            LivroDTO objlivro = new LivroDTO();
             objlivro.setNome_cliente(nome_cliente);
             objlivro.setData_cliente(data_cliente);
             objlivro.setHora_cliente(hora_cliente);
@@ -480,10 +490,36 @@ public class PagMovimento extends javax.swing.JFrame {
             objlivro.setCpf_cliente(cpf_cliente);
             objlivro.setReservado(reservado);
             //ordenando o DTO ser salvo no mysql
-            LivroDAO objLivroDAO = new LivroDAO();
             objLivroDAO.alterarUsuarioLivro(objlivro);
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "alterarEditaveisLivro em Pagmovimento; " + erro);
+        }
+
+    }
+
+    public void preencherLivros() {
+        try {
+            rs = objLivroDAO.resgatarDadosLivro();
+
+            while (rs.next()) {
+                idLivro.setText(rs.getString(1));
+                txtTituloLivro.setText(rs.getString(2));
+                txtNomeLivro.setText(rs.getString(2));
+                txtAutorLivro.setText(rs.getString(3));
+                txtISBN.setText(rs.getString(4));
+                txtEditoraLivro.setText(rs.getString(5));
+                txtLocaLivro.setText(rs.getString(6));
+                txtDataLivro.setText(rs.getString(7));
+                txtNome.setText(rs.getString(8));
+                txtCPF.setText(rs.getString(9));
+                txtDatausuario.setText(rs.getString(10));
+                txtHorausuario.setText(rs.getString(11));
+                txtCelular.setText(rs.getString(12));
+                boxReservado.setSelected(rs.getBoolean(13));
+            }
+            
+        }catch(SQLException erro){
+            JOptionPane.showMessageDialog(null, "preencherLivros em PagMovimento: " + erro);
         }
     }
 

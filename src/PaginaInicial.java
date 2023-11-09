@@ -45,8 +45,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         //aqui a lista é atualizada assim que a página surge
         conn.conecta();
         listarLivros();
-        //aqui a combox padrao é atualiza assim que a página surge
-        //restaurarBoxLivros();
+
         atualizarNomeUsuario();
         //métodos para a combobox IMPROVISADA (do lado do botao pesquisar)
         listaPesquisaLivros.setVisible(false);
@@ -313,12 +312,13 @@ public class PaginaInicial extends javax.swing.JFrame {
             objLivroDTO.setId(idLocal);
 
             LivroDAO objLivroDAO = new LivroDAO();
-            ResultSet rsLivroDAO = objLivroDAO.compararIdLivro(objLivroDTO);
+            rs = objLivroDAO.resgatarDadosLivro();
 
-            if (rsLivroDAO.next()) {
-                //checar se está funcionando
-                objLivroDAO.resgatarDadosLivro(objLivroDTO);
+            if (rs.next()) {
 
+                objLivroDTO.setId(rs.getString(1));
+                objLivroDTO.setTitulo(rs.getString(2));
+                
                 PagMovimento denuncias = new PagMovimento();
                 denuncias.setVisible(true);
                 this.dispose();
@@ -329,11 +329,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "btnPesquisarActionPerformed: " + erro);
         }
-
-        //HOJE EU VEJO ESSE BOTÃO
-        PagMovimento denuncias = new PagMovimento();
-        denuncias.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnAtualizarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaActionPerformed
@@ -355,8 +350,8 @@ public class PaginaInicial extends javax.swing.JFrame {
         //criei uma acao que quando o usuario clicar na lista aberta
         //o campo de escrever também recebe o conteúdo que ele clicou da lista
         //depois ela se fecha
-        //MostraPesquisa();
-        //listaPesquisaLivros.setVisible(false);
+        MostraPesquisa();
+        listaPesquisaLivros.setVisible(false);
     }//GEN-LAST:event_listaPesquisaLivrosMouseClicked
 
     private void txtPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPesquisaMouseClicked
@@ -480,15 +475,13 @@ public class PaginaInicial extends javax.swing.JFrame {
     }
 
     //não vou utilizar agora
-    /*Vector<Integer> id = new Vector<Integer>();
 
-    public void restaurarBoxLivros() {
-        boxLivros.setEditable(true);
-        boxLivros.addActionListener(boxLivros);
+    /*public void preencherDadosLivros() {
+
         try {
 
             LivroDAO objLivroDAO = new LivroDAO();
-            ResultSet rs = objLivroDAO.listarBoxLivros();
+            rs = objLivroDAO.resgatarDadosLivro();
 
             while (rs.next()) {
                 id.addElement(rs.getInt(1));
@@ -530,14 +523,17 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void atualizarNomeUsuario(){
         
         try{
-            UserDTO objUserDTO = new UserDTO();
-            
-            txtNomeUsuario.setText(objUserDTO.getNome_completo());
-            
-        }catch(Exception erro){
+            UserDAO objUserDAO = new UserDAO();
+            rs = objUserDAO.resgatarDadosUsuario();
+            while(rs.next()){
+            txtNomeUsuario.setText(rs.getString(5));
+            }
+        }catch(SQLException erro){
             JOptionPane.showMessageDialog(null, "atualizarNomeUsuario em pagInicial: " + erro);
         }
         
     }   
+    
+    
     
 }
