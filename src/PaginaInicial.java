@@ -40,15 +40,17 @@ public class PaginaInicial extends javax.swing.JFrame {
     String [] Codig;
 
     public PaginaInicial() {
+       
         initComponents();
         //aqui a lista é atualizada assim que a página surge
+        conn.conecta();
         listarLivros();
         //aqui a combox padrao é atualiza assim que a página surge
         //restaurarBoxLivros();
         atualizarNomeUsuario();
         //métodos para a combobox IMPROVISADA (do lado do botao pesquisar)
         listaPesquisaLivros.setVisible(false);
-        conn.conecta();
+        
         modelo = new DefaultListModel();
         listaPesquisaLivros.setModel(modelo);
         txtId.setVisible(false);
