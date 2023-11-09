@@ -41,6 +41,7 @@ public class LivroDTO {
 
     public String getNome_cliente() {
         return nome_cliente;
+        
     }
 
     public void setNome_cliente(String nome_cliente) {

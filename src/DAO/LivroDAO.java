@@ -140,7 +140,7 @@ public class LivroDAO {
     }
     
     public void criarNovoLivro(LivroDTO objLivroDTO) {
-        String sql = "INSERT INTO livromovimentacao VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO livromovimentacao VALUES(?,?,?,?,?,?,?,'','','','','',0)";
         conn = new Conexao().conectaBD();
 
         try {
@@ -152,12 +152,7 @@ public class LivroDAO {
             pstm.setString(5, objLivroDTO.getEditora());
             pstm.setString(6, objLivroDTO.getData());
             pstm.setString(7, objLivroDTO.getLocal());
-            pstm.setString(8, objLivroDTO.getNome_cliente());
-            pstm.setString(9, objLivroDTO.getCpf_cliente());
-            pstm.setString(10, objLivroDTO.getData_cliente());
-            pstm.setString(11, objLivroDTO.getHora_cliente());
-            pstm.setString(12, objLivroDTO.getCelular_cliente());
-            pstm.setBoolean(13, objLivroDTO.isReservado());
+          
 
             pstm.execute();
             pstm.close();

@@ -294,8 +294,7 @@ public class Registro extends javax.swing.JFrame {
         UserDAO userdao;
         boolean status;
         int resp;
-        Random random = new Random();
-        int randomnumber = random.nextInt(0, 100);
+        
        
         user = new UserDTO();
         
