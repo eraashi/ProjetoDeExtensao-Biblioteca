@@ -17,7 +17,6 @@ public class LivroDAO {
     PreparedStatement pstm;
     ResultSet rs;
     ArrayList<LivroDTO> lista = new ArrayList<>();
-    LivroDTO objLivroDTO = new LivroDTO();
     
     //método que lista id e titulo do banco de dados
     //não está sendo usado
@@ -40,7 +39,7 @@ public class LivroDAO {
         conn = new Conexao().conectaBD();
         
         try {
-            String sql = "SELECT * from livromovimentacao WHERE id = ?";
+            String sql = "SELECT id from livromovimentacao WHERE id = ?";
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, objLivroDTO.getId());
             rs = pstm.executeQuery();
@@ -53,18 +52,35 @@ public class LivroDAO {
     }
     
     //aqui esse método puxa os dados do msql e trás para a classe LivrosDTO
-    public ResultSet resgatarDadosLivro() {
-        conn = new Conexao().conectaBD();
+    public void resgatarDadosLivro(LivroDTO objLivroDTO) {
         String sql = "SELECT * from livromovimentacao WHERE id = ?";
+        conn = new Conexao().conectaBD();
         
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, objLivroDTO.getId());
-            return pstm.executeQuery();
+            rs = pstm.executeQuery();
+            
+            while (rs.next()) {
+                
+                objLivroDTO.setId(rs.getString("id"));
+                objLivroDTO.setTitulo(rs.getString("titulo"));
+                objLivroDTO.setAutor(rs.getString("autor"));
+                objLivroDTO.setIsbn(rs.getString("isbn"));
+                objLivroDTO.setEditora(rs.getString("editora"));
+                objLivroDTO.setData(rs.getString("data"));
+                objLivroDTO.setLocal(rs.getString("local"));
+                objLivroDTO.setNome_cliente(rs.getString("nome_cliente"));
+                objLivroDTO.setCpf_cliente(rs.getString("cpf_cliente"));
+                objLivroDTO.setData_cliente(rs.getString("data_cliente"));
+                objLivroDTO.setHora_cliente(rs.getString("hora_cliente"));
+                objLivroDTO.setCelular_cliente(rs.getString("isbn"));
+                objLivroDTO.setReservado(rs.getBoolean("reservado"));
+
+            }
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "resgatarDadosLivros em LivroDAO: " + erro);
-            return null;
         }
     }
     //aqui esse método faz a alteração do DTO para o mysql
@@ -103,6 +119,7 @@ public class LivroDAO {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
+                LivroDTO objLivroDTO = new LivroDTO();
 
                 objLivroDTO.setId(rs.getString("id"));
                 objLivroDTO.setTitulo(rs.getString("titulo"));

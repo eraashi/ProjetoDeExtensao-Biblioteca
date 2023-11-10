@@ -147,6 +147,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
             UserDAO OBJuserdao = new UserDAO();
             ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(objUserDTO);
             if (rsuserdao.next()){
+                OBJuserdao.resgatarDadosUsuario(objUserDTO);
                 //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
                 this.dispose();
                 PaginaInicial formulario = new PaginaInicial();

@@ -17,7 +17,6 @@ public class UserDAO {
     Connection conn;
     PreparedStatement pst;
     ResultSet rs;
-    UserDTO objUserDTO = new UserDTO();
 
     public boolean conectar() {
         try {
@@ -61,21 +60,38 @@ public class UserDAO {
         }
     }
     
-    public ResultSet resgatarDadosUsuario() {
+    public ResultSet resgatarDadosUsuario(UserDTO objUserDTO) {
+        String sql = "SELECT * FROM user WHERE login = ? AND senha = ?";
         conn = new Conexao().conectaBD();
-        String sql = "SELECT * FROM user WHERE login = ?";
         
         try {
-            
             pst = conn.prepareStatement(sql);
             pst.setString(1, objUserDTO.getLogin());
+            pst.setString(2, objUserDTO.getSenha());
+            rs = pst.executeQuery();
             
-            return pst.executeQuery();
+            while (rs.next()) {
+                
+                objUserDTO.setId(rs.getString("id"));
+                objUserDTO.setLogin(rs.getString("login"));
+                objUserDTO.setSenha(rs.getString("senha"));
+                objUserDTO.setConfirmar_senha(rs.getString("confirmar_senha"));
+                objUserDTO.setNome_completo(rs.getString("nome_completo"));
+                objUserDTO.setCpf(rs.getString("cpf"));
+                objUserDTO.setCelular(rs.getString("celular"));
+                objUserDTO.setCidade(rs.getString("cidade"));
+                objUserDTO.setUf(rs.getString("uf"));
+                objUserDTO.setNum(rs.getString("num"));
+                objUserDTO.setEndereço(rs.getString("endereco"));
+                objUserDTO.setEmail(rs.getString("email"));
+                
+            }
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "resgatarDadosUsuario em UserDAO: " + erro);
             return null;
         }
+        return rs;
     }
     
     //criei esse método simplificado de autenticacao
@@ -90,7 +106,7 @@ public class UserDAO {
             pstm.setString(1, objUserDTO.getLogin());
             pstm.setString(2, objUserDTO.getSenha());
             
-            rs = pstm.executeQuery();
+            ResultSet rs = pstm.executeQuery();
             return rs;
             
         }catch(SQLException erro){

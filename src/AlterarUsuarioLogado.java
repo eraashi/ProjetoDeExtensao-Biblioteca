@@ -16,13 +16,10 @@ import java.util.Random;
 public class AlterarUsuarioLogado extends javax.swing.JFrame {
     //User user = new UserDTO();
     //UserDAO usuariodao = new UserDAO();
-    public ResultSet rs;
-    UserDTO objUserDTO = new UserDTO();
-    UserDAO objUserDAO = new UserDAO();
+
     public AlterarUsuarioLogado() {
         initComponents();
-        //resgatarDadosUsuarioLogado();
-        preencherDadosUsuario();
+        resgatarDadosUsuarioLogado();
     }
 
     /**
@@ -401,11 +398,12 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     private javax.swing.JTextField txtuf;
     // End of variables declaration//GEN-END:variables
     
-    /*private void resgatarDadosUsuarioLogado(){
+    private void resgatarDadosUsuarioLogado(){
 
         try {
             UserDTO objUserDTO = new UserDTO();
             String login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, endereco, email;
+
 
             login = objUserDTO.getLogin();
             senha = objUserDTO.getSenha();
@@ -433,7 +431,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "resgatarDadosUsuarioLogado em AlterarUsuarioLogado: " + erro);
         }
     
-    }*/
+    }
     
     private void alterarDadosUsuario() {
         try {
@@ -450,6 +448,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             endereco = txtendereço.getText();
             email = txtemail.getText();
             
+            UserDTO objUserDTO = new UserDTO();
             objUserDTO.setLogin(login);
             objUserDTO.setSenha(senha);
             objUserDTO.setConfirmar_senha(confirmar_senha);
@@ -461,34 +460,12 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             objUserDTO.setEndereço(endereco);
             objUserDTO.setEmail(email);
             
+            UserDAO objUserDAO = new UserDAO();
             objUserDAO.alterarUsuarioLogado(objUserDTO);
             
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "alterarDadosUsuario em AlterarUsuarioLogado: " + erro);
         }
     }
-    
-    public void preencherDadosUsuario() {
-        try {
-            rs = objUserDAO.resgatarDadosUsuario();
-
-            while (rs.next()) {
-                txtlogin.setText(rs.getString(2));
-                txtsenha.setText(rs.getString(3));
-                txtconf_senha.setText(rs.getString(4));
-                txtnome_completo.setText(rs.getString(5));
-                txtcpf.setText(rs.getString(6));
-                txtcelular.setText(rs.getString(7));
-                txtcidade.setText(rs.getString(8));
-                txtuf.setText(rs.getString(9));
-                txtendereço.setText(rs.getString(10));
-                txtemail.setText(rs.getString(11));
-            }
-            
-        }catch(SQLException erro){
-            JOptionPane.showMessageDialog(null, "preencherDadosUsuario em AlterarUsuarioLogado: " + erro);
-        }
-    }
-
 
 }
