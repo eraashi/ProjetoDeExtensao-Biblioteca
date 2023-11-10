@@ -420,6 +420,10 @@ public class PagMovimento extends javax.swing.JFrame {
             LivroDTO objLivroDTO = new LivroDTO();
             String tituloLivro, autor, editora, local, nomeCliente, id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;;
             boolean reservadoCliente;
+            
+            LivroDAO objLivroDAO = new LivroDAO();
+            objLivroDAO.resgatarDadosLivro(objLivroDTO);
+            
             //pegando o não aditável
             tituloLivro = objLivroDTO.getTitulo();
             autor = objLivroDTO.getAutor();

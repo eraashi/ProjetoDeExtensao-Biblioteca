@@ -116,7 +116,7 @@ public class UserDAO {
     }
     
     public void alterarUsuarioLogado(UserDTO objUserDTO) {
-        String sql = "update user set login = ?, senha = ?, confirmar_senha = ?, nome_completo = ?, cpf = ?, celular = ?, cidade = ?, uf = ?, num = ?, endereco = ?, email = ? where login = ?";
+        String sql = "UPDATE user SET login = ?, senha = ?, confirmar_senha = ?, nome_completo = ?, cpf = ?, celular = ?, cidade = ?, uf = ?, num = ?, endereco = ?, email = ? where login = ?";
         conn = new Conexao().conectaBD();
 
         try {
@@ -133,7 +133,7 @@ public class UserDAO {
             pst.setString(10, objUserDTO.getEndereço());
             pst.setString(11, objUserDTO.getEmail());
             pst.setString(12, objUserDTO.getLogin());
-            //talvez precise verificar pelo id do usuario, ao inves do login, ou talvez não
+            
             pst.execute();
             pst.close();
 

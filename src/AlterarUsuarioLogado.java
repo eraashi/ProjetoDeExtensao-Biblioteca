@@ -20,6 +20,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     public AlterarUsuarioLogado() {
         initComponents();
         resgatarDadosUsuarioLogado();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -403,8 +404,10 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         try {
             UserDTO objUserDTO = new UserDTO();
             String login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, endereco, email;
-
-
+            
+            UserDAO objUserDAO = new UserDAO();
+            objUserDAO.resgatarDadosUsuario(objUserDTO);
+            
             login = objUserDTO.getLogin();
             senha = objUserDTO.getSenha();
             confirmar_senha = objUserDTO.getConfirmar_senha();

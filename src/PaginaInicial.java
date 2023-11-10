@@ -304,16 +304,16 @@ public class PaginaInicial extends javax.swing.JFrame {
         //cada campo label e campo textfield, com as informações da DTO
         
         try {
-            String idLocal;
+            String tituloLocal;
 
-            idLocal = txtId.getText();
+            tituloLocal = txtPesquisa.getText();
 
             LivroDTO objLivroDTO = new LivroDTO();
 
-            objLivroDTO.setId(idLocal);
+            objLivroDTO.setTitulo(tituloLocal);
 
             LivroDAO objLivroDAO = new LivroDAO();
-            ResultSet rsLivroDAO = objLivroDAO.compararIdLivro(objLivroDTO);
+            ResultSet rsLivroDAO = objLivroDAO.compararTituloLivro(objLivroDTO);
 
             if (rsLivroDAO.next()) {
                 //checar se está funcionando
@@ -530,8 +530,10 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void atualizarNomeUsuario(){
         
         try{
-            UserDTO objUserDTO = new UserDTO();
+            UserDAO objUserDAO = new UserDAO();
             
+            UserDTO objUserDTO = new UserDTO();
+            objUserDAO.resgatarDadosUsuario(objUserDTO);
             txtNomeUsuario.setText(objUserDTO.getNome_completo());
             
         }catch(Exception erro){

@@ -35,13 +35,13 @@ public class LivroDAO {
     }*/
     
     //esse método aqui tenta comparar um id local com um id do mysql
-    public ResultSet compararIdLivro(LivroDTO objLivroDTO){
+    public ResultSet compararTituloLivro(LivroDTO objLivroDTO){
         conn = new Conexao().conectaBD();
         
         try {
-            String sql = "SELECT id from livromovimentacao WHERE id = ?";
+            String sql = "SELECT * from livromovimentacao WHERE titulo = ?";
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objLivroDTO.getId());
+            pstm.setString(1, objLivroDTO.getTitulo());
             rs = pstm.executeQuery();
             
             return rs;
@@ -52,13 +52,13 @@ public class LivroDAO {
     }
     
     //aqui esse método puxa os dados do msql e trás para a classe LivrosDTO
-    public void resgatarDadosLivro(LivroDTO objLivroDTO) {
-        String sql = "SELECT * from livromovimentacao WHERE id = ?";
+    public ResultSet resgatarDadosLivro(LivroDTO objLivroDTO) {
+        String sql = "SELECT * from livromovimentacao WHERE titulo = ?";
         conn = new Conexao().conectaBD();
         
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objLivroDTO.getId());
+            pstm.setString(1, objLivroDTO.getTitulo());
             rs = pstm.executeQuery();
             
             while (rs.next()) {
@@ -82,12 +82,13 @@ public class LivroDAO {
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "resgatarDadosLivros em LivroDAO: " + erro);
         }
+        return rs;
     }
     //aqui esse método faz a alteração do DTO para o mysql
     //pega os dados editáveis dos livros em LivrosDTO e joga na tabela msql
     //utilizando o id como referência
     public void alterarUsuarioLivro(LivroDTO objLivroDTO) {
-        String sql = "update livromovimentacao set nome_cliente = ?, cpf_cliente = ?, data_cliente = ?, hora_cliente = ?, hora_cliente = ?, celular-cliente = ? where id = ?";
+        String sql = "UPDATE livromovimentacao SET nome_cliente = ?, cpf_cliente = ?, data_cliente = ?, hora_cliente = ?, hora_cliente = ?, celular-cliente = ? where titulo = ?";
         conn = new Conexao().conectaBD();
 
         try {
@@ -98,7 +99,7 @@ public class LivroDAO {
             pstm.setString(4, objLivroDTO.getHora_cliente());
             pstm.setString(5, objLivroDTO.getCelular_cliente());
             pstm.setBoolean(6, objLivroDTO.isReservado());
-            pstm.setString(7, objLivroDTO.getId());
+            pstm.setString(7, objLivroDTO.getTitulo());
 
             pstm.execute();
             pstm.close();
