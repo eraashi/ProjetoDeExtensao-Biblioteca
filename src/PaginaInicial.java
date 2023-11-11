@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  * @author icaro
  */
 public class PaginaInicial extends javax.swing.JFrame {
-
+    private UserDTO objUserDTO;
     /**
      * Creates new form FormularioUnico
      */
@@ -272,6 +272,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void btnEditarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarDadosActionPerformed
         this.dispose();
         AlterarUsuarioLogado altUsuario = new AlterarUsuarioLogado();
+        altUsuario.setUserDTO(objUserDTO);
         altUsuario.setVisible(true);
         
     }//GEN-LAST:event_btnEditarDadosActionPerformed
@@ -438,6 +439,11 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 
+    public void setUserDTO(UserDTO objUserDTO) {
+        this.objUserDTO = objUserDTO;
+        // Use o objeto UserDTO dentro deste JFrame
+    }
+    
     public void listaPesquisaParaTextfield() {
         try {
             conn.executaSQL("SELECT * FROM livromovimentacao WHERE titulo LIKE '" + txtPesquisa.getText() + "%' ORDER BY titulo");
@@ -532,8 +538,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         
         try{
             UserDAO objUserDAO = new UserDAO();
-            
-            UserDTO objUserDTO = new UserDTO();
             objUserDAO.resgatarDadosUsuario(objUserDTO);
             txtNomeUsuario.setText(objUserDTO.getNome_completo());
             

@@ -139,7 +139,6 @@ public class TelaDeLogin extends javax.swing.JFrame {
     private void botao_entraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_entraActionPerformed
         CadastrarUsuario();
         
-        
     }//GEN-LAST:event_botao_entraActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -201,6 +200,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
                 this.dispose();
                 PaginaInicial formulario = new PaginaInicial();
+                formulario.setUserDTO(objUserDTO);
                 formulario.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos");

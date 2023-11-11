@@ -14,12 +14,14 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import java.util.Random;
 
 public class AlterarUsuarioLogado extends javax.swing.JFrame {
-  
-   
+    
+    private UserDTO objUserDTO;
+    
     public AlterarUsuarioLogado() {
         initComponents();
         resgatarDadosUsuarioLogado();
         setLocationRelativeTo(null);
+        
     }
    
     /**
@@ -297,20 +299,6 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         TelaDeLogin login = new TelaDeLogin();
         login.setVisible(true);
     }//GEN-LAST:event_botao_confirmarActionPerformed
-    public void limparcampos() {
-        txtlogin.setText("");
-        txtsenha.setText("");
-        txtconf_senha.setText("");
-        txtnome_completo.setText("");
-        txtcpf.setText("");
-        txtcelular.setText("");
-        txtcidade.setText("");
-        txtuf.setText("");
-        txtnum.setText("");
-        txtendereço.setText("");
-        txtemail.setText("");
-        txtlogin.requestFocus();
-    }
 
     private void botao_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_voltarActionPerformed
         this.dispose();
@@ -402,9 +390,13 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     private javax.swing.JTextField txtuf;
     // End of variables declaration//GEN-END:variables
     
+    public void setUserDTO(UserDTO objUserDTO) {
+        this.objUserDTO = objUserDTO;
+        // Use o objeto UserDTO dentro deste JFrame
+    }
+    
     private UserDTO resgatarDadosUsuarioLogado() {
     try {
-        UserDTO objUserDTO = new UserDTO();
         UserDAO objUserDAO = new UserDAO();
         objUserDAO.resgatarDadosUsuario(objUserDTO);
         txtId.setText(Integer.toString(objUserDTO.getId()));
