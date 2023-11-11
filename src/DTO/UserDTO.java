@@ -2,7 +2,7 @@ package DTO;
 
 
 public class UserDTO {
-    private String id;
+    private int id;
     private String login;
     private String senha;
     private String confirmar_senha;
@@ -34,11 +34,11 @@ public class UserDTO {
     
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

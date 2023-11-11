@@ -273,6 +273,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         this.dispose();
         AlterarUsuarioLogado altUsuario = new AlterarUsuarioLogado();
         altUsuario.setVisible(true);
+        
     }//GEN-LAST:event_btnEditarDadosActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

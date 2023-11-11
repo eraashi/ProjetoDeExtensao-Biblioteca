@@ -32,7 +32,7 @@ public class UserDAO {
         int status;
         try {
             pst = conn.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
-            pst.setString(1, user.getId());
+            pst.setInt(1, user.getId());
             pst.setString(2, user.getLogin());
             pst.setString(3, user.getSenha());
             pst.setString(4, user.getConfirmar_senha());
@@ -61,7 +61,7 @@ public class UserDAO {
     }
     
     public ResultSet resgatarDadosUsuario(UserDTO objUserDTO) {
-        String sql = "SELECT * FROM user WHERE login = ? AND senha = ?";
+        String sql = "SELECT * FROM user WHERE login = ? AND senha = ? ";
         conn = new Conexao().conectaBD();
         
         try {
@@ -71,8 +71,20 @@ public class UserDAO {
             rs = pst.executeQuery();
             
             while (rs.next()) {
+                System.out.println("id: " + rs.getString("id"));
+                System.out.println("Login: " + rs.getString("login"));
+                System.out.println("senha: " + rs.getString("senha"));
+                System.out.println("confirmar_senha: " + rs.getString("confirmar_senha"));
+                System.out.println("nome_completo: " + rs.getString("nome_completo"));
+                System.out.println("cpf: " + rs.getString("cpf"));
+                System.out.println("celular: " + rs.getString("celular"));
+                System.out.println("cidade: " + rs.getString("cidade"));
+                System.out.println("uf: " + rs.getString("uf"));
+                System.out.println("num: " + rs.getString("num"));
+                System.out.println("endereco: " + rs.getString("endereco"));
+                System.out.println("email: " + rs.getString("email"));
                 
-                objUserDTO.setId(rs.getString("id"));
+                objUserDTO.setId(rs.getInt("id"));
                 objUserDTO.setLogin(rs.getString("login"));
                 objUserDTO.setSenha(rs.getString("senha"));
                 objUserDTO.setConfirmar_senha(rs.getString("confirmar_senha"));
@@ -84,6 +96,8 @@ public class UserDAO {
                 objUserDTO.setNum(rs.getString("num"));
                 objUserDTO.setEndereço(rs.getString("endereco"));
                 objUserDTO.setEmail(rs.getString("email"));
+                
+
                 
             }
 
@@ -141,5 +155,5 @@ public class UserDAO {
             JOptionPane.showMessageDialog(null, "alterarUsuarioLivro em LivroDAO: " + erro);
         }
     }
-    
+
 }

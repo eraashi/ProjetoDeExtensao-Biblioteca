@@ -137,27 +137,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioActionPerformed
 
     private void botao_entraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_entraActionPerformed
-        try {
-            String usuario_login, senha_usuario;
-            usuario_login = usuario.getText();
-            senha_usuario = senhalogin.getText();
-            UserDTO objUserDTO = new UserDTO();
-            objUserDTO.setLogin(usuario_login);
-            objUserDTO.setSenha(senha_usuario);
-            UserDAO OBJuserdao = new UserDAO();
-            ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(objUserDTO);
-            if (rsuserdao.next()){
-                OBJuserdao.resgatarDadosUsuario(objUserDTO);
-                //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
-                this.dispose();
-                PaginaInicial formulario = new PaginaInicial();
-                formulario.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaDeLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        CadastrarUsuario();
         
         
     }//GEN-LAST:event_botao_entraActionPerformed
@@ -202,6 +182,32 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 new TelaDeLogin().setVisible(true);
             }
         });
+    }
+    
+    private void CadastrarUsuario(){
+        try {
+            String usuario_login, senha_usuario;
+            usuario_login = usuario.getText();
+            senha_usuario = senhalogin.getText();
+            UserDTO objUserDTO = new UserDTO();
+            objUserDTO.setLogin(usuario_login);
+            objUserDTO.setSenha(senha_usuario);
+            UserDAO OBJuserdao = new UserDAO();
+            ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(objUserDTO);
+            OBJuserdao.resgatarDadosUsuario(objUserDTO);
+            if (rsuserdao.next()){
+                
+                
+                //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
+                this.dispose();
+                PaginaInicial formulario = new PaginaInicial();
+                formulario.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaDeLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

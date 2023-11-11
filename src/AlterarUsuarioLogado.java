@@ -14,15 +14,14 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import java.util.Random;
 
 public class AlterarUsuarioLogado extends javax.swing.JFrame {
-    //User user = new UserDTO();
-    //UserDAO usuariodao = new UserDAO();
-
+  
+   
     public AlterarUsuarioLogado() {
         initComponents();
         resgatarDadosUsuarioLogado();
         setLocationRelativeTo(null);
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -362,7 +361,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registro().setVisible(true);
+                new AlterarUsuarioLogado().setVisible(true);
             }
         });
     }
@@ -399,15 +398,65 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     private javax.swing.JTextField txtuf;
     // End of variables declaration//GEN-END:variables
     
+   /* private UserDTO resgatarDadosUsuarioLogado() {
+    try {
+        UserDTO objUserDTO = new UserDTO();
+        UserDAO objUserDAO = new UserDAO();
+        objUserDAO.resgatarDadosUsuario(objUserDTO);
+        txtlogin.setText(objUserDTO.getLogin());
+        txtsenha.setText(objUserDTO.getSenha());
+        txtconf_senha.setText(objUserDTO.getConfirmar_senha());
+        txtnome_completo.setText(objUserDTO.getNome_completo());
+        txtcpf.setText(objUserDTO.getCpf());
+        txtcelular.setText(objUserDTO.getCelular());
+        txtcidade.setText(objUserDTO.getCidade());
+        txtuf.setText(objUserDTO.getUf());
+        txtendereço.setText(objUserDTO.getEndereço());
+        txtemail.setText(objUserDTO.getEmail());
+        return objUserDTO;
+    } catch (Exception erro) {
+        JOptionPane.showMessageDialog(null, "resgatarDadosUsuarioLogado em AlterarUsuarioLogado: " + erro);
+        return null;
+    }
+}
+    /*private void preencherDados() {
+        // Outras inicializações do JFrame
+           
+        // Recuperar e preencher os campos com os dados do usuário
+        UserDTO usuarioLogado = resgatarDadosUsuarioLogado();
+        if (usuarioLogado != null) {
+            
+            txtlogin.setText(usuarioLogado.getLogin());
+            txtsenha.setText(usuarioLogado.getSenha());
+            txtconf_senha.setText(usuarioLogado.getConfirmar_senha());
+            txtnome_completo.setText(usuarioLogado.getNome_completo());
+            txtcpf.setText(usuarioLogado.getCpf());
+            txtcelular.setText(usuarioLogado.getCelular());
+            txtcidade.setText(usuarioLogado.getCidade());
+            txtuf.setText(usuarioLogado.getUf());
+            txtendereço.setText(usuarioLogado.getEndereço());
+            txtemail.setText(usuarioLogado.getEmail());
+            
+            
+            // Preencher outros campos aqui
+        } else {
+            // Tratar o caso em que não foi possível recuperar os dados
+            JOptionPane.showMessageDialog(null, "não rolou (preencherDados) ");
+    }
+}*/
+    
+    
     private void resgatarDadosUsuarioLogado(){
-
+        
         try {
             UserDTO objUserDTO = new UserDTO();
             String login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, endereco, email;
+            int id;
             
             UserDAO objUserDAO = new UserDAO();
             objUserDAO.resgatarDadosUsuario(objUserDTO);
-            
+            //System.out.println(objUserDTO);
+            id = objUserDTO.getId();
             login = objUserDTO.getLogin();
             senha = objUserDTO.getSenha();
             confirmar_senha = objUserDTO.getConfirmar_senha();
@@ -418,6 +467,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             uf = objUserDTO.getUf();
             endereco = objUserDTO.getEndereço();
             email = objUserDTO.getEmail();
+            
             //setando o não editável
             txtlogin.setText(login);
             txtsenha.setText(senha);
@@ -429,6 +479,11 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             txtuf.setText(uf);
             txtendereço.setText(endereco);
             txtemail.setText(email);
+            
+            
+            
+            
+             System.out.println(objUserDTO.getLogin());
             
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "resgatarDadosUsuarioLogado em AlterarUsuarioLogado: " + erro);
@@ -470,5 +525,5 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "alterarDadosUsuario em AlterarUsuarioLogado: " + erro);
         }
     }
-
+   
 }
