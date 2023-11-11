@@ -102,6 +102,7 @@ public class PaginaInicial extends javax.swing.JFrame {
 
         txtNomeUsuario.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         txtNomeUsuario.setForeground(new java.awt.Color(239, 125, 9));
+        txtNomeUsuario.setToolTipText("");
         getContentPane().add(txtNomeUsuario);
         txtNomeUsuario.setBounds(20, 380, 260, 50);
 
@@ -434,7 +435,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JList<String> listaPesquisaLivros;
     private javax.swing.JTable tabelaLivro;
     private javax.swing.JTextField txtId;
-    private javax.swing.JLabel txtNomeUsuario;
+    public javax.swing.JLabel txtNomeUsuario;
     private javax.swing.JLabel txtOla;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
@@ -534,22 +535,15 @@ public class PaginaInicial extends javax.swing.JFrame {
     
     }
     
-    private void atualizarNomeUsuario(){
-        
+        private void atualizarNomeUsuario(){
         try{
-            UserDAO objUserDAO = new UserDAO();
-            rs = objUserDAO.resgatarDadosUsuario();
-            while(rs.next()){
-                txtNomeUsuario.setText(rs.getString(5));
-                System.out.println(rs.getString(5));
-            }
-            //objUserDAO.resgatarDadosUsuario(objUserDTO);
+            String nomeUsuario;
+
+            nomeUsuario = objUserDTO.getNome_completo();
             
-            
-        }catch(SQLException erro){
-            erro.printStackTrace();
+            txtNomeUsuario.setText(nomeUsuario);
+        }catch(Exception erro){
             JOptionPane.showMessageDialog(null, "atualizarNomeUsuario em pagInicial: " + erro);
-            
         }
         
     } 

@@ -448,12 +448,8 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     private void resgatarDadosUsuarioLogado(){
         
         try {
-            UserDTO objUserDTO = new UserDTO();
             String login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, endereco, email;
             int id;
-            
-            UserDAO objUserDAO = new UserDAO();
-            objUserDAO.resgatarDadosUsuario();
             
             id = objUserDTO.getId();
             login = objUserDTO.getLogin();
@@ -481,9 +477,6 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             txtuf.setText(uf);
             txtendereço.setText(endereco);
             txtemail.setText(email);
-            
-            
-            
             
             
         } catch (Exception erro) {

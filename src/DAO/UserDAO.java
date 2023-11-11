@@ -60,17 +60,18 @@ public class UserDAO {
         }
     }
     
-    public ResultSet resgatarDadosUsuario() {
+    public ResultSet resgatarDadosUsuario(String login, String senha) {
         String sql = "SELECT * FROM user WHERE login = ? AND senha = ? ";
         conn = new Conexao().conectaBD();
         
         try {
-            UserDTO objUserDTO = new UserDTO();
             
             pst = conn.prepareStatement(sql);
-            pst.setString(1, objUserDTO.getLogin());
-            pst.setString(2, objUserDTO.getSenha());
+            pst.setString(1, login);
+            pst.setString(2, senha);
             rs = pst.executeQuery();
+            
+            UserDTO objUserDTO = new UserDTO();
             
             while (rs.next()) {
                 /*System.out.println("id: " + rs.getString("id"));
@@ -99,9 +100,6 @@ public class UserDAO {
                 objUserDTO.setEndereço(rs.getString("endereco"));
                 objUserDTO.setEmail(rs.getString("email"));
                 
-                
-
-                
             }
 
         } catch (SQLException erro) {
@@ -113,15 +111,15 @@ public class UserDAO {
     
     //criei esse método simplificado de autenticacao
     //para organizar melhor a tela de login caso seja necessário
-    public ResultSet autenticacaoUsuario(UserDTO objUserDTO){
+    public ResultSet autenticacaoUsuario(String login, String senha){
         conn = new Conexao().conectaBD();
         
         try{
             String sql = "SELECT * FROM user WHERE login = ? AND senha = ?";
             
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objUserDTO.getLogin());
-            pstm.setString(2, objUserDTO.getSenha());
+            pstm.setString(1, login);
+            pstm.setString(2, senha);
             
             ResultSet rs = pstm.executeQuery();
             return rs;

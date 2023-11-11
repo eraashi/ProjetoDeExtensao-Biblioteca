@@ -138,7 +138,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioActionPerformed
 
     private void botao_entraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_entraActionPerformed
-        CadastrarUsuario();
+        LogarUsuario();
         
     }//GEN-LAST:event_botao_entraActionPerformed
 
@@ -184,20 +184,20 @@ public class TelaDeLogin extends javax.swing.JFrame {
         });
     }
     
-    private void CadastrarUsuario(){
+    private void LogarUsuario(){
         try {
             String usuario_login, senha_usuario;
             usuario_login = usuario.getText();
             senha_usuario = senhalogin.getText();
            
-            objUserDTO.setLogin(usuario_login);
-            objUserDTO.setSenha(senha_usuario);
+            //objUserDTO.setLogin(usuario_login);
+            //objUserDTO.setSenha(senha_usuario);
             UserDAO OBJuserdao = new UserDAO();
-            ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(objUserDTO);
+            ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(usuario_login, senha_usuario);
             
             if (rsuserdao.next()){
-                OBJuserdao.resgatarDadosUsuario();
-               // UserDTO objUserDTO = resgatarDadosUsuario();
+                OBJuserdao.resgatarDadosUsuario(usuario_login, senha_usuario);
+                
                 System.out.print(objUserDTO.getLogin());
                 //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
                 
