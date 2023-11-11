@@ -31,6 +31,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtId = new javax.swing.JTextField();
         botao_confirmar = new javax.swing.JButton();
         botao_voltar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -66,6 +67,8 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(960, 551));
         setResizable(false);
         getContentPane().setLayout(null);
+        getContentPane().add(txtId);
+        txtId.setBounds(790, 160, 64, 22);
 
         botao_confirmar.setBackground(new java.awt.Color(255, 153, 0));
         botao_confirmar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -385,6 +388,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtcelular;
     private javax.swing.JTextField txtcidade;
     private javax.swing.JPasswordField txtconf_senha;
@@ -398,11 +402,12 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     private javax.swing.JTextField txtuf;
     // End of variables declaration//GEN-END:variables
     
-   /* private UserDTO resgatarDadosUsuarioLogado() {
+    private UserDTO resgatarDadosUsuarioLogado() {
     try {
         UserDTO objUserDTO = new UserDTO();
         UserDAO objUserDAO = new UserDAO();
         objUserDAO.resgatarDadosUsuario(objUserDTO);
+        txtId.setText(Integer.toString(objUserDTO.getId()));
         txtlogin.setText(objUserDTO.getLogin());
         txtsenha.setText(objUserDTO.getSenha());
         txtconf_senha.setText(objUserDTO.getConfirmar_senha());
@@ -446,7 +451,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
 }*/
     
     
-    private void resgatarDadosUsuarioLogado(){
+    /*private void resgatarDadosUsuarioLogado(){
         
         try {
             UserDTO objUserDTO = new UserDTO();
@@ -489,7 +494,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "resgatarDadosUsuarioLogado em AlterarUsuarioLogado: " + erro);
         }
     
-    }
+    }*/
     
     private void alterarDadosUsuario() {
         try {
