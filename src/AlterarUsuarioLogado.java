@@ -395,7 +395,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         // Use o objeto UserDTO dentro deste JFrame
     }
     
-    private UserDTO resgatarDadosUsuarioLogado() {
+    /*private UserDTO resgatarDadosUsuarioLogado() {
     try {
         UserDAO objUserDAO = new UserDAO();
         objUserDAO.resgatarDadosUsuario(objUserDTO);
@@ -410,6 +410,8 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         txtuf.setText(objUserDTO.getUf());
         txtendereço.setText(objUserDTO.getEndereço());
         txtemail.setText(objUserDTO.getEmail());
+        System.out.println(objUserDTO.getId());
+        
         return objUserDTO;
     } catch (Exception erro) {
         JOptionPane.showMessageDialog(null, "resgatarDadosUsuarioLogado em AlterarUsuarioLogado: " + erro);
@@ -443,7 +445,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
 }*/
     
     
-    /*private void resgatarDadosUsuarioLogado(){
+    private void resgatarDadosUsuarioLogado(){
         
         try {
             UserDTO objUserDTO = new UserDTO();
@@ -451,8 +453,8 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             int id;
             
             UserDAO objUserDAO = new UserDAO();
-            objUserDAO.resgatarDadosUsuario(objUserDTO);
-            //System.out.println(objUserDTO);
+            objUserDAO.resgatarDadosUsuario();
+            
             id = objUserDTO.getId();
             login = objUserDTO.getLogin();
             senha = objUserDTO.getSenha();
@@ -465,6 +467,9 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             endereco = objUserDTO.getEndereço();
             email = objUserDTO.getEmail();
             
+            //System.out.println(objUserDTO.getLogin());
+            
+             
             //setando o não editável
             txtlogin.setText(login);
             txtsenha.setText(senha);
@@ -480,13 +485,13 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             
             
             
-             System.out.println(objUserDTO.getLogin());
             
         } catch (Exception erro) {
+            erro.printStackTrace();
             JOptionPane.showMessageDialog(null, "resgatarDadosUsuarioLogado em AlterarUsuarioLogado: " + erro);
         }
     
-    }*/
+    }
     
     private void alterarDadosUsuario() {
         try {

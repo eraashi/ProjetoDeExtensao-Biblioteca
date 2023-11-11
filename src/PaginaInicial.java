@@ -67,12 +67,12 @@ public class PaginaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtNomeUsuario = new javax.swing.JLabel();
         listaPesquisaLivros = new javax.swing.JList<>();
         txtOla = new javax.swing.JLabel();
         btnNovoLivro = new javax.swing.JButton();
         btnEditarDados = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        txtNomeUsuario = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         txtPesquisa = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -99,6 +99,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         setModalExclusionType(null);
         setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
+
+        txtNomeUsuario.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
+        txtNomeUsuario.setForeground(new java.awt.Color(239, 125, 9));
+        getContentPane().add(txtNomeUsuario);
+        txtNomeUsuario.setBounds(20, 380, 260, 50);
 
         listaPesquisaLivros.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(211, 211, 211), 1, true));
         listaPesquisaLivros.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,11 +151,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         });
         getContentPane().add(btnSair);
         btnSair.setBounds(60, 570, 180, 50);
-
-        txtNomeUsuario.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
-        txtNomeUsuario.setForeground(new java.awt.Color(239, 125, 9));
-        getContentPane().add(txtNomeUsuario);
-        txtNomeUsuario.setBounds(20, 380, 260, 50);
 
         btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnPesquisar.setText("Pesquisar");
@@ -538,13 +538,20 @@ public class PaginaInicial extends javax.swing.JFrame {
         
         try{
             UserDAO objUserDAO = new UserDAO();
-            objUserDAO.resgatarDadosUsuario(objUserDTO);
-            txtNomeUsuario.setText(objUserDTO.getNome_completo());
+            rs = objUserDAO.resgatarDadosUsuario();
+            while(rs.next()){
+                txtNomeUsuario.setText(rs.getString(5));
+                System.out.println(rs.getString(5));
+            }
+            //objUserDAO.resgatarDadosUsuario(objUserDTO);
             
-        }catch(Exception erro){
+            
+        }catch(SQLException erro){
+            erro.printStackTrace();
             JOptionPane.showMessageDialog(null, "atualizarNomeUsuario em pagInicial: " + erro);
+            
         }
         
-    }   
+    } 
     
 }

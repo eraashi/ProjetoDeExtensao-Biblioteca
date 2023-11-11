@@ -33,6 +33,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author icaro
  */
 public class TelaDeLogin extends javax.swing.JFrame {
+    UserDTO objUserDTO = new UserDTO();
     
     public TelaDeLogin() {
         initComponents();
@@ -188,20 +189,22 @@ public class TelaDeLogin extends javax.swing.JFrame {
             String usuario_login, senha_usuario;
             usuario_login = usuario.getText();
             senha_usuario = senhalogin.getText();
-            UserDTO objUserDTO = new UserDTO();
+           
             objUserDTO.setLogin(usuario_login);
             objUserDTO.setSenha(senha_usuario);
             UserDAO OBJuserdao = new UserDAO();
             ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(objUserDTO);
-            OBJuserdao.resgatarDadosUsuario(objUserDTO);
+            
             if (rsuserdao.next()){
-                
-                
+                OBJuserdao.resgatarDadosUsuario();
+               // UserDTO objUserDTO = resgatarDadosUsuario();
+                System.out.print(objUserDTO.getLogin());
                 //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
-                this.dispose();
+                
                 PaginaInicial formulario = new PaginaInicial();
                 formulario.setUserDTO(objUserDTO);
                 formulario.setVisible(true);
+                this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos");
             }

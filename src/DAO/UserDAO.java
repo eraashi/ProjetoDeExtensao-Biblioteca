@@ -60,18 +60,20 @@ public class UserDAO {
         }
     }
     
-    public ResultSet resgatarDadosUsuario(UserDTO objUserDTO) {
+    public ResultSet resgatarDadosUsuario() {
         String sql = "SELECT * FROM user WHERE login = ? AND senha = ? ";
         conn = new Conexao().conectaBD();
         
         try {
+            UserDTO objUserDTO = new UserDTO();
+            
             pst = conn.prepareStatement(sql);
             pst.setString(1, objUserDTO.getLogin());
             pst.setString(2, objUserDTO.getSenha());
             rs = pst.executeQuery();
             
             while (rs.next()) {
-                System.out.println("id: " + rs.getString("id"));
+                /*System.out.println("id: " + rs.getString("id"));
                 System.out.println("Login: " + rs.getString("login"));
                 System.out.println("senha: " + rs.getString("senha"));
                 System.out.println("confirmar_senha: " + rs.getString("confirmar_senha"));
@@ -82,7 +84,7 @@ public class UserDAO {
                 System.out.println("uf: " + rs.getString("uf"));
                 System.out.println("num: " + rs.getString("num"));
                 System.out.println("endereco: " + rs.getString("endereco"));
-                System.out.println("email: " + rs.getString("email"));
+                System.out.println("email: " + rs.getString("email"));*/
                 
                 objUserDTO.setId(rs.getInt("id"));
                 objUserDTO.setLogin(rs.getString("login"));
@@ -96,6 +98,7 @@ public class UserDAO {
                 objUserDTO.setNum(rs.getString("num"));
                 objUserDTO.setEndereço(rs.getString("endereco"));
                 objUserDTO.setEmail(rs.getString("email"));
+                
                 
 
                 
