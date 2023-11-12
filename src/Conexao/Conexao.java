@@ -17,18 +17,20 @@ public class Conexao {
     final private String driver = "com.mysql.jdbc.Driver";
     final private String usuario = "root";
     final private String senha = "";
-    Connection conexao;
     public Statement statement;
     public ResultSet resultset;
-    public void conecta() {
+    public Connection conecta() {
+        Connection conexao = null;
         try {
-            Class.forName(driver);
-            conexao = DriverManager.getConnection(url, usuario, senha);
+            Class.forName("com.mysql.jdbc.Driver");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/bibliotecamero?user=root&pass=");
+            st = conexao.createStatement();
         } catch (ClassNotFoundException Fonte) {
             JOptionPane.showMessageDialog(null, "Driver nao localizado");
         } catch (SQLException Fonte) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar com o servidor MYSQL", "ATENÇAO", (2));
         }
+        return conexao;
     }
     public static void main(String[] args){
         try {
@@ -66,8 +68,8 @@ public class Conexao {
     //para a lista que vai surgir quando o usuario digitar algo no txtField
     public void executaSQL(String sql) {
         try {
-            st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = pstm.executeQuery();
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            resultset = statement.executeQuery(sql);
         } catch (SQLException sqlex) {
             JOptionPane.showMessageDialog(null, "Nao foi possível executar o comando sql"
                     + "" + sqlex + "O comando passado foi" + sql);
