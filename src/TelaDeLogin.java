@@ -196,9 +196,24 @@ public class TelaDeLogin extends javax.swing.JFrame {
             ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(usuario_login, senha_usuario);
             
             if (rsuserdao.next()){
-                OBJuserdao.resgatarDadosUsuario(usuario_login, senha_usuario);
                 
-                System.out.print(objUserDTO.getLogin());
+                objUserDTO.setId(rsuserdao.getInt("id"));
+                objUserDTO.setLogin(rsuserdao.getString(2));
+                objUserDTO.setSenha(rsuserdao.getString(3));
+                objUserDTO.setConfirmar_senha(rsuserdao.getString(4));
+                objUserDTO.setNome_completo(rsuserdao.getString(5));
+                objUserDTO.setCpf(rsuserdao.getString(6));
+                
+                //OBJuserdao.resgatarDadosUsuario(usuario_login, senha_usuario);
+                System.out.print("Teste de recepção em LogarUsuario, após autenticacaoUsuario:");
+                System.out.print("Id: " + objUserDTO.getId());
+                System.out.print("Login: " + objUserDTO.getLogin());
+                System.out.print("Senha: " + objUserDTO.getSenha());
+                System.out.print("Confirmar Senha: " + objUserDTO.getConfirmar_senha());
+                System.out.print("Nome Completo: " + objUserDTO.getNome_completo());
+                System.out.print("CPF: " + objUserDTO.getCpf());
+                
+                
                 //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
                 
                 PaginaInicial formulario = new PaginaInicial();
