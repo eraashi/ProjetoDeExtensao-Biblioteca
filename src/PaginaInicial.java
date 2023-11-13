@@ -47,7 +47,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         listarLivros();
         //aqui a combox padrao é atualiza assim que a página surge
         //restaurarBoxLivros();
-        atualizarNomeUsuario();
+        //atualizarNomeUsuario();
         //métodos para a combobox IMPROVISADA (do lado do botao pesquisar)
         listaPesquisaLivros.setVisible(false);
         
@@ -447,23 +447,23 @@ public class PaginaInicial extends javax.swing.JFrame {
         try{
             String nomeUsuario;
 
-            nomeUsuario = objUserDTONovo.getLogin();
+            nomeUsuario = objUserDTONovo.getNome_completo();
             
             txtNomeUsuario.setText(nomeUsuario);
             
             System.out.print("Teste de recepção em setUserDTO, após abrir a PaginaInicial: \n");
-            //System.out.print("Id: " + objUserDTONovo.getId() + "\n");
+            System.out.print("Id: " + objUserDTONovo.getId() + "\n");
             System.out.print("Login: " + objUserDTONovo.getLogin() + "\n");
             System.out.print("Senha: " + objUserDTONovo.getSenha() + "\n");
-            //System.out.print("Confirmar Senha: " + objUserDTONovo.getConfirmar_senha() + "\n");
-            //System.out.print("Nome Completo: " + objUserDTONovo.getNome_completo() + "\n");
-            //System.out.print("CPF: " + objUserDTONovo.getCpf() + "\n");
-            //System.out.print("Celular: " + objUserDTONovo.getCelular() + "\n");
-            //System.out.print("Cidade: " + objUserDTONovo.getCidade() + "\n");
-            //System.out.print("Uf: " + objUserDTONovo.getUf() + "\n");
-            //System.out.print("Num: " + objUserDTONovo.getNum() + "\n");
-            //System.out.print("Endereço: " + objUserDTONovo.getEndereço() + "\n");
-            //System.out.print("Email: " + objUserDTONovo.getEmail() + "\n");
+            System.out.print("Confirmar Senha: " + objUserDTONovo.getConfirmar_senha() + "\n");
+            System.out.print("Nome Completo: " + objUserDTONovo.getNome_completo() + "\n");
+            System.out.print("CPF: " + objUserDTONovo.getCpf() + "\n");
+            System.out.print("Celular: " + objUserDTONovo.getCelular() + "\n");
+            System.out.print("Cidade: " + objUserDTONovo.getCidade() + "\n");
+            System.out.print("Uf: " + objUserDTONovo.getUf() + "\n");
+            System.out.print("Num: " + objUserDTONovo.getNum() + "\n");
+            System.out.print("Endereço: " + objUserDTONovo.getEndereço() + "\n");
+            System.out.print("Email: " + objUserDTONovo.getEmail() + "\n");
             
         }catch(Exception erro){
             JOptionPane.showMessageDialog(null, "setUserDTO em pagInicial: " + erro);

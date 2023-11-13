@@ -34,6 +34,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class TelaDeLogin extends javax.swing.JFrame {
     UserDTO objUserDTO = new UserDTO();
+    AlterarUsuarioLogado altUsuario;
     PaginaInicial formulario;
     
     public TelaDeLogin() {
@@ -139,8 +140,8 @@ public class TelaDeLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioActionPerformed
 
     private void botao_entraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_entraActionPerformed
-        //LogarUsuario();
-        String usuario_login, senha_usuario;
+        LogarUsuario();
+        /*String usuario_login, senha_usuario;
         usuario_login = usuario.getText();
         senha_usuario = senhalogin.getText();
         
@@ -150,7 +151,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
         formulario = new PaginaInicial();
         formulario.setUserDTO(objUserDTO);
         formulario.setVisible(true);
-        this.setVisible(false);
+        this.setVisible(false);*/
         
     }//GEN-LAST:event_botao_entraActionPerformed
 
@@ -235,6 +236,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 System.out.print("Email: " + objUserDTO.getEmail() + "\n");
                 
                 formulario = new PaginaInicial();
+                
                 formulario.setUserDTO(objUserDTO);
                 formulario.setVisible(true);
                 this.setVisible(false);

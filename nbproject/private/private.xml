@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/DTO/UserDTO.java</file>
             <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/Conexao/Conexao.java</file>
             <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/DAO/UserDAO.java</file>
             <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/PaginaInicial.java</file>
+            <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/DAO/LivroDAO.java</file>
             <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/AlterarUsuarioLogado.java</file>
             <file>file:/I:/Faculdade/Programas/ProjetoDeExtensao-Biblioteca/src/TelaDeLogin.java</file>
         </group>
