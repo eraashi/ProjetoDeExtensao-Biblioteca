@@ -213,13 +213,12 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 System.out.print("Nome Completo: " + objUserDTO.getNome_completo());
                 System.out.print("CPF: " + objUserDTO.getCpf());
                 
-                
                 //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
                 
                 PaginaInicial formulario = new PaginaInicial();
                 formulario.setUserDTO(objUserDTO);
                 formulario.setVisible(true);
-                this.dispose();
+                this.setVisible(false);
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos");
             }

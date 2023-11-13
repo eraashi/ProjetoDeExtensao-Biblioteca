@@ -321,7 +321,7 @@ public class PaginaInicial extends javax.swing.JFrame {
             if (rsLivroDAO.next()) {
                 //checar se está funcionando
                 objLivroDAO.resgatarDadosLivro(objLivroDTO);
-
+                
                 PagMovimento denuncias = new PagMovimento();
                 denuncias.setVisible(true);
                 this.dispose();
