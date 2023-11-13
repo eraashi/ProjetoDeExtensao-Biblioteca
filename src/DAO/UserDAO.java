@@ -130,24 +130,24 @@ public class UserDAO {
         }
     }
     
-    public void alterarUsuarioLogado(UserDTO objUserDTO) {
+    public void alterarUsuarioLogado(UserDTO objUserDTOFinal) {
         String sql = "UPDATE user SET login = ?, senha = ?, confirmar_senha = ?, nome_completo = ?, cpf = ?, celular = ?, cidade = ?, uf = ?, num = ?, endereco = ?, email = ? where login = ?";
         conn = new Conexao().conectaBD();
 
         try {
             pst = conn.prepareStatement(sql);
-            pst.setString(1, objUserDTO.getLogin());
-            pst.setString(2, objUserDTO.getSenha());
-            pst.setString(3, objUserDTO.getConfirmar_senha());
-            pst.setString(4, objUserDTO.getNome_completo());
-            pst.setString(5, objUserDTO.getCpf());
-            pst.setString(6, objUserDTO.getCelular());
-            pst.setString(7, objUserDTO.getCidade());
-            pst.setString(8, objUserDTO.getUf());
-            pst.setString(9, objUserDTO.getNum());
-            pst.setString(10, objUserDTO.getEndereço());
-            pst.setString(11, objUserDTO.getEmail());
-            pst.setString(12, objUserDTO.getLogin());
+            pst.setString(1, objUserDTOFinal.getLogin());
+            pst.setString(2, objUserDTOFinal.getSenha());
+            pst.setString(3, objUserDTOFinal.getConfirmar_senha());
+            pst.setString(4, objUserDTOFinal.getNome_completo());
+            pst.setString(5, objUserDTOFinal.getCpf());
+            pst.setString(6, objUserDTOFinal.getCelular());
+            pst.setString(7, objUserDTOFinal.getCidade());
+            pst.setString(8, objUserDTOFinal.getUf());
+            pst.setString(9, objUserDTOFinal.getNum());
+            pst.setString(10, objUserDTOFinal.getEndereço());
+            pst.setString(11, objUserDTOFinal.getEmail());
+            pst.setString(12, objUserDTOFinal.getLogin());
             
             pst.execute();
             pst.close();
