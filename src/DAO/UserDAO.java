@@ -109,6 +109,24 @@ public class UserDAO {
         return rs;
     }
     
+    public ResultSet autenticacaoParaAlt(String id){
+        conn = new Conexao().conectaBD();
+        
+        try{
+            String sql = "SELECT * FROM user WHERE id = ?";
+            
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, id);
+            
+            ResultSet rs = pstm.executeQuery();
+            return rs;
+            
+        }catch(SQLException erro){
+            JOptionPane.showMessageDialog(null, "autenticacaoUsuario em UserDAO: " + erro);
+            return null;
+        }
+    }
+    
     //criei esse método simplificado de autenticacao
     //para organizar melhor a tela de login caso seja necessário
     public ResultSet autenticacaoUsuario(String login, String senha){
@@ -131,7 +149,7 @@ public class UserDAO {
     }
     
     public void alterarUsuarioLogado(UserDTO objUserDTOFinal) {
-        String sql = "UPDATE user SET login = ?, senha = ?, confirmar_senha = ?, nome_completo = ?, cpf = ?, celular = ?, cidade = ?, uf = ?, num = ?, endereco = ?, email = ? where login = ?";
+        String sql = "UPDATE user SET login = ?, senha = ?, confirmar_senha = ?, nome_completo = ?, cpf = ?, celular = ?, cidade = ?, uf = ?, num = ?, endereco = ?, email = ? where = id";
         conn = new Conexao().conectaBD();
 
         try {
@@ -147,7 +165,7 @@ public class UserDAO {
             pst.setString(9, objUserDTOFinal.getNum());
             pst.setString(10, objUserDTOFinal.getEndereço());
             pst.setString(11, objUserDTOFinal.getEmail());
-            pst.setString(12, objUserDTOFinal.getLogin());
+            pst.setInt(12, objUserDTOFinal.getId());
             
             pst.execute();
             pst.close();

@@ -20,7 +20,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     
     public AlterarUsuarioLogado() {
         initComponents();
-        
+        txtid.setVisible(false);
         setLocationRelativeTo(null);
         
     }
@@ -36,6 +36,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
 
         botao_confirmar = new javax.swing.JButton();
         botao_voltar = new javax.swing.JButton();
+        txtid = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -91,6 +92,14 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         });
         getContentPane().add(botao_voltar);
         botao_voltar.setBounds(560, 430, 140, 40);
+
+        txtid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtid);
+        txtid.setBounds(540, 200, 71, 22);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setFocusCycleRoot(true);
@@ -317,6 +326,10 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtloginActionPerformed
 
+    private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -377,6 +390,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     private javax.swing.JTextField txtcpf;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtendereço;
+    private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtlogin;
     private javax.swing.JTextField txtnome_completo;
     private javax.swing.JTextField txtnum;
@@ -402,6 +416,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             endereco = objUserDTOAlt.getEndereço();
             email = objUserDTOAlt.getEmail();
             
+            txtid.setText(Integer.toString(id));
             txtlogin.setText(login);
             txtsenha.setText(senha);
             txtconf_senha.setText(confirmar_senha);
@@ -512,8 +527,10 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     
     private void alterarDadosUsuario() {
         try {
-            String login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, endereco, email;
+            String login, senha, confirmar_senha, nome_completo, cpf, num, celular, cidade, uf, endereco, email;
+            int id;
             
+            id = Integer.parseInt(txtid.getText());
             login = txtlogin.getText();
             senha = txtsenha.getText();
             confirmar_senha = txtconf_senha.getText();
@@ -522,10 +539,12 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             celular = txtcelular.getText();
             cidade = txtcidade.getText();
             uf = txtuf.getText();
+            num = txtnum.getText();
             endereco = txtendereço.getText();
             email = txtemail.getText();
             
             UserDTO objUserDTOFinal = new UserDTO();
+            objUserDTOFinal.setId(id);
             objUserDTOFinal.setLogin(login);
             objUserDTOFinal.setSenha(senha);
             objUserDTOFinal.setConfirmar_senha(confirmar_senha);
@@ -534,15 +553,22 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             objUserDTOFinal.setCelular(celular);
             objUserDTOFinal.setCidade(cidade);
             objUserDTOFinal.setUf(uf);
+            objUserDTOFinal.setNum(num);
             objUserDTOFinal.setEndereço(endereco);
             objUserDTOFinal.setEmail(email);
             
+            UserDAO objUserDAOAlt = new UserDAO();
+            ResultSet rsuserdao = objUserDAOAlt.autenticacaoParaAlt(txtid.getText());
+            
+            if (rsuserdao.next()){
+                
             UserDAO objUserDAO = new UserDAO();
             objUserDAO.alterarUsuarioLogado(objUserDTOFinal);
             
             TelaLogin = new TelaDeLogin();
             TelaLogin.setVisible(true);
             this.dispose();
+            }
             
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "alterarDadosUsuario em AlterarUsuarioLogado: " + erro);
