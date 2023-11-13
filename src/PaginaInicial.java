@@ -48,6 +48,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         //aqui a lista é atualizada assim que a página surge
         CONEXAO.conecta();
         listarLivros();
+        listarLivrosRecentes();
         MostraPesquisa();
         //aqui a combox padrao é atualiza assim que a página surge
         //restaurarBoxLivros();
@@ -58,7 +59,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         listaPesquisaLivros.setModel(modelo);
         txtId.setVisible(false);
         txtExcluirId.setVisible(false);
-
+        txtAltLivro.setVisible(false);
         setLocationRelativeTo(null);
     }
 
@@ -95,6 +96,8 @@ public class PaginaInicial extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtExcluirId = new javax.swing.JTextField();
+        btnAltLivro = new javax.swing.JButton();
+        txtAltLivro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Página Inicial");
@@ -280,6 +283,12 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(txtExcluirId);
         txtExcluirId.setBounds(570, 630, 80, 22);
 
+        btnAltLivro.setText("Alterar Estado");
+        getContentPane().add(btnAltLivro);
+        btnAltLivro.setBounds(880, 600, 120, 23);
+        getContentPane().add(txtAltLivro);
+        txtAltLivro.setBounds(880, 630, 120, 22);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -361,6 +370,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void btnAtualizarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaActionPerformed
         //botão para atualizar a tabela da interface
         listarLivros();
+        listarLivrosRecentes();
     }//GEN-LAST:event_btnAtualizarTabelaActionPerformed
 
     private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
@@ -390,13 +400,13 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void btnNovoLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLivroActionPerformed
         NovoLivro objNovoLivro = new NovoLivro();
         objNovoLivro.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnNovoLivroActionPerformed
 
     private void btnExcluirLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLivroActionPerformed
         CarregarIdLivroExcluir();
         ExcluirLivro();
         listarLivros();
+        listarLivrosRecentes();
         LimparCampoId();
     }//GEN-LAST:event_btnExcluirLivroActionPerformed
 
@@ -441,6 +451,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAltLivro;
     private javax.swing.JButton btnAtualizarTabela;
     private javax.swing.JButton btnEditarDados;
     private javax.swing.JButton btnExcluirLivro;
@@ -460,6 +471,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JList<String> listaLivros;
     private javax.swing.JList<String> listaPesquisaLivros;
     private javax.swing.JTable tabelaLivro;
+    private javax.swing.JTextField txtAltLivro;
     private javax.swing.JTextField txtExcluirId;
     private javax.swing.JTextField txtId;
     public javax.swing.JLabel txtNomeUsuario;
@@ -520,7 +532,7 @@ public class PaginaInicial extends javax.swing.JFrame {
 
             ResultadoPesquisa();
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "listPesquisaParaTextfield em PaginaInicial: " + erro);
+            JOptionPane.showMessageDialog(null, "listaPesquisaParaTextfield em PaginaInicial: " + erro);
         }
     }
 
@@ -587,6 +599,29 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "listarLivros TABELA: " + erro);
+        }
+    }
+    
+    private void listarLivrosRecentes() {
+
+        try {
+            LivroDAO objLivroDAO = new LivroDAO();
+
+            DefaultTableModel model = (DefaultTableModel) listaLivros.getModel();
+            model.setNumRows(0);
+
+            ArrayList<LivroDTO> listaRecente = objLivroDAO.pesquisarLivroRecente();
+
+            for (int num = 0; num < listaRecente.size(); num++) {
+                model.addRow(new Object[]{
+                    listaRecente.get(num).getTitulo(),
+                    listaRecente.get(num).getNome_cliente(),
+                    listaRecente.get(num).getData_cliente(),
+                    listaRecente.get(num).getHora_cliente(),
+                });
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "listarLivrosRecentes TABELA: " + erro);
         }
     
     }

@@ -27,7 +27,6 @@ public class PagMovimento extends javax.swing.JFrame {
     public PagMovimento() {
         initComponents();
         setLocationRelativeTo(null);
-        atualizarLivros();
         idLivro.setVisible(false);
 
         txtNome.setDocument(new LimitaCaracteres(60, LimitaCaracteres.TipoEntrada.NOME));
@@ -463,7 +462,7 @@ public class PagMovimento extends javax.swing.JFrame {
     }
     
     //método privado do frame pra atualizar os campos com as infos dos livros
-    private void atualizarLivros() {
+    /*private void atualizarLivros() {
         try {
             LivroDTO objLivroDTO = new LivroDTO();
             String tituloLivro, autor, editora, local, nomeCliente, id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;;
@@ -507,7 +506,7 @@ public class PagMovimento extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "atualizarLivros em PagMovimento: " + erro);
         }
-    }
+    }*/
 
     //método para pegar o que foi escrito no editavel
     //jogar no LivroDTO e depois usar o método "alterarUsuarioLivro"
@@ -534,6 +533,9 @@ public class PagMovimento extends javax.swing.JFrame {
             //ordenando o DTO ser salvo no mysql
             LivroDAO objLivroDAO = new LivroDAO();
             objLivroDAO.alterarUsuarioLivro(objlivro);
+            
+            //CRIAR AUTENTICAÇÃO TAMBÉM
+            
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "alterarEditaveisLivro em Pagmovimento; " + erro);
         }

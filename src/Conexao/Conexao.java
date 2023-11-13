@@ -19,6 +19,7 @@ public class Conexao {
     final private String senha = "";
     public Statement statement;
     public ResultSet resultset;
+    
     public void conecta() {
         try {
             Class.forName("com.mysql.jdbc.Driver");

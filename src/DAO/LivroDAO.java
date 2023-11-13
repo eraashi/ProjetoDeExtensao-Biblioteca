@@ -17,6 +17,7 @@ public class LivroDAO {
     PreparedStatement pstm;
     ResultSet rs;
     ArrayList<LivroDTO> lista = new ArrayList<>();
+    ArrayList<LivroDTO> listaRecente = new ArrayList<>();
     
     //método que lista id e titulo do banco de dados
     //não está sendo usado
@@ -138,6 +139,33 @@ public class LivroDAO {
             JOptionPane.showMessageDialog(null, "pesquisarLivroLista em LivroDAO: " + erro);
         }
         return lista;
+    }
+    
+    public ArrayList<LivroDTO> pesquisarLivroRecente() {
+        String sql = "SELECT * from livromovimentacao ORDER BY data_cliente DESC";
+        conn = new Conexao().conectaBD();
+        
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                LivroDTO objLivroRecente = new LivroDTO();
+
+                objLivroRecente.setId(rs.getString("id"));
+                objLivroRecente.setTitulo(rs.getString("titulo"));
+                objLivroRecente.setNome_cliente(rs.getString("nome_cliente"));
+                objLivroRecente.setData_cliente(rs.getString("data_cliente"));
+                objLivroRecente.setHora_cliente(rs.getString("hora_cliente"));
+
+                listaRecente.add(objLivroRecente);
+
+            }
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "pesquisarLivroLista em LivroDAO: " + erro);
+        }
+        return listaRecente;
     }
     
     public void criarNovoLivro(LivroDTO objLivroDTO) {
