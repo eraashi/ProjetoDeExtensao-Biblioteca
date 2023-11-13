@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  * @author icaro
  */
 public class PaginaInicial extends javax.swing.JFrame {
-    private UserDTO objUserDTO;
+    private UserDTO objUserDTONovo;
     /**
      * Creates new form FormularioUnico
      */
@@ -273,7 +273,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void btnEditarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarDadosActionPerformed
         this.dispose();
         AlterarUsuarioLogado altUsuario = new AlterarUsuarioLogado();
-        altUsuario.setUserDTO(objUserDTO);
+        altUsuario.setUserDTO(objUserDTONovo);
         altUsuario.setVisible(true);
         
     }//GEN-LAST:event_btnEditarDadosActionPerformed
@@ -440,8 +440,34 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 
+    
+    
     public void setUserDTO(UserDTO objUserDTO) {
-        this.objUserDTO = objUserDTO;
+        this.objUserDTONovo = objUserDTO;
+        try{
+            String nomeUsuario;
+
+            nomeUsuario = objUserDTONovo.getLogin();
+            
+            txtNomeUsuario.setText(nomeUsuario);
+            
+            System.out.print("Teste de recepção em setUserDTO, após abrir a PaginaInicial: \n");
+            //System.out.print("Id: " + objUserDTONovo.getId() + "\n");
+            System.out.print("Login: " + objUserDTONovo.getLogin() + "\n");
+            System.out.print("Senha: " + objUserDTONovo.getSenha() + "\n");
+            //System.out.print("Confirmar Senha: " + objUserDTONovo.getConfirmar_senha() + "\n");
+            //System.out.print("Nome Completo: " + objUserDTONovo.getNome_completo() + "\n");
+            //System.out.print("CPF: " + objUserDTONovo.getCpf() + "\n");
+            //System.out.print("Celular: " + objUserDTONovo.getCelular() + "\n");
+            //System.out.print("Cidade: " + objUserDTONovo.getCidade() + "\n");
+            //System.out.print("Uf: " + objUserDTONovo.getUf() + "\n");
+            //System.out.print("Num: " + objUserDTONovo.getNum() + "\n");
+            //System.out.print("Endereço: " + objUserDTONovo.getEndereço() + "\n");
+            //System.out.print("Email: " + objUserDTONovo.getEmail() + "\n");
+            
+        }catch(Exception erro){
+            JOptionPane.showMessageDialog(null, "setUserDTO em pagInicial: " + erro);
+        }
         // Use o objeto UserDTO dentro deste JFrame
     }
     
@@ -535,11 +561,11 @@ public class PaginaInicial extends javax.swing.JFrame {
     
     }
     
-        private void atualizarNomeUsuario(){
+        public void atualizarNomeUsuario(){
         try{
             String nomeUsuario;
 
-            nomeUsuario = objUserDTO.getNome_completo();
+            nomeUsuario = objUserDTONovo.getLogin();
             
             txtNomeUsuario.setText(nomeUsuario);
         }catch(Exception erro){

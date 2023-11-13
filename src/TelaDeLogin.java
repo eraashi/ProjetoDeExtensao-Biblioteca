@@ -34,6 +34,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class TelaDeLogin extends javax.swing.JFrame {
     UserDTO objUserDTO = new UserDTO();
+    PaginaInicial formulario;
     
     public TelaDeLogin() {
         initComponents();
@@ -138,7 +139,18 @@ public class TelaDeLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioActionPerformed
 
     private void botao_entraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_entraActionPerformed
-        LogarUsuario();
+        //LogarUsuario();
+        String usuario_login, senha_usuario;
+        usuario_login = usuario.getText();
+        senha_usuario = senhalogin.getText();
+        
+        objUserDTO.setLogin(usuario_login);
+        objUserDTO.setSenha(senha_usuario);
+        
+        formulario = new PaginaInicial();
+        formulario.setUserDTO(objUserDTO);
+        formulario.setVisible(true);
+        this.setVisible(false);
         
     }//GEN-LAST:event_botao_entraActionPerformed
 
@@ -184,14 +196,12 @@ public class TelaDeLogin extends javax.swing.JFrame {
         });
     }
     
-    private void LogarUsuario(){
+    public void LogarUsuario(){
         try {
             String usuario_login, senha_usuario;
             usuario_login = usuario.getText();
             senha_usuario = senhalogin.getText();
-           
-            //objUserDTO.setLogin(usuario_login);
-            //objUserDTO.setSenha(senha_usuario);
+
             UserDAO OBJuserdao = new UserDAO();
             ResultSet rsuserdao = OBJuserdao.autenticacaoUsuario(usuario_login, senha_usuario);
             
@@ -203,19 +213,28 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 objUserDTO.setConfirmar_senha(rsuserdao.getString(4));
                 objUserDTO.setNome_completo(rsuserdao.getString(5));
                 objUserDTO.setCpf(rsuserdao.getString(6));
+                objUserDTO.setCelular(rsuserdao.getString(7));
+                objUserDTO.setCidade(rsuserdao.getString(8));
+                objUserDTO.setUf(rsuserdao.getString(9));
+                objUserDTO.setNum(rsuserdao.getString(10));
+                objUserDTO.setEndereço(rsuserdao.getString(11));
+                objUserDTO.setEmail(rsuserdao.getString(12));
                 
-                //OBJuserdao.resgatarDadosUsuario(usuario_login, senha_usuario);
                 System.out.print("Teste de recepção em LogarUsuario, após autenticacaoUsuario:");
-                System.out.print("Id: " + objUserDTO.getId());
-                System.out.print("Login: " + objUserDTO.getLogin());
-                System.out.print("Senha: " + objUserDTO.getSenha());
-                System.out.print("Confirmar Senha: " + objUserDTO.getConfirmar_senha());
-                System.out.print("Nome Completo: " + objUserDTO.getNome_completo());
-                System.out.print("CPF: " + objUserDTO.getCpf());
+                System.out.print("Id: " + objUserDTO.getId() + "\n");
+                System.out.print("Login: " + objUserDTO.getLogin() + "\n");
+                System.out.print("Senha: " + objUserDTO.getSenha() + "\n");
+                System.out.print("Confirmar Senha: " + objUserDTO.getConfirmar_senha() + "\n");
+                System.out.print("Nome Completo: " + objUserDTO.getNome_completo() + "\n");
+                System.out.print("CPF: " + objUserDTO.getCpf() + "\n");
+                System.out.print("Celular: " + objUserDTO.getCelular() + "\n");
+                System.out.print("Cidade: " + objUserDTO.getCidade() + "\n");
+                System.out.print("Uf: " + objUserDTO.getUf() + "\n");
+                System.out.print("Num: " + objUserDTO.getNum() + "\n");
+                System.out.print("Endereço: " + objUserDTO.getEndereço() + "\n");
+                System.out.print("Email: " + objUserDTO.getEmail() + "\n");
                 
-                //JOptionPane.showMessageDialog(null, "Logado com Sucesso!");
-                
-                PaginaInicial formulario = new PaginaInicial();
+                formulario = new PaginaInicial();
                 formulario.setUserDTO(objUserDTO);
                 formulario.setVisible(true);
                 this.setVisible(false);
