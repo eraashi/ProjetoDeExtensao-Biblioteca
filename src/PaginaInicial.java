@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PaginaInicial extends javax.swing.JFrame {
     private UserDTO objUserDTONovo;
+    private AlterarUsuarioLogado altUsuarioFinal;
     /**
      * Creates new form FormularioUnico
      */
@@ -271,10 +272,9 @@ public class PaginaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarDadosActionPerformed
+
+        altUsuarioFinal.setVisible(true);
         this.dispose();
-        AlterarUsuarioLogado altUsuario = new AlterarUsuarioLogado();
-        altUsuario.setUserDTO(objUserDTONovo);
-        altUsuario.setVisible(true);
         
     }//GEN-LAST:event_btnEditarDadosActionPerformed
 
@@ -440,7 +440,10 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 
-    
+    public void BotaoEditar(AlterarUsuarioLogado altUsuario){
+        this.altUsuarioFinal = altUsuario;
+        altUsuarioFinal.setVisible(false);
+    }
     
     public void setUserDTO(UserDTO objUserDTO) {
         this.objUserDTONovo = objUserDTO;

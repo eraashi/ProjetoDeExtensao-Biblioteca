@@ -15,11 +15,12 @@ import java.util.Random;
 
 public class AlterarUsuarioLogado extends javax.swing.JFrame {
     
-    private UserDTO objUserDTO;
+    private UserDTO objUserDTOAlt;
+    TelaDeLogin TelaLogin;
     
     public AlterarUsuarioLogado() {
         initComponents();
-        resgatarDadosUsuarioLogado();
+        
         setLocationRelativeTo(null);
         
     }
@@ -292,9 +293,6 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
 
     private void botao_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_confirmarActionPerformed
         alterarDadosUsuario();
-        this.dispose();
-        TelaDeLogin login = new TelaDeLogin();
-        login.setVisible(true);
     }//GEN-LAST:event_botao_confirmarActionPerformed
 
     private void botao_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_voltarActionPerformed
@@ -387,8 +385,38 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     public void setUserDTO(UserDTO objUserDTO) {
-        this.objUserDTO = objUserDTO;
-        // Use o objeto UserDTO dentro deste JFrame
+        this.objUserDTOAlt = objUserDTO;
+        try {
+            String login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, endereco, email;
+            int id;
+            
+            id = objUserDTOAlt.getId();
+            login = objUserDTOAlt.getLogin();
+            senha = objUserDTOAlt.getSenha();
+            confirmar_senha = objUserDTOAlt.getConfirmar_senha();
+            nome_completo = objUserDTOAlt.getNome_completo();
+            cpf = objUserDTOAlt.getCpf();
+            celular = objUserDTOAlt.getCelular();
+            cidade = objUserDTOAlt.getCidade();
+            uf = objUserDTOAlt.getUf();
+            endereco = objUserDTOAlt.getEndereço();
+            email = objUserDTOAlt.getEmail();
+            
+            txtlogin.setText(login);
+            txtsenha.setText(senha);
+            txtconf_senha.setText(confirmar_senha);
+            txtnome_completo.setText(nome_completo);
+            txtcpf.setText(cpf);
+            txtcelular.setText(celular);
+            txtcidade.setText(cidade);
+            txtuf.setText(uf);
+            txtendereço.setText(endereco);
+            txtemail.setText(email);
+            
+        } catch (Exception erro) {
+            erro.printStackTrace();
+            JOptionPane.showMessageDialog(null, "resgatarDadosUsuarioLogado em AlterarUsuarioLogado: " + erro);
+        }
     }
     
     /*private UserDTO resgatarDadosUsuarioLogado() {
@@ -413,7 +441,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "resgatarDadosUsuarioLogado em AlterarUsuarioLogado: " + erro);
         return null;
     }
-}
+}*/
     /*private void preencherDados() {
         // Outras inicializações do JFrame
            
@@ -441,7 +469,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
 }*/
     
     
-    private void resgatarDadosUsuarioLogado(){
+    /*private void resgatarDadosUsuarioLogado(){
         
         try {
             String login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, endereco, email;
@@ -480,7 +508,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "resgatarDadosUsuarioLogado em AlterarUsuarioLogado: " + erro);
         }
     
-    }
+    }*/
     
     private void alterarDadosUsuario() {
         try {
@@ -497,20 +525,24 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             endereco = txtendereço.getText();
             email = txtemail.getText();
             
-            UserDTO objUserDTO = new UserDTO();
-            objUserDTO.setLogin(login);
-            objUserDTO.setSenha(senha);
-            objUserDTO.setConfirmar_senha(confirmar_senha);
-            objUserDTO.setNome_completo(nome_completo);
-            objUserDTO.setCpf(cpf);
-            objUserDTO.setCelular(celular);
-            objUserDTO.setCidade(cidade);
-            objUserDTO.setUf(uf);
-            objUserDTO.setEndereço(endereco);
-            objUserDTO.setEmail(email);
+            UserDTO objUserDTOFinal = new UserDTO();
+            objUserDTOFinal.setLogin(login);
+            objUserDTOFinal.setSenha(senha);
+            objUserDTOFinal.setConfirmar_senha(confirmar_senha);
+            objUserDTOFinal.setNome_completo(nome_completo);
+            objUserDTOFinal.setCpf(cpf);
+            objUserDTOFinal.setCelular(celular);
+            objUserDTOFinal.setCidade(cidade);
+            objUserDTOFinal.setUf(uf);
+            objUserDTOFinal.setEndereço(endereco);
+            objUserDTOFinal.setEmail(email);
             
             UserDAO objUserDAO = new UserDAO();
-            objUserDAO.alterarUsuarioLogado(objUserDTO);
+            objUserDAO.alterarUsuarioLogado(objUserDTOFinal);
+            
+            TelaLogin = new TelaDeLogin();
+            TelaLogin.setVisible(true);
+            this.dispose();
             
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "alterarDadosUsuario em AlterarUsuarioLogado: " + erro);

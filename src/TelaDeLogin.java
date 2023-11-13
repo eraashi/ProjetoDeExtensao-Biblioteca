@@ -236,10 +236,15 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 System.out.print("Email: " + objUserDTO.getEmail() + "\n");
                 
                 formulario = new PaginaInicial();
+                altUsuario = new AlterarUsuarioLogado();
                 
                 formulario.setUserDTO(objUserDTO);
                 formulario.setVisible(true);
+                formulario.BotaoEditar(altUsuario);
                 this.setVisible(false);
+                
+                altUsuario.setUserDTO(objUserDTO);
+                                
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario ou senha invalidos");
             }
