@@ -401,7 +401,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
     public void setUserDTO(UserDTO objUserDTO) {
         this.objUserDTOAlt = objUserDTO;
         try {
-            String login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, endereco, email;
+            String login, senha, confirmar_senha, nome_completo, cpf, celular, cidade, uf, num, endereco, email;
             int id;
             
             id = objUserDTOAlt.getId();
@@ -413,6 +413,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             celular = objUserDTOAlt.getCelular();
             cidade = objUserDTOAlt.getCidade();
             uf = objUserDTOAlt.getUf();
+            num = objUserDTOAlt.getNum();
             endereco = objUserDTOAlt.getEndereço();
             email = objUserDTOAlt.getEmail();
             
@@ -425,6 +426,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
             txtcelular.setText(celular);
             txtcidade.setText(cidade);
             txtuf.setText(uf);
+            txtnum.setText(num);
             txtendereço.setText(endereco);
             txtemail.setText(email);
             
