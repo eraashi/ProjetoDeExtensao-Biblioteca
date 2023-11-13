@@ -149,7 +149,7 @@ public class UserDAO {
     }
     
     public void alterarUsuarioLogado(UserDTO objUserDTOFinal) {
-        String sql = "UPDATE user SET login = ?, senha = ?, confirmar_senha = ?, nome_completo = ?, cpf = ?, celular = ?, cidade = ?, uf = ?, num = ?, endereco = ?, email = ? where = ?";
+        String sql = "UPDATE user SET login = ?, senha = ?, confirmar_senha = ?, nome_completo = ?, cpf = ?, celular = ?, cidade = ?, uf = ?, num = ?, endereco = ?, email = ? where id = ?";
         conn = new Conexao().conectaBD();
 
         try {

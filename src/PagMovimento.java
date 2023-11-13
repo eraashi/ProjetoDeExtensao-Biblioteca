@@ -22,6 +22,8 @@ public class PagMovimento extends javax.swing.JFrame {
     /**
      * Creates new form PagDenuncia
      */
+    private LivroDTO objLivroDTONovo;
+    
     public PagMovimento() {
         initComponents();
         setLocationRelativeTo(null);
@@ -414,6 +416,52 @@ public class PagMovimento extends javax.swing.JFrame {
     private javax.swing.JLabel txtTituloLivro;
     // End of variables declaration//GEN-END:variables
 
+    public void setobjLivroDTO(LivroDTO objLivroDTO){
+        this.objLivroDTONovo = objLivroDTO;
+        try {
+            String tituloLivro, autor, editora, local, nomeCliente, id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;
+            boolean reservadoCliente;
+            
+            LivroDAO objLivroDAO = new LivroDAO();
+            objLivroDAO.resgatarDadosLivro(objLivroDTO);
+            
+            //pegando o não aditável
+            tituloLivro = objLivroDTONovo.getTitulo();
+            autor = objLivroDTONovo.getAutor();
+            editora = objLivroDTONovo.getEditora();
+            isbn = objLivroDTONovo.getIsbn();
+            data = objLivroDTONovo.getData();
+            local = objLivroDTONovo.getLocal();
+            id = objLivroDTONovo.getId();
+            //pegando o editável
+            nomeCliente = objLivroDTONovo.getNome_cliente();
+            cpfCliente = objLivroDTONovo.getCpf_cliente();
+            dataCliente = objLivroDTONovo.getData_cliente();
+            horaCliente = objLivroDTONovo.getHora_cliente();
+            celularCliente = objLivroDTONovo.getCelular_cliente();
+            reservadoCliente = objLivroDTONovo.isReservado();
+            //setando o não editável
+            txtTituloLivro.setText(tituloLivro);
+            txtNomeLivro.setText(tituloLivro);
+            txtAutorLivro.setText(autor);
+            txtISBN.setText(isbn);
+            txtEditoraLivro.setText(editora);
+            txtLocaLivro.setText(local);
+            txtDataLivro.setText(data);
+            idLivro.setText(id);
+            //setando o editável
+            txtNome.setText(nomeCliente);
+            txtCPF.setText(cpfCliente);
+            txtDatausuario.setText(dataCliente);
+            txtHorausuario.setText(horaCliente);
+            txtCelular.setText(celularCliente);
+            boxReservado.setSelected(reservadoCliente);
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "setarobjLivroDTO em PagMovimento: " + erro);
+        }
+    }
+    
     //método privado do frame pra atualizar os campos com as infos dos livros
     private void atualizarLivros() {
         try {

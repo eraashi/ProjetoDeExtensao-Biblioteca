@@ -19,18 +19,15 @@ public class Conexao {
     final private String senha = "";
     public Statement statement;
     public ResultSet resultset;
-    public Connection conecta() {
-        Connection conexao = null;
+    public void conecta() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/bibliotecamero?user=root&pass=");
-            st = conexao.createStatement();
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bibliotecamero?user=root&pass=");
         } catch (ClassNotFoundException Fonte) {
             JOptionPane.showMessageDialog(null, "Driver nao localizado");
         } catch (SQLException Fonte) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar com o servidor MYSQL", "ATENÇAO", (2));
         }
-        return conexao;
     }
     public static void main(String[] args){
         try {

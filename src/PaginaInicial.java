@@ -27,12 +27,14 @@ import javax.swing.table.DefaultTableModel;
 public class PaginaInicial extends javax.swing.JFrame {
     private UserDTO objUserDTONovo;
     private AlterarUsuarioLogado altUsuarioFinal;
+    PagMovimento denuncias;
+    LivroDTO objLivroDTO = new LivroDTO();
     /**
      * Creates new form FormularioUnico
      */
     //fui obrigado a criar essas variáveis de conexão aqui apra fazer um
     //combobox IMPROVISADO funcionar, aquele do lado do botao pesquisar
-    Conexao conn = new Conexao();
+    Conexao CONEXAO = new Conexao();
     public PreparedStatement pstm;
     public ResultSet rs;
     DefaultListModel modelo;
@@ -44,17 +46,18 @@ public class PaginaInicial extends javax.swing.JFrame {
        
         initComponents();
         //aqui a lista é atualizada assim que a página surge
-        conn.conecta();
+        CONEXAO.conecta();
         listarLivros();
+        MostraPesquisa();
         //aqui a combox padrao é atualiza assim que a página surge
         //restaurarBoxLivros();
-        //atualizarNomeUsuario();
         //métodos para a combobox IMPROVISADA (do lado do botao pesquisar)
         listaPesquisaLivros.setVisible(false);
         
         modelo = new DefaultListModel();
         listaPesquisaLivros.setModel(modelo);
         txtId.setVisible(false);
+        txtExcluirId.setVisible(false);
 
         setLocationRelativeTo(null);
     }
@@ -91,6 +94,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        txtExcluirId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Página Inicial");
@@ -268,6 +272,14 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(jLabel10);
         jLabel10.setBounds(360, 90, 630, 48);
 
+        txtExcluirId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtExcluirIdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtExcluirId);
+        txtExcluirId.setBounds(570, 630, 80, 22);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -311,20 +323,32 @@ public class PaginaInicial extends javax.swing.JFrame {
 
             tituloLocal = txtPesquisa.getText();
 
-            LivroDTO objLivroDTO = new LivroDTO();
-
-            objLivroDTO.setTitulo(tituloLocal);
-
             LivroDAO objLivroDAO = new LivroDAO();
-            ResultSet rsLivroDAO = objLivroDAO.compararTituloLivro(objLivroDTO);
+            ResultSet rsLivroDAO = objLivroDAO.compararTituloLivro(tituloLocal);
 
             if (rsLivroDAO.next()) {
                 //checar se está funcionando
-                objLivroDAO.resgatarDadosLivro(objLivroDTO);
+
+                objLivroDTO.setId(rsLivroDAO.getString("id"));
+                objLivroDTO.setTitulo(rsLivroDAO.getString("titulo"));
+                objLivroDTO.setAutor(rsLivroDAO.getString("autor"));
+                objLivroDTO.setIsbn(rsLivroDAO.getString("isbn"));
+                objLivroDTO.setEditora(rsLivroDAO.getString("editora"));
+                objLivroDTO.setData(rsLivroDAO.getString("data"));
+                objLivroDTO.setLocal(rsLivroDAO.getString("local"));
+                objLivroDTO.setNome_cliente(rsLivroDAO.getString("nome_cliente"));
+                objLivroDTO.setCpf_cliente(rsLivroDAO.getString("cpf_cliente"));
+                objLivroDTO.setData_cliente(rsLivroDAO.getString("data_cliente"));
+                objLivroDTO.setHora_cliente(rsLivroDAO.getString("hora_cliente"));
+                objLivroDTO.setCelular_cliente(rsLivroDAO.getString("isbn"));
+                objLivroDTO.setReservado(rsLivroDAO.getBoolean("reservado"));
                 
-                PagMovimento denuncias = new PagMovimento();
+                denuncias = new PagMovimento();
+                
+                denuncias.setobjLivroDTO(objLivroDTO);
                 denuncias.setVisible(true);
-                this.dispose();
+                this.setVisible(false);
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Livro não encontrado no banco de dados. ");
             }
@@ -332,11 +356,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "btnPesquisarActionPerformed: " + erro);
         }
-
-        //HOJE EU VEJO ESSE BOTÃO
-        PagMovimento denuncias = new PagMovimento();
-        denuncias.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnAtualizarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaActionPerformed
@@ -375,8 +394,15 @@ public class PaginaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoLivroActionPerformed
 
     private void btnExcluirLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLivroActionPerformed
-        // TODO add your handling code here:
+        CarregarIdLivroExcluir();
+        ExcluirLivro();
+        listarLivros();
+        LimparCampoId();
     }//GEN-LAST:event_btnExcluirLivroActionPerformed
+
+    private void txtExcluirIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExcluirIdActionPerformed
+        
+    }//GEN-LAST:event_txtExcluirIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -434,6 +460,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JList<String> listaLivros;
     private javax.swing.JList<String> listaPesquisaLivros;
     private javax.swing.JTable tabelaLivro;
+    private javax.swing.JTextField txtExcluirId;
     private javax.swing.JTextField txtId;
     public javax.swing.JLabel txtNomeUsuario;
     private javax.swing.JLabel txtOla;
@@ -476,13 +503,13 @@ public class PaginaInicial extends javax.swing.JFrame {
     
     public void listaPesquisaParaTextfield() {
         try {
-            conn.executaSQL("SELECT * FROM livromovimentacao WHERE titulo LIKE '" + txtPesquisa.getText() + "%' ORDER BY titulo");
+            CONEXAO.executaSQL("SELECT * FROM livromovimentacao WHERE titulo LIKE '" + txtPesquisa.getText() + "%' ORDER BY titulo");
             modelo.removeAllElements();
             int v = 0;
-            Codig = new String[10];
-            while (conn.rs.next() & v < 4) {
-                modelo.addElement(conn.rs.getString("titulo"));
-                Codig[v] = conn.rs.getString("id");
+            Codig = new String[4];
+            while (CONEXAO.rs.next() & v < 4) {
+                modelo.addElement(CONEXAO.rs.getString("titulo"));
+                Codig[v] = CONEXAO.rs.getString("id");
                 v++;
             }
             if (v >= 1) {
@@ -500,16 +527,16 @@ public class PaginaInicial extends javax.swing.JFrame {
     public void MostraPesquisa() {
         int Linha = listaPesquisaLivros.getSelectedIndex();
         if (Linha >= 0) {
-            conn.executaSQL("SELECT * FROM livromovimentacao WHERE id = "+Codig[Linha]+" ");
+            CONEXAO.executaSQL("SELECT * FROM livromovimentacao WHERE id = "+Codig[Linha]+" ");
             ResultadoPesquisa();
         }
     }
 
     public void ResultadoPesquisa() {
         try {
-            conn.rs.first();
-            txtPesquisa.setText(conn.rs.getString("titulo"));
-            txtId.setText(conn.rs.getString("id"));
+            CONEXAO.rs.first();
+            txtPesquisa.setText(CONEXAO.rs.getString("titulo"));
+            txtId.setText(CONEXAO.rs.getString("id"));
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "ResultadoPesquisa em PaginaInicial: " + erro);
@@ -564,17 +591,27 @@ public class PaginaInicial extends javax.swing.JFrame {
     
     }
     
-        public void atualizarNomeUsuario(){
-        try{
-            String nomeUsuario;
-
-            nomeUsuario = objUserDTONovo.getLogin();
-            
-            txtNomeUsuario.setText(nomeUsuario);
-        }catch(Exception erro){
-            JOptionPane.showMessageDialog(null, "atualizarNomeUsuario em pagInicial: " + erro);
-        }
+    private void CarregarIdLivroExcluir(){
+        int setar = tabelaLivro.getSelectedRow();
         
-    } 
+        txtExcluirId.setText(tabelaLivro.getModel().getValueAt(setar, 0).toString());
+    }
+    
+    private void LimparCampoId(){
+        txtExcluirId.setText("");
+    }
+    
+    private void ExcluirLivro(){
+        String tituloExcluir;
+        
+        tituloExcluir = txtExcluirId.getText();
+        
+        LivroDTO objLivroExcluir = new LivroDTO();
+        objLivroExcluir.setTitulo(tituloExcluir);
+        
+        LivroDAO objLivroDAOExcluir = new LivroDAO();
+        objLivroDAOExcluir.excluirLivro(objLivroExcluir);
+        
+    }
     
 }

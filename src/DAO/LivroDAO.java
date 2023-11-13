@@ -35,13 +35,13 @@ public class LivroDAO {
     }*/
     
     //esse método aqui tenta comparar um id local com um id do mysql
-    public ResultSet compararTituloLivro(LivroDTO objLivroDTO){
+    public ResultSet compararTituloLivro(String tituloLocal){
         conn = new Conexao().conectaBD();
         
         try {
             String sql = "SELECT * from livromovimentacao WHERE titulo = ?";
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objLivroDTO.getTitulo());
+            pstm.setString(1, tituloLocal);
             rs = pstm.executeQuery();
             
             return rs;
@@ -162,6 +162,23 @@ public class LivroDAO {
             JOptionPane.showMessageDialog(null, "criarNovoLivro em LivroDAO: " + erro);
         }
 
+    }
+    
+    public void excluirLivro(LivroDTO objLivroExcluir){
+        String sql = "DELETE FROM livromovimentacao WHERE titulo = ?";
+        conn = new Conexao().conectaBD();
+        
+        try {
+            pstm = conn.prepareStatement(sql);
+            
+            pstm.setString(1, objLivroExcluir.getTitulo());
+
+            pstm.execute();
+            pstm.close();
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "excluirLivro em LivroDAO: " + erro);
+        }
     }
     
 }
