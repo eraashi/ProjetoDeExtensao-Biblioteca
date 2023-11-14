@@ -456,53 +456,6 @@ public class PagMovimento extends javax.swing.JFrame {
         }
     }
     
-    //método privado do frame pra atualizar os campos com as infos dos livros
-    /*private void atualizarLivros() {
-        try {
-            LivroDTO objLivroDTO = new LivroDTO();
-            String tituloLivro, autor, editora, local, nomeCliente, id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;;
-            boolean reservadoCliente;
-            
-            LivroDAO objLivroDAO = new LivroDAO();
-            objLivroDAO.resgatarDadosLivro(objLivroDTO);
-            
-            //pegando o não aditável
-            tituloLivro = objLivroDTO.getTitulo();
-            autor = objLivroDTO.getAutor();
-            editora = objLivroDTO.getEditora();
-            isbn = objLivroDTO.getIsbn();
-            data = objLivroDTO.getData();
-            local = objLivroDTO.getLocal();
-            id = objLivroDTO.getId();
-            //pegando o editável
-            nomeCliente = objLivroDTO.getNome_cliente();
-            cpfCliente = objLivroDTO.getCpf_cliente();
-            dataCliente = objLivroDTO.getData_cliente();
-            horaCliente = objLivroDTO.getHora_cliente();
-            celularCliente = objLivroDTO.getCelular_cliente();
-            reservadoCliente = objLivroDTO.isReservado();
-            //setando o não editável
-            txtTituloLivro.setText(tituloLivro);
-            txtNomeLivro.setText(tituloLivro);
-            txtAutorLivro.setText(autor);
-            txtISBN.setText(isbn);
-            txtEditoraLivro.setText(editora);
-            txtLocaLivro.setText(local);
-            txtDataLivro.setText(data);
-            idLivro.setText(id);
-            //setando o editável
-            txtNome.setText(nomeCliente);
-            txtCPF.setText(cpfCliente);
-            txtDatausuario.setText(dataCliente);
-            txtHorausuario.setText(horaCliente);
-            txtCelular.setText(celularCliente);
-            boxReservado.setSelected(reservadoCliente);
-
-        } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "atualizarLivros em PagMovimento: " + erro);
-        }
-    }*/
-
     //método para pegar o que foi escrito no editavel
     //jogar no LivroDTO e depois usar o método "alterarUsuarioLivro"
     //para que ele atualize no banco de dados mysql
@@ -517,18 +470,14 @@ public class PagMovimento extends javax.swing.JFrame {
             cpf_cliente = txtCPF.getText();
             celular_cliente = txtCelular.getText();
             reservado = boxReservado.isSelected();
-            //titulo = txtTituloLivro.getText();
             //setando o editável escrito na DTO para o mysql
-            
             objLivroDTONovo.setNome_cliente(nome_cliente);
             objLivroDTONovo.setData_cliente(data_cliente);
             objLivroDTONovo.setHora_cliente(hora_cliente);
             objLivroDTONovo.setCelular_cliente(celular_cliente);
             objLivroDTONovo.setCpf_cliente(cpf_cliente);
             objLivroDTONovo.setReservado(reservado);
-            //objLivroDTONovo.setTitulo(titulo);
             //ordenando o DTO ser salvo no mysql
-            
             LivroDAO objLivroDAO = new LivroDAO();
             ResultSet rslivrodao = objLivroDAO.compararTituloLivro(txtTituloLivro.getText());
             

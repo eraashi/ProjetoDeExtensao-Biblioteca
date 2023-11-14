@@ -35,32 +35,12 @@ public class PaginaInicial extends javax.swing.JFrame {
     /**
      * Creates new form FormularioUnico
      */
-    //fui obrigado a criar essas variáveis de conexão aqui apra fazer um
-    //combobox IMPROVISADO funcionar, aquele do lado do botao pesquisar
-    Conexao CONEXAO = new Conexao();
-    public PreparedStatement pstm;
-    public ResultSet rs;
-    DefaultListModel modelo;
-    int Enter = 0;
-
-    String[] Codig;
-
     public PaginaInicial() {
 
         initComponents();
         //aqui a lista é atualizada assim que a página surge
-        CONEXAO.conecta();
         listarLivros();
         listarLivrosRecentes();
-        MostraPesquisa();
-        //aqui a combox padrao é atualiza assim que a página surge
-        //restaurarBoxLivros();
-        //métodos para a combobox IMPROVISADA (do lado do botao pesquisar)
-        listaPesquisaLivros.setVisible(false);
-
-        modelo = new DefaultListModel();
-        listaPesquisaLivros.setModel(modelo);
-        txtId.setVisible(false);
         txtExcluirId.setVisible(false);
         txtAltLivro.setVisible(false);
         setLocationRelativeTo(null);
@@ -76,13 +56,10 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         txtNomeUsuario = new javax.swing.JLabel();
-        listaPesquisaLivros = new javax.swing.JList<>();
         txtOla = new javax.swing.JLabel();
         btnNovoLivro = new javax.swing.JButton();
         btnEditarDados = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        btnPesquisar = new javax.swing.JButton();
-        txtPesquisa = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -93,8 +70,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         tabelaLivro = new javax.swing.JTable();
         btnAtualizarTabela = new javax.swing.JButton();
         btnExcluirLivro = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtExcluirId = new javax.swing.JTextField();
         btnAltLivro = new javax.swing.JButton();
@@ -111,22 +86,15 @@ public class PaginaInicial extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
 
-        txtNomeUsuario.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
+        txtNomeUsuario.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
         txtNomeUsuario.setForeground(new java.awt.Color(239, 125, 9));
+        txtNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtNomeUsuario.setText("bruno santos");
         txtNomeUsuario.setToolTipText("");
         getContentPane().add(txtNomeUsuario);
-        txtNomeUsuario.setBounds(20, 380, 260, 50);
+        txtNomeUsuario.setBounds(40, 380, 216, 50);
 
-        listaPesquisaLivros.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(211, 211, 211), 1, true));
-        listaPesquisaLivros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listaPesquisaLivrosMouseClicked(evt);
-            }
-        });
-        getContentPane().add(listaPesquisaLivros);
-        listaPesquisaLivros.setBounds(480, 260, 500, 90);
-
-        txtOla.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
+        txtOla.setFont(new java.awt.Font("Yu Gothic UI", 1, 34)); // NOI18N
         txtOla.setForeground(new java.awt.Color(239, 125, 9));
         txtOla.setText("Olá,");
         getContentPane().add(txtOla);
@@ -163,37 +131,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         });
         getContentPane().add(btnSair);
         btnSair.setBounds(60, 570, 180, 50);
-
-        btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnPesquisar.setText("Pesquisar");
-        btnPesquisar.setToolTipText("");
-        btnPesquisar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnPesquisar);
-        btnPesquisar.setBounds(360, 230, 100, 30);
-
-        txtPesquisa.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        txtPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPesquisaMouseClicked(evt);
-            }
-        });
-        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPesquisaActionPerformed(evt);
-            }
-        });
-        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPesquisaKeyReleased(evt);
-            }
-        });
-        getContentPane().add(txtPesquisa);
-        txtPesquisa.setBounds(480, 230, 500, 30);
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 153, 51));
@@ -239,6 +176,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(400, 380, 300, 200);
 
+        btnAtualizarTabela.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAtualizarTabela.setText("Atualizar");
         btnAtualizarTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,6 +186,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(btnAtualizarTabela);
         btnAtualizarTabela.setBounds(440, 600, 90, 23);
 
+        btnExcluirLivro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnExcluirLivro.setText("Excluir Livro");
         btnExcluirLivro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,17 +194,7 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExcluirLivro);
-        btnExcluirLivro.setBounds(560, 600, 94, 23);
-
-        jLabel9.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 153, 51));
-        jLabel9.setText("Nova Reserva/Devolução");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(360, 188, 630, 30);
-
-        txtId.setEditable(false);
-        getContentPane().add(txtId);
-        txtId.setBounds(990, 230, 30, 30);
+        btnExcluirLivro.setBounds(560, 600, 100, 23);
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 153, 51));
@@ -281,6 +210,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(txtExcluirId);
         txtExcluirId.setBounds(570, 630, 80, 22);
 
+        btnAltLivro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAltLivro.setText("Alterar Estado");
         btnAltLivro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,7 +242,6 @@ public class PaginaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarDadosActionPerformed
-
         altUsuarioFinal.setVisible(true);
         this.dispose();
 
@@ -324,47 +253,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
-        //aqui a lista improvisada desaparece de baixo do campo de escrever
-        //assim que o usuario aperta Enter e a variável recebe 1
-        listaPesquisaLivros.setVisible(false);
-        Enter = 1;
-    }//GEN-LAST:event_txtPesquisaActionPerformed
-
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-
-        alterarLivroDTO();
-    }//GEN-LAST:event_btnPesquisarActionPerformed
-
     private void btnAtualizarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaActionPerformed
         //botão para atualizar a tabela da interface
         listarLivros();
         listarLivrosRecentes();
     }//GEN-LAST:event_btnAtualizarTabelaActionPerformed
-
-    private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
-        //aqui se o usuario pressionar enter e a variável for 0
-        //a lista IMPROVISADA é atualizada
-        //se nao, se for 1, a variável recebe 0
-        if (Enter == 0) {
-            listaPesquisaParaTextfield();
-        } else
-            Enter = 0;
-    }//GEN-LAST:event_txtPesquisaKeyReleased
-
-    private void listaPesquisaLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPesquisaLivrosMouseClicked
-        //criei uma acao que quando o usuario clicar na lista aberta
-        //o campo de escrever também recebe o conteúdo que ele clicou da lista
-        //depois ela se fecha
-        //MostraPesquisa();
-        //listaPesquisaLivros.setVisible(false);
-    }//GEN-LAST:event_listaPesquisaLivrosMouseClicked
-
-    private void txtPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPesquisaMouseClicked
-        //aqui quando o campo de escrever é clicado a lista se mostra
-        listaPesquisaParaTextfield();
-        listaPesquisaLivros.setVisible(true);
-    }//GEN-LAST:event_txtPesquisaMouseClicked
 
     private void btnNovoLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLivroActionPerformed
         NovoLivro objNovoLivro = new NovoLivro();
@@ -432,7 +325,6 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarDados;
     private javax.swing.JButton btnExcluirLivro;
     private javax.swing.JButton btnNovoLivro;
-    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
@@ -441,18 +333,14 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable listaLivros;
-    private javax.swing.JList<String> listaPesquisaLivros;
     private javax.swing.JTable tabelaLivro;
     private javax.swing.JTextField txtAltLivro;
     private javax.swing.JTextField txtExcluirId;
-    private javax.swing.JTextField txtId;
     public javax.swing.JLabel txtNomeUsuario;
     private javax.swing.JLabel txtOla;
-    private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 
     public void BotaoEditar(AlterarUsuarioLogado altUsuario) {
@@ -469,88 +357,12 @@ public class PaginaInicial extends javax.swing.JFrame {
 
             txtNomeUsuario.setText(nomeUsuario);
 
-            System.out.print("Teste de recepção em setUserDTO, após abrir a PaginaInicial: \n");
-            System.out.print("Id: " + objUserDTONovo.getId() + "\n");
-            System.out.print("Login: " + objUserDTONovo.getLogin() + "\n");
-            System.out.print("Senha: " + objUserDTONovo.getSenha() + "\n");
-            System.out.print("Confirmar Senha: " + objUserDTONovo.getConfirmar_senha() + "\n");
-            System.out.print("Nome Completo: " + objUserDTONovo.getNome_completo() + "\n");
-            System.out.print("CPF: " + objUserDTONovo.getCpf() + "\n");
-            System.out.print("Celular: " + objUserDTONovo.getCelular() + "\n");
-            System.out.print("Cidade: " + objUserDTONovo.getCidade() + "\n");
-            System.out.print("Uf: " + objUserDTONovo.getUf() + "\n");
-            System.out.print("Num: " + objUserDTONovo.getNum() + "\n");
-            System.out.print("Endereço: " + objUserDTONovo.getEndereço() + "\n");
-            System.out.print("Email: " + objUserDTONovo.getEmail() + "\n");
-
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "setUserDTO em pagInicial: " + erro);
         }
         // Use o objeto UserDTO dentro deste JFrame
     }
 
-    public void listaPesquisaParaTextfield() {
-        try {
-            CONEXAO.executaSQL("SELECT * FROM livromovimentacao WHERE titulo LIKE '" + txtPesquisa.getText() + "%' ORDER BY titulo");
-            modelo.removeAllElements();
-            int v = 0;
-            Codig = new String[4];
-            while (CONEXAO.rs.next() & v < 4) {
-                modelo.addElement(CONEXAO.rs.getString("titulo"));
-                Codig[v] = CONEXAO.rs.getString("id");
-                v++;
-            }
-            if (v >= 1) {
-                listaPesquisaLivros.setVisible(true);
-            } else {
-                listaPesquisaLivros.setVisible(false);
-            }
-
-            ResultadoPesquisa();
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "listaPesquisaParaTextfield em PaginaInicial: " + erro);
-        }
-    }
-
-    public void MostraPesquisa() {
-        int Linha = listaPesquisaLivros.getSelectedIndex();
-        if (Linha >= 0) {
-            CONEXAO.executaSQL("SELECT * FROM livromovimentacao WHERE id = " + Codig[Linha] + " ");
-            ResultadoPesquisa();
-        }
-    }
-
-    public void ResultadoPesquisa() {
-        try {
-            CONEXAO.rs.first();
-            txtPesquisa.setText(CONEXAO.rs.getString("titulo"));
-            txtId.setText(CONEXAO.rs.getString("id"));
-
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "ResultadoPesquisa em PaginaInicial: " + erro);
-        }
-    }
-
-    //não vou utilizar agora
-    /*Vector<Integer> id = new Vector<Integer>();
-
-    public void restaurarBoxLivros() {
-        boxLivros.setEditable(true);
-        boxLivros.addActionListener(boxLivros);
-        try {
-
-            LivroDAO objLivroDAO = new LivroDAO();
-            ResultSet rs = objLivroDAO.listarBoxLivros();
-
-            while (rs.next()) {
-                id.addElement(rs.getInt(1));
-                boxLivros.addItem(rs.getString(2));
-            }
-
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "restaurarBoxLivros: " + erro);
-        }
-    }*/
     //criei esse método para listar os livros do mysql numa tabela da interface
     //ela é atualizada quando a página abre e quando é pressionado o novo botao em baixo dela
     private void listarLivros() {

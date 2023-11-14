@@ -141,17 +141,6 @@ public class TelaDeLogin extends javax.swing.JFrame {
 
     private void botao_entraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botao_entraActionPerformed
         LogarUsuario();
-        /*String usuario_login, senha_usuario;
-        usuario_login = usuario.getText();
-        senha_usuario = senhalogin.getText();
-        
-        objUserDTO.setLogin(usuario_login);
-        objUserDTO.setSenha(senha_usuario);
-        
-        formulario = new PaginaInicial();
-        formulario.setUserDTO(objUserDTO);
-        formulario.setVisible(true);
-        this.setVisible(false);*/
         
     }//GEN-LAST:event_botao_entraActionPerformed
 

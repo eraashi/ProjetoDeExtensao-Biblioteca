@@ -19,22 +19,6 @@ public class LivroDAO {
     ArrayList<LivroDTO> lista = new ArrayList<>();
     ArrayList<LivroDTO> listaRecente = new ArrayList<>();
     
-    //método que lista id e titulo do banco de dados
-    //não está sendo usado
-    /*public ResultSet listarBoxLivros(){
-        String sql = "SELECT id, titulo FROM livromovimentacao ORDER BY titulo";
-        conn = new Conexao().conectaBD();
-        
-        try{
-            pstm = conn.prepareStatement(sql);
-            return pstm.executeQuery();
-            
-        }catch(SQLException erro){
-            JOptionPane.showMessageDialog(null, "listarBoxLivros: " + erro);
-            return null;
-        }
-    }*/
-    
     //esse método aqui tenta comparar um id local com um id do mysql
     public ResultSet compararTituloLivro(String tituloLocal){
         conn = new Conexao().conectaBD();
@@ -52,39 +36,6 @@ public class LivroDAO {
         }
     }
     
-    //aqui esse método puxa os dados do msql e trás para a classe LivrosDTO
-    public ResultSet resgatarDadosLivro(LivroDTO objLivroDTO) {
-        String sql = "SELECT * from livromovimentacao WHERE titulo = ?";
-        conn = new Conexao().conectaBD();
-        
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objLivroDTO.getTitulo());
-            rs = pstm.executeQuery();
-            
-            while (rs.next()) {
-                
-                objLivroDTO.setId(rs.getString("id"));
-                objLivroDTO.setTitulo(rs.getString("titulo"));
-                objLivroDTO.setAutor(rs.getString("autor"));
-                objLivroDTO.setIsbn(rs.getString("isbn"));
-                objLivroDTO.setEditora(rs.getString("editora"));
-                objLivroDTO.setData(rs.getString("data"));
-                objLivroDTO.setLocal(rs.getString("local"));
-                objLivroDTO.setNome_cliente(rs.getString("nome_cliente"));
-                objLivroDTO.setCpf_cliente(rs.getString("cpf_cliente"));
-                objLivroDTO.setData_cliente(rs.getString("data_cliente"));
-                objLivroDTO.setHora_cliente(rs.getString("hora_cliente"));
-                objLivroDTO.setCelular_cliente(rs.getString("celular_cliente"));
-                objLivroDTO.setReservado(rs.getBoolean("reservado"));
-
-            }
-
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "resgatarDadosLivros em LivroDAO: " + erro);
-        }
-        return rs;
-    }
     //aqui esse método faz a alteração do DTO para o mysql
     //pega os dados editáveis dos livros em LivrosDTO e joga na tabela msql
     //utilizando o id como referência

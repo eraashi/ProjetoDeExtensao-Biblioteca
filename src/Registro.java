@@ -15,8 +15,6 @@ import java.util.Random;
 
 
 public class Registro extends javax.swing.JFrame {
-    //User user = new UserDTO();
-    //UserDAO usuariodao = new UserDAO();
    
     public Registro() {
         initComponents();

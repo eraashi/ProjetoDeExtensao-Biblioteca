@@ -27,12 +27,6 @@ public class NovoLivro extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         idLivro.setVisible(false);
-        
-        //txtNome.setDocument(new LimitaCaracteres(60, LimitaCaracteres.TipoEntrada.NOME));
-        //txtCelular.setDocument(new LimitaCaracteres(11, LimitaCaracteres.TipoEntrada.NUMEROINTEIRO));
-        //txtDatausuario.setDocument(new LimitaCaracteres(10, LimitaCaracteres.TipoEntrada.DATA));
-        //txtHorausuario.setDocument(new LimitaCaracteres(5, LimitaCaracteres.TipoEntrada.HORA));
-        //txtCPF.setDocument(new LimitaCaracteres(60, LimitaCaracteres.TipoEntrada.NUMEROINTEIRO));
     }
 
     /**

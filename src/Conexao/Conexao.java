@@ -20,16 +20,6 @@ public class Conexao {
     public Statement statement;
     public ResultSet resultset;
     
-    public void conecta() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bibliotecamero?user=root&pass=");
-        } catch (ClassNotFoundException Fonte) {
-            JOptionPane.showMessageDialog(null, "Driver nao localizado");
-        } catch (SQLException Fonte) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o servidor MYSQL", "ATENÇAO", (2));
-        }
-    }
     public static void main(String[] args){
         try {
             Connection con;
@@ -61,16 +51,5 @@ public class Conexao {
             JOptionPane.showMessageDialog(null, "conectaBD na classe Conexao: " + erro.getMessage());
         }
         return conn;
-    }
-    //criei esse metodoaqui pra testar uma conexao direto na pagina inicial
-    //para a lista que vai surgir quando o usuario digitar algo no txtField
-    public void executaSQL(String sql) {
-        try {
-            statement = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            resultset = statement.executeQuery(sql);
-        } catch (SQLException sqlex) {
-            JOptionPane.showMessageDialog(null, "Nao foi possível executar o comando sql"
-                    + "" + sqlex + "O comando passado foi" + sql);
-        }
     }
 }

@@ -74,18 +74,6 @@ public class UserDAO {
             UserDTO objUserDTO = new UserDTO();
             
             while (rs.next()) {
-                /*System.out.println("id: " + rs.getString("id"));
-                System.out.println("Login: " + rs.getString("login"));
-                System.out.println("senha: " + rs.getString("senha"));
-                System.out.println("confirmar_senha: " + rs.getString("confirmar_senha"));
-                System.out.println("nome_completo: " + rs.getString("nome_completo"));
-                System.out.println("cpf: " + rs.getString("cpf"));
-                System.out.println("celular: " + rs.getString("celular"));
-                System.out.println("cidade: " + rs.getString("cidade"));
-                System.out.println("uf: " + rs.getString("uf"));
-                System.out.println("num: " + rs.getString("num"));
-                System.out.println("endereco: " + rs.getString("endereco"));
-                System.out.println("email: " + rs.getString("email"));*/
                 
                 objUserDTO.setId(rs.getInt("id"));
                 objUserDTO.setLogin(rs.getString("login"));
