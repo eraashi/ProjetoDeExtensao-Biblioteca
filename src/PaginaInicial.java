@@ -652,7 +652,7 @@ public class PaginaInicial extends javax.swing.JFrame {
                 objLivroDTO.setCpf_cliente(rsLivroDAO.getString("cpf_cliente"));
                 objLivroDTO.setData_cliente(rsLivroDAO.getString("data_cliente"));
                 objLivroDTO.setHora_cliente(rsLivroDAO.getString("hora_cliente"));
-                objLivroDTO.setCelular_cliente(rsLivroDAO.getString("celular-cliente"));
+                objLivroDTO.setCelular_cliente(rsLivroDAO.getString("celular_cliente"));
                 objLivroDTO.setReservado(rsLivroDAO.getBoolean("reservado"));
 
                 denuncias = new PagMovimento();
