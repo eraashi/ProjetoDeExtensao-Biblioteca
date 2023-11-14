@@ -607,13 +607,13 @@ public class PaginaInicial extends javax.swing.JFrame {
         try {
             LivroDAO objLivroDAO = new LivroDAO();
 
-            DefaultTableModel model = (DefaultTableModel) listaLivros.getModel();
-            model.setNumRows(0);
+            DefaultTableModel modelRecente = (DefaultTableModel) listaLivros.getModel();
+            modelRecente.setNumRows(0);
 
             ArrayList<LivroDTO> listaRecente = objLivroDAO.pesquisarLivroRecente();
 
             for (int num = 0; num < listaRecente.size(); num++) {
-                model.addRow(new Object[]{
+                modelRecente.addRow(new Object[]{
                     listaRecente.get(num).getTitulo(),
                     listaRecente.get(num).getNome_cliente(),
                     listaRecente.get(num).getData_cliente(),
