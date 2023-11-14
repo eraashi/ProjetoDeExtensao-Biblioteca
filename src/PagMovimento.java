@@ -517,7 +517,7 @@ public class PagMovimento extends javax.swing.JFrame {
             cpf_cliente = txtCPF.getText();
             celular_cliente = txtCelular.getText();
             reservado = boxReservado.isSelected();
-            titulo = txtTituloLivro.getText();
+            //titulo = txtTituloLivro.getText();
             //setando o editável escrito na DTO para o mysql
             
             objLivroDTONovo.setNome_cliente(nome_cliente);
@@ -526,7 +526,7 @@ public class PagMovimento extends javax.swing.JFrame {
             objLivroDTONovo.setCelular_cliente(celular_cliente);
             objLivroDTONovo.setCpf_cliente(cpf_cliente);
             objLivroDTONovo.setReservado(reservado);
-            objLivroDTONovo.setTitulo(titulo);
+            //objLivroDTONovo.setTitulo(titulo);
             //ordenando o DTO ser salvo no mysql
             
             LivroDAO objLivroDAO = new LivroDAO();
