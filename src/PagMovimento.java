@@ -2,6 +2,7 @@
 import DTO.LivroDTO;
 import DAO.LivroDAO;
 import Ferramentas.LimitaCaracteres;
+import java.sql.ResultSet;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -518,21 +519,27 @@ public class PagMovimento extends javax.swing.JFrame {
             reservado = boxReservado.isSelected();
             titulo = txtTituloLivro.getText();
             //setando o editável escrito na DTO para o mysql
-            LivroDTO objlivro = new LivroDTO();
-            objlivro.setNome_cliente(nome_cliente);
-            objlivro.setData_cliente(data_cliente);
-            objlivro.setHora_cliente(hora_cliente);
-            objlivro.setCelular_cliente(celular_cliente);
-            objlivro.setCpf_cliente(cpf_cliente);
-            objlivro.setReservado(reservado);
-            objlivro.setTitulo(titulo);
+            
+            objLivroDTONovo.setNome_cliente(nome_cliente);
+            objLivroDTONovo.setData_cliente(data_cliente);
+            objLivroDTONovo.setHora_cliente(hora_cliente);
+            objLivroDTONovo.setCelular_cliente(celular_cliente);
+            objLivroDTONovo.setCpf_cliente(cpf_cliente);
+            objLivroDTONovo.setReservado(reservado);
+            objLivroDTONovo.setTitulo(titulo);
             //ordenando o DTO ser salvo no mysql
+            
             LivroDAO objLivroDAO = new LivroDAO();
-            objLivroDAO.alterarUsuarioLivro(objlivro);
+            ResultSet rslivrodao = objLivroDAO.compararTituloLivro(txtTituloLivro.getText());
             
+            if (rslivrodao.next()){
+            
+            LivroDAO objLivroDAOteste = new LivroDAO();
+            objLivroDAOteste.alterarUsuarioLivro(objLivroDTONovo);
             this.dispose();
+            }
             
-        } catch (NumberFormatException erro) {
+        } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "alterarEditaveisLivro em Pagmovimento; " + erro);
         }
     }

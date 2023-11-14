@@ -75,7 +75,7 @@ public class LivroDAO {
                 objLivroDTO.setCpf_cliente(rs.getString("cpf_cliente"));
                 objLivroDTO.setData_cliente(rs.getString("data_cliente"));
                 objLivroDTO.setHora_cliente(rs.getString("hora_cliente"));
-                objLivroDTO.setCelular_cliente(rs.getString("isbn"));
+                objLivroDTO.setCelular_cliente(rs.getString("celular-cliente"));
                 objLivroDTO.setReservado(rs.getBoolean("reservado"));
 
             }
@@ -89,7 +89,7 @@ public class LivroDAO {
     //pega os dados editáveis dos livros em LivrosDTO e joga na tabela msql
     //utilizando o id como referência
     public void alterarUsuarioLivro(LivroDTO objLivroAlt) {
-        String sql = "UPDATE livromovimentacao SET nome_cliente = ?, cpf_cliente = ?, data_cliente = ?, hora_cliente = ?, hora_cliente = ?, celular-cliente = ? where titulo = ?";
+        String sql = "UPDATE livromovimentacao SET nome_cliente = ?, cpf_cliente = ?, data_cliente = ?, hora_cliente = ?, celular-cliente = ?, reservado = ? where titulo = ?";
         conn = new Conexao().conectaBD();
 
         try {
