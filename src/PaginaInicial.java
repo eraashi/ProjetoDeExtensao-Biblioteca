@@ -82,8 +82,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         txtPesquisa = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        listaLivros = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -98,6 +96,8 @@ public class PaginaInicial extends javax.swing.JFrame {
         txtExcluirId = new javax.swing.JTextField();
         btnAltLivro = new javax.swing.JButton();
         txtAltLivro = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaLivros = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Página Inicial");
@@ -202,11 +202,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         getContentPane().add(jLabel8);
         jLabel8.setBounds(800, 310, 48, 60);
 
-        jScrollPane3.setViewportView(listaLivros);
-
-        getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(790, 380, 310, 199);
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/lateral mero.png"))); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 300, 1160);
@@ -288,6 +283,22 @@ public class PaginaInicial extends javax.swing.JFrame {
         btnAltLivro.setBounds(880, 600, 120, 23);
         getContentPane().add(txtAltLivro);
         txtAltLivro.setBounds(880, 630, 120, 22);
+
+        listaLivros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Titulo", "Cliente", "Data", "Hora"
+            }
+        ));
+        jScrollPane2.setViewportView(listaLivros);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(780, 380, 310, 200);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -467,8 +478,8 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JList<String> listaLivros;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable listaLivros;
     private javax.swing.JList<String> listaPesquisaLivros;
     private javax.swing.JTable tabelaLivro;
     private javax.swing.JTextField txtAltLivro;
