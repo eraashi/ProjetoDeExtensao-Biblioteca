@@ -27,6 +27,7 @@ public class PagMovimento extends javax.swing.JFrame {
     public PagMovimento() {
         initComponents();
         setLocationRelativeTo(null);
+
         idLivro.setVisible(false);
 
         txtNome.setDocument(new LimitaCaracteres(60, LimitaCaracteres.TipoEntrada.NOME));
@@ -313,14 +314,10 @@ public class PagMovimento extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         alterarEditaveisLivro();
         this.dispose();
-        PaginaInicial formulario = new PaginaInicial();
-        formulario.setVisible(true);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
-        PaginaInicial formulario = new PaginaInicial();
-        formulario.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void limNum(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_limNum
@@ -420,10 +417,7 @@ public class PagMovimento extends javax.swing.JFrame {
         try {
             String tituloLivro, autor, editora, local, nomeCliente, id, isbn, data, cpfCliente, dataCliente, horaCliente, celularCliente;
             boolean reservadoCliente;
-            
-            LivroDAO objLivroDAO = new LivroDAO();
-            objLivroDAO.resgatarDadosLivro(objLivroDTO);
-            
+                        
             //pegando o não aditável
             tituloLivro = objLivroDTONovo.getTitulo();
             autor = objLivroDTONovo.getAutor();
@@ -513,7 +507,7 @@ public class PagMovimento extends javax.swing.JFrame {
     //para que ele atualize no banco de dados mysql
     private void alterarEditaveisLivro() {
         try {
-            String nome_cliente, data_cliente, hora_cliente, cpf_cliente, celular_cliente;;
+            String nome_cliente, data_cliente, hora_cliente, cpf_cliente, celular_cliente, titulo;
             boolean reservado;
             //pegando o editável escrito
             nome_cliente = txtNome.getText();
@@ -522,6 +516,7 @@ public class PagMovimento extends javax.swing.JFrame {
             cpf_cliente = txtCPF.getText();
             celular_cliente = txtCelular.getText();
             reservado = boxReservado.isSelected();
+            titulo = txtTituloLivro.getText();
             //setando o editável escrito na DTO para o mysql
             LivroDTO objlivro = new LivroDTO();
             objlivro.setNome_cliente(nome_cliente);
@@ -530,11 +525,12 @@ public class PagMovimento extends javax.swing.JFrame {
             objlivro.setCelular_cliente(celular_cliente);
             objlivro.setCpf_cliente(cpf_cliente);
             objlivro.setReservado(reservado);
+            objlivro.setTitulo(titulo);
             //ordenando o DTO ser salvo no mysql
             LivroDAO objLivroDAO = new LivroDAO();
             objLivroDAO.alterarUsuarioLivro(objlivro);
             
-            //CRIAR AUTENTICAÇÃO TAMBÉM
+            this.dispose();
             
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "alterarEditaveisLivro em Pagmovimento; " + erro);

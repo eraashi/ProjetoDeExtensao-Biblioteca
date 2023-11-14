@@ -88,19 +88,19 @@ public class LivroDAO {
     //aqui esse método faz a alteração do DTO para o mysql
     //pega os dados editáveis dos livros em LivrosDTO e joga na tabela msql
     //utilizando o id como referência
-    public void alterarUsuarioLivro(LivroDTO objLivroDTO) {
+    public void alterarUsuarioLivro(LivroDTO objLivroAlt) {
         String sql = "UPDATE livromovimentacao SET nome_cliente = ?, cpf_cliente = ?, data_cliente = ?, hora_cliente = ?, hora_cliente = ?, celular-cliente = ? where titulo = ?";
         conn = new Conexao().conectaBD();
 
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objLivroDTO.getNome_cliente());
-            pstm.setString(2, objLivroDTO.getCpf_cliente());
-            pstm.setString(3, objLivroDTO.getData_cliente());
-            pstm.setString(4, objLivroDTO.getHora_cliente());
-            pstm.setString(5, objLivroDTO.getCelular_cliente());
-            pstm.setBoolean(6, objLivroDTO.isReservado());
-            pstm.setString(7, objLivroDTO.getTitulo());
+            pstm.setString(1, objLivroAlt.getNome_cliente());
+            pstm.setString(2, objLivroAlt.getCpf_cliente());
+            pstm.setString(3, objLivroAlt.getData_cliente());
+            pstm.setString(4, objLivroAlt.getHora_cliente());
+            pstm.setString(5, objLivroAlt.getCelular_cliente());
+            pstm.setBoolean(6, objLivroAlt.isReservado());
+            pstm.setString(7, objLivroAlt.getTitulo());
 
             pstm.execute();
             pstm.close();
