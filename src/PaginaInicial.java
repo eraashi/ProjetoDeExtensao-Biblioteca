@@ -136,11 +136,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 153, 51));
         jLabel14.setText("Movimentações");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(860, 320, 180, 40);
+        jLabel14.setBounds(830, 250, 180, 40);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/pngtree-magnifier-and-background-glass-lens-png-image_4944280 1.png"))); // NOI18N
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(800, 310, 48, 60);
+        jLabel8.setBounds(770, 240, 48, 60);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/lateral mero.png"))); // NOI18N
         getContentPane().add(jLabel2);
@@ -154,11 +154,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 153, 51));
         jLabel3.setText("Atualização de Catálogo");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(440, 320, 280, 30);
+        jLabel3.setBounds(410, 250, 280, 30);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/icone atualização (1).png"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(360, 310, 80, 50);
+        jLabel4.setBounds(330, 240, 80, 50);
 
         tabelaLivro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,7 +174,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelaLivro);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(400, 380, 300, 200);
+        jScrollPane1.setBounds(370, 310, 300, 200);
 
         btnAtualizarTabela.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAtualizarTabela.setText("Atualizar");
@@ -184,7 +184,7 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAtualizarTabela);
-        btnAtualizarTabela.setBounds(440, 600, 90, 23);
+        btnAtualizarTabela.setBounds(410, 530, 90, 23);
 
         btnExcluirLivro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnExcluirLivro.setText("Excluir Livro");
@@ -194,7 +194,7 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExcluirLivro);
-        btnExcluirLivro.setBounds(560, 600, 100, 23);
+        btnExcluirLivro.setBounds(530, 530, 100, 23);
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 153, 51));
@@ -208,7 +208,7 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtExcluirId);
-        txtExcluirId.setBounds(570, 630, 80, 22);
+        txtExcluirId.setBounds(540, 560, 80, 22);
 
         btnAltLivro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAltLivro.setText("Alterar Estado");
@@ -218,9 +218,9 @@ public class PaginaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAltLivro);
-        btnAltLivro.setBounds(880, 600, 120, 23);
+        btnAltLivro.setBounds(850, 530, 120, 23);
         getContentPane().add(txtAltLivro);
-        txtAltLivro.setBounds(880, 630, 120, 22);
+        txtAltLivro.setBounds(850, 560, 120, 22);
 
         listaLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -236,7 +236,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listaLivros);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(780, 380, 310, 200);
+        jScrollPane2.setBounds(750, 310, 310, 200);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
