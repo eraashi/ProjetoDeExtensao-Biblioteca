@@ -62,7 +62,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro Funcionário");
+        setTitle("Cadastro");
         setMinimumSize(new java.awt.Dimension(960, 551));
         setResizable(false);
         getContentPane().setLayout(null);

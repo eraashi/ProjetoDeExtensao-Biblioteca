@@ -301,11 +301,11 @@ public class PagMovimento extends javax.swing.JFrame {
         txtNomeLivro.setForeground(new java.awt.Color(255, 153, 51));
         txtNomeLivro.setText("Nome do Livro");
         getContentPane().add(txtNomeLivro);
-        txtNomeLivro.setBounds(170, 30, 410, 48);
+        txtNomeLivro.setBounds(110, 30, 410, 48);
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/folder/newpackage/icone movimento.png"))); // NOI18N
         getContentPane().add(jLabel20);
-        jLabel20.setBounds(80, 30, 80, 50);
+        jLabel20.setBounds(30, 30, 80, 50);
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(20, 230, 540, 30);
 

@@ -63,7 +63,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela de Login");
+        setTitle("Projeto/Tela de Login");
         setBackground(new java.awt.Color(255, 252, 101));
         setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(946, 596));

@@ -59,7 +59,7 @@ public class NovoLivro extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Novo Livro");
+        setTitle("Nova Livro");
         setMinimumSize(new java.awt.Dimension(600, 515));
         setResizable(false);
         getContentPane().setLayout(null);

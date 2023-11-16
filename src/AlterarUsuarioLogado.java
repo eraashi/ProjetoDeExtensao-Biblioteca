@@ -66,7 +66,7 @@ public class AlterarUsuarioLogado extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Altere seus Dados");
+        setTitle("Cadastro");
         setMinimumSize(new java.awt.Dimension(960, 551));
         setResizable(false);
         getContentPane().setLayout(null);
